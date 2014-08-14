@@ -1,0 +1,7 @@
+/Lang/DotNet/Wrapper/*.cs
+/Lang/DotNet/Wrapper/Release
+/Lang/DotNet/Wrapper/Debug
+/Lang/DotNet/Wrapper/obj
+/Lang/DotNet/FdoDotNet/fdo_wrap.cpp
+/Lang/DotNet/FdoDotNet/Debug
+/Lang/DotNet/FdoDotNet/Release
