@@ -7,6 +7,10 @@
 %feature("unref") FdoIDisposable "FDO_SAFE_RELEASE($this);"
 %newobject *::Create;
 
+//======= C#-specific ==========
+//Make all classes partial, so we can customize said classes outside of swig
+%typemap(csclassmodifiers) SWIGTYPE "public partial class"
+
 %include "../Common/FdoIgnore.i"
 %include "../Common/FdoIncludes.i"
 %{
