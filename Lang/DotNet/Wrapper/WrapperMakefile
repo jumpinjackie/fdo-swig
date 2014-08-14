@@ -1,0 +1,19 @@
+cleandebug:
+  if exist $(OUTDIR)\OSGeo.FDO.dll del $(OUTDIR)\OSGeo.FDO.dll
+  if exist $(OUTDIR)\OSGeo.FDO.pdb del $(OUTDIR)\OSGeo.FDO.pdb
+  if exist $(OUTDIR)\OSGeo.FDO.Debug.dll del $(OUTDIR)\OSGeo.FDO.Debug.dll
+
+cleanrelease:
+  if exist $(OUTDIR)\OSGeo.FDO.dll del $(OUTDIR)\OSGeo.FDO.dll
+  if exist $(OUTDIR)\OSGeo.FDO.pdb del $(OUTDIR)\OSGeo.FDO.pdb
+
+debug: $(OUTDIR)\OSGeo.FDO.Debug.dll
+
+release: $(OUTDIR)\OSGeo.FDO.dll
+
+$(OUTDIR)\OSGeo.FDO.Debug.dll:
+  csc.exe /debug+ /debug:full    /optimize- /out:$(OUTDIR)\OSGeo.FDO.dll /doc:$(OUTDIR)\OSGeo.FDO.xml /platform:$(PLATFORM) /target:library .\*.cs
+  copy /y $(OUTDIR)\OSGeo.FDO.dll $(OUTDIR)\OSGeo.FDO.Debug.dll
+
+$(OUTDIR)\OSGeo.FDO.dll:
+  csc.exe /debug+ /debug:pdbonly /optimize+ /out:$(OUTDIR)\OSGeo.FDO.dll /doc:$(OUTDIR)\OSGeo.FDO.xml /platform:$(PLATFORM) /target:library .\*.cs
