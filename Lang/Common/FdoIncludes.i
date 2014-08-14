@@ -12,6 +12,8 @@
 %include <Common/ArrayHelper.h>
 %include <Common/Compare.h>
 %include <Common/StringP.h>
+%include <Common/Collection.h>
+%include <Common/NamedCollection.h>
 %include <Common/Dimensionality.h>
 %include <Common/GeometryType.h>
 %include <Common/StringCollection.h>
@@ -73,6 +75,12 @@
 %include <Geometry/GeometryStream/GeometryStreamWriter.h>
 
 %include <Geometry/Fgf/Factory.h>
+
+//
+// FDO Core
+//
+%include <Fdo/ReadOnlyCollection.h>
+%include <Fdo/ReadOnlyUnnamedCollection.h>
 
 ////////////////////////////////////////////////////////////////
 // Commands
@@ -153,7 +161,7 @@
 %include <Fdo/Commands/Schema/IGetSchemaNames.h>
 %include <Fdo/Commands/Schema/PhysicalClassMapping.h>
 %include <Fdo/Commands/Schema/PhysicalElementMapping.h>
-//%include <Fdo/Commands/Schema/PhysicalElementMappingCollection.h>
+%include <Fdo/Commands/Schema/PhysicalElementMappingCollection.h>
 %include <Fdo/Commands/Schema/PhysicalPropertyMapping.h>
 %include <Fdo/Commands/Schema/PhysicalSchemaMapping.h>
 //%include <Fdo/Commands/Schema/PhysicalSchemaMappingCollection.h>
@@ -375,7 +383,11 @@
 %include <Fdo/Xml/GmlVersion.h>
 */
 
-// Collections
+//
+// Templates
+//
+%template (FdoByteArray) FdoArray<FdoByte>;
+
 %template (FdoArgumentDefinitionCollection) FdoCollection<FdoArgumentDefinition,FdoConnectionException >;
 %template (FdoFunctionDefinitionCollection) FdoCollection<FdoFunctionDefinition,FdoConnectionException >;
 %template (FdoNamedFunctionDefinitionCollection) FdoNamedCollection<FdoFunctionDefinition,FdoConnectionException >;

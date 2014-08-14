@@ -73,12 +73,22 @@
 %ignore FDO_STRING_COLLECTION;
 %ignore FDO_STRINGP_H;
 %ignore FDO_VECTOR_H;
+%ignore FDO_STRING_COLLECTION_H;
+%ignore MAX_GEOMETRY_TYPE_SIZE;
+%ignore MAX_GEOMETRIC_TYPE_SIZE;
+%ignore FdoInt64Max;
+%ignore FdoInt64Min;
+%ignore FdoFloatMax;
+%ignore FdoFloatMin;
 
 %ignore FdoStringP;
+%ignore FdoArrayHelper;
 %ignore FdoSchemaMergeContext;
 %ignore FdoSchemaAttributeDictionary;
 %ignore FdoXmlFeatureFlags::Create;
 %ignore FdoSubSelectExpression::ToStringInternal;
+
+%ignore FdoFunctionDefinition::Create;
 
 /* Ignore all Topology classes */
 %ignore FdoIActivateTopologyArea;
