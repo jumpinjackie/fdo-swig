@@ -24,6 +24,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{348671
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunner", "TestRunner\TestRunner.csproj", "{73C5CD97-0464-4461-AB66-E57F9BB3132A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRunner64", "TestRunner64\TestRunner64.csproj", "{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -60,6 +64,18 @@ Global
 		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Release|Win32.ActiveCfg = Release|x64
 		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Release|x64.ActiveCfg = Release|x64
 		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Release|x64.Build.0 = Release|x64
+		{73C5CD97-0464-4461-AB66-E57F9BB3132A}.Debug|Win32.ActiveCfg = Debug|x86
+		{73C5CD97-0464-4461-AB66-E57F9BB3132A}.Debug|Win32.Build.0 = Debug|x86
+		{73C5CD97-0464-4461-AB66-E57F9BB3132A}.Debug|x64.ActiveCfg = Debug|x86
+		{73C5CD97-0464-4461-AB66-E57F9BB3132A}.Release|Win32.ActiveCfg = Release|x86
+		{73C5CD97-0464-4461-AB66-E57F9BB3132A}.Release|Win32.Build.0 = Release|x86
+		{73C5CD97-0464-4461-AB66-E57F9BB3132A}.Release|x64.ActiveCfg = Release|x86
+		{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}.Debug|Win32.ActiveCfg = Debug|x64
+		{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}.Debug|x64.ActiveCfg = Debug|x64
+		{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}.Debug|x64.Build.0 = Debug|x64
+		{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}.Release|Win32.ActiveCfg = Release|x64
+		{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}.Release|x64.ActiveCfg = Release|x64
+		{4D2B9C74-BF69-4539-9932-B7F0CC75AED7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

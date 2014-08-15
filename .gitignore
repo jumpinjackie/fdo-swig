@@ -20,3 +20,7 @@
 /Lang/DotNet/UnitTest/bin
 /Lang/DotNet/UnitTest64/obj
 /Lang/DotNet/UnitTest64/bin
+/Lang/DotNet/TestRunner64/bin
+/Lang/DotNet/TestRunner64/obj
+/Lang/DotNet/TestRunner/obj
+/Lang/DotNet/TestRunner/bin
