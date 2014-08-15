@@ -62,6 +62,8 @@ static std::string W2A_SLOW(const wchar_t* input)
 %ignore FdoIGeometryCapabilities::GetGeometryComponentTypes;
 %ignore FdoIGeometryCapabilities::GetGeometryTypes;
 %ignore FdoIConnectionCapabilities::GetLockTypes;
+%ignore FdoIConnectionCapabilities::GetSpatialContextTypes;
+%ignore FdoICommandCapabilities::GetCommands;
 
 %include "../Common/FdoIncludes.i"
 %include "../Common/FdoMarshal.i"

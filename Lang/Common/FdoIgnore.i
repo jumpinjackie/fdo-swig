@@ -136,6 +136,38 @@
 %ignore FdoFeatureClass::_writeBaseXml;
 %ignore FdoFeatureClass::_writeXml;
 
+%ignore FdoGeometricPropertyDefinition::InitFromXml;
+%ignore FdoPropertyDefinition::InitFromXml;
+%ignore FdoSchemaElement::InitFromXml;
+%ignore FdoGeometricPropertyDefinition::_writeXml;
+%ignore FdoPropertyDefinition::_writeXml;
+
+%ignore FdoFeatureSchema::CheckReferences;
+%ignore FdoObjectPropertyDefinition::CheckReferences;
+%ignore FdoSchemaElement::CheckReferences;
+%ignore FdoGeometricPropertyDefinition::Set;
+%ignore FdoPropertyDefinition::Set;
+%ignore FdoPropertyValueConstraint::Set;
+%ignore FdoPropertyValueConstraintList::Set;
+%ignore FdoPropertyValueConstraintRange::Set;
+%ignore FdoSchemaElement::Set;
+
+%ignore FdoXmlCopyHandler::Create(FdoXmlWriter*, FdoString*, FdoString*, FdoString*, FdoXmlAttributeCollection*);
+%ignore FdoXmlCopyHandler::Create(FdoXmlWriter*, FdoString*, FdoString*, FdoString*, FdoXmlAttributeCollection*, FdoDictionary*);
+%ignore FdoGeometricPropertyDefinition::InitFromXml;
+%ignore FdoPhysicalClassMapping::InitFromXml;
+%ignore FdoPhysicalElementMapping::InitFromXml;
+%ignore FdoPhysicalPropertyMapping::InitFromXml;
+%ignore FdoPropertyDefinition::InitFromXml;
+%ignore FdoSchemaElement::InitFromXml;
+%ignore FdoFeatureSchemaCollection::XmlStartElement;
+%ignore FdoPhysicalSchemaMappingCollection::XmlStartElement;
+%ignore FdoXmlSaxHandler::XmlStartElement;
+
+%ignore FdoPhysicalClassMapping::_writeXml;
+%ignore FdoPhysicalElementMapping::_writeXml;
+%ignore FdoPhysicalPropertyMapping::_writeXml;
+
 %ignore FdoIDirectPosition::GetOrdinates;
 %ignore FdoIEnvelope::GetOrdinates;
 %ignore FdoILinearRing::GetOrdinates;

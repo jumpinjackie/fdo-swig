@@ -1,3 +1,8 @@
+// FdoMarshal.i
+//
+// This defines helper collection classes and typemaps to "box" methods in FDO
+// that are not easy to wrap in their existing forms.
+//
 %include "../Common/BasicValueCollection.h"
 %template (FdoClassTypeCollectionBase) FdoBasicValueCollection<FdoClassType>;
 %include "../Common/ClassTypeCollection.h"
@@ -161,6 +166,33 @@
         FdoInt32 count = 0;
         FdoLockType* types = $self->GetLockTypes(count);
         FdoPtr<FdoLockTypeCollection> ret = FdoLockTypeCollection::Create();
+        for (FdoInt32 i = 0; i < count; i++)
+        {
+            ret->Add(types[i]);
+        }
+        return ret.Detach();
+    }
+    
+    FdoSpatialContextExtentTypeCollection* SupportedSpatialContextExtentTypes()
+    {
+        FdoInt32 count = 0;
+        FdoSpatialContextExtentType* types = $self->GetSpatialContextTypes(count);
+        FdoPtr<FdoSpatialContextExtentTypeCollection> ret = FdoSpatialContextExtentTypeCollection::Create();
+        for (FdoInt32 i = 0; i < count; i++)
+        {
+            ret->Add(types[i]);
+        }
+        return ret.Detach();
+    }
+};
+
+%extend FdoICommandCapabilities
+{
+    FdoInt32Collection* SupportedCommands()
+    {
+        FdoInt32 count = 0;
+        FdoInt32* types = $self->GetCommands(count);
+        FdoPtr<FdoInt32Collection> ret = FdoInt32Collection::Create();
         for (FdoInt32 i = 0; i < count; i++)
         {
             ret->Add(types[i]);
