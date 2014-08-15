@@ -81,14 +81,25 @@
 %ignore FdoFloatMax;
 %ignore FdoFloatMin;
 
+%ignore FdoArray;
 %ignore FdoStringP;
+%ignore FdoStringsP;
+%ignore FdoProviderNameTokensP;
 %ignore FdoArrayHelper;
 %ignore FdoSchemaMergeContext;
 %ignore FdoSchemaAttributeDictionary;
+%ignore FdoDirectPositionImpl;
 %ignore FdoXmlFeatureFlags::Create;
 %ignore FdoSubSelectExpression::ToStringInternal;
 
 %ignore FdoFunctionDefinition::Create;
+
+%ignore FdoStringElement::operator =;
+%ignore FdoStringCollection::operator +;
+%ignore FdoStringCollection::operator +=;
+
+%ignore FdoStringCollection::Create(FdoStringCollection const *);
+%ignore FdoStringCollection::Create(FdoStringCollection const &);
 
 /* Ignore all Topology classes */
 %ignore FdoIActivateTopologyArea;

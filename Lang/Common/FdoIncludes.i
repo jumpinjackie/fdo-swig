@@ -13,23 +13,33 @@
 %include <Common/Compare.h>
 %include <Common/StringP.h>
 %include <Common/Collection.h>
+%template (FdoDictionaryElementCollectionBase) FdoCollection< FdoDictionaryElement,FdoException >;
 %include <Common/NamedCollection.h>
 %include <Common/Dimensionality.h>
 %include <Common/GeometryType.h>
-%include <Common/StringCollection.h>
+%include <Common/IStreamReaderTmpl.h>
+//%include <Common/StringCollection.h>
+%template (FdoStringCollectionBase) FdoCollection< FdoStringElement,FdoException >;
+
 %include <Common/Context.h>
 %include <Common/DictionaryElement.h>
-%include <Common/Dictionary.h>
+//%include <Common/Dictionary.h>
+%template (FdoDictionaryBase) FdoNamedCollection< FdoDictionaryElement,FdoException >;
+
 %include <Common/ReadOnlyNamedCollection.h>
 %include <Common/RestrictedNamedCollection.h>
 %include <Common/IStreamReader.h>
-%include <Common/Vector.h>
+//%include <Common/Vector.h>
+%include <Common/Io/Stream.h>
 %include <Common/Io/MemoryStream.h>
 %include <Common/Io/FileStream.h>
 %include <Common/Io/TextReader.h>
 %include <Common/Io/TextWriter.h>
+%template (FdoObjectStreamReader) FdoIStreamReaderTmpl< unsigned char >;
 %include <Common/Io/ObjectStreamReader.h>
-%include <Common/Io/ByteStreamReader.h>
+//%include <Common/Io/ByteStreamReader.h>
+%template (FdoByteStreamReader) FdoIoObjectStreamReader< FdoByte >;
+
 %include <Common/Xml/Xml.h>
 %include <Common/Xml/XmlException.h>
 %include <Common/Xml/Attribute.h>
@@ -50,23 +60,40 @@
 // FDO Geometry
 //
 %include <Geometry/IEnvelope.h>
+%template (FdoGeometryCollectionBase) FdoCollection< FdoIGeometry,FdoException >;
+%include <Geometry/IGeometry.h>
 %include <Common/Dimensionality.h>
 %include <Common/GeometryType.h>
+%include <Geometry/IRingAbstract.h>
+%include <Geometry/IGeometricAggregateAbstract.h>
+%include <Geometry/ISurfaceAbstract.h>
+%include <Geometry/ICurveAbstract.h>
+%template (FdoCurveSegmentAbstractCollectionBase) FdoCollection< FdoICurveSegmentAbstract,FdoException >;
+%include <Geometry/ICurveSegmentAbstract.h>
+%include <Geometry/IArcSegmentAbstract.h>
+%template (FdoDirectPositionCollectionBase) FdoCollection< FdoIDirectPosition,FdoException >;
 %include <Geometry/IDirectPosition.h>
 %include <Geometry/DirectPositionImpl.h>
+%template (FdoLineStringCollectionBase) FdoCollection< FdoILineString,FdoException >;
 %include <Geometry/ILineString.h>
+%template (FdoPointCollectionBase) FdoCollection< FdoIPoint,FdoException >;
 %include <Geometry/IPoint.h>
+%template (FdoLinearRingCollectionBase) FdoCollection< FdoILinearRing,FdoException >;
 %include <Geometry/ILinearRing.h>
 %include <Geometry/ILineStringSegment.h>
+%template (FdoPolygonCollectionBase) FdoCollection< FdoIPolygon,FdoException >;
 %include <Geometry/IPolygon.h>
 %include <Geometry/IMultiPoint.h>
 %include <Geometry/IMultiGeometry.h>
 %include <Geometry/IMultiLineString.h>
 %include <Geometry/IMultiPolygon.h>
 %include <Geometry/ICircularArcSegment.h>
+%template (FdoCurveStringCollectionBase) FdoCollection< FdoICurveString,FdoException >;
 %include <Geometry/ICurveString.h>
 %include <Geometry/IMultiCurveString.h>
+%template (FdoRingCollectionBase) FdoCollection< FdoIRing,FdoException >;
 %include <Geometry/IRing.h>
+%template (FdoCurvePolygonCollectionBase) FdoCollection< FdoICurvePolygon,FdoException >;
 %include <Geometry/ICurvePolygon.h>
 %include <Geometry/IMultiCurvePolygon.h>
 
@@ -81,6 +108,8 @@
 //
 %include <Fdo/ReadOnlyCollection.h>
 %include <Fdo/ReadOnlyUnnamedCollection.h>
+
+%include <Fdo/Connections/IPropertyDictionary.h>
 
 ////////////////////////////////////////////////////////////////
 // Commands
@@ -104,12 +133,14 @@
 %include <Fdo/Commands/DataStore/IDataStoreReader.h>
 %include <Fdo/Commands/DataStore/IListDataStores.h>
 
+%include <Fdo/Commands/Feature/IReader.h>
 %include <Fdo/Commands/Feature/IBaseSelect.h>
 %include <Fdo/Commands/Feature/IDataReader.h>
 %include <Fdo/Commands/Feature/IDelete.h>
+%include <Fdo/Commands/Feature/IFeatureReader.h>
 %include <Fdo/Commands/Feature/IScrollableFeatureReader.h>
 %include <Fdo/Commands/Feature/IInsert.h>
-%include <Fdo/Commands/Feature/IReader.h>
+%include <Fdo/Commands/Feature/ISelect.h>
 %include <Fdo/Commands/Feature/IExtendedSelect.h>
 %include <Fdo/Commands/Feature/ISelectAggregates.h>
 %include <Fdo/Commands/Feature/IUpdate.h>
@@ -159,8 +190,8 @@
 %include <Fdo/Commands/Schema/IDestroySchema.h>
 %include <Fdo/Commands/Schema/IGetClassNames.h>
 %include <Fdo/Commands/Schema/IGetSchemaNames.h>
-%include <Fdo/Commands/Schema/PhysicalClassMapping.h>
 %include <Fdo/Commands/Schema/PhysicalElementMapping.h>
+%include <Fdo/Commands/Schema/PhysicalClassMapping.h>
 %include <Fdo/Commands/Schema/PhysicalElementMappingCollection.h>
 %include <Fdo/Commands/Schema/PhysicalPropertyMapping.h>
 %include <Fdo/Commands/Schema/PhysicalSchemaMapping.h>
@@ -191,7 +222,6 @@
 %include <Fdo/Connections/IConnection.h>
 %include <Fdo/Connections/IConnectionInfo.h>
 %include <Fdo/Connections/IConnectionPropertyDictionary.h>
-%include <Fdo/Connections/IPropertyDictionary.h>
 %include <Fdo/Connections/ITransaction.h>
 
 %include <Fdo/Connections/Capabilities/ArgumentDefinition.h>
@@ -208,11 +238,18 @@
 %include <Fdo/Connections/Capabilities/IRasterCapabilities.h>
 %include <Fdo/Connections/Capabilities/ITopologyCapabilities.h>
 //%include <Fdo/Connections/Capabilities/ReadOnlyArgumentDefinitionCollection.h>
+%template (FdoSignatureDefinitionCollectionBase) FdoCollection< FdoSignatureDefinition,FdoConnectionException >;
+%template (FdoReadOnlySignatureDefinitionCollectionBase) FdoReadOnlyUnnamedCollection< FdoSignatureDefinition,FdoSignatureDefinitionCollection,FdoSchemaException >;
 %include <Fdo/Connections/Capabilities/SignatureDefinition.h>
 
 ////////////////////////////////////////////////////////////////
 // Expression
 //
+%include <Fdo/Expression/Expression.h>
+%include <Fdo/Expression/ValueExpression.h>
+%include <Fdo/Expression/LiteralValue.h>
+%include <Fdo/Expression/DataValue.h>
+%include <Fdo/Expression/Identifier.h>
 %include <Fdo/Expression/BinaryExpression.h>
 %include <Fdo/Expression/BinaryOperations.h>
 %include <Fdo/Expression/BooleanValue.h>
@@ -222,23 +259,19 @@
 %include <Fdo/Expression/CLOBValue.h>
 %include <Fdo/Expression/BLOBStreamReader.h>
 %include <Fdo/Expression/ComputedIdentifier.h>
-%include <Fdo/Expression/DataValue.h>
 //%include <Fdo/Expression/DataValueCollection.h>
 %include <Fdo/Expression/DateTimeValue.h>
 %include <Fdo/Expression/DecimalValue.h>
 %include <Fdo/Expression/DoubleValue.h>
-%include <Fdo/Expression/Expression.h>
 //%include <Fdo/Expression/ExpressionCollection.h>
 %include <Fdo/Expression/ExpressionException.h>
 %include <Fdo/Expression/ExpressionType.h>
 %include <Fdo/Expression/Function.h>
 %include <Fdo/Expression/GeometryValue.h>
-%include <Fdo/Expression/Identifier.h>
 %include <Fdo/Expression/Int16Value.h>
 %include <Fdo/Expression/Int32Value.h>
 %include <Fdo/Expression/Int64Value.h>
 %include <Fdo/Expression/IExpressionProcessor.h>
-%include <Fdo/Expression/LiteralValue.h>
 //%include <Fdo/Expression/LiteralValueCollection.h>
 %include <Fdo/Expression/LiteralValueType.h>
 %include <Fdo/Expression/Parameter.h>
@@ -246,7 +279,6 @@
 %include <Fdo/Expression/StringValue.h>
 %include <Fdo/Expression/UnaryExpression.h>
 %include <Fdo/Expression/UnaryOperations.h>
-%include <Fdo/Expression/ValueExpression.h>
 %include <Fdo/Expression/ExpressionItemType.h>
 %include <Fdo/Expression/JoinCriteria.h>
 //%include <Fdo/Expression/JoinCriteriaCollection.h>
@@ -255,6 +287,10 @@
 ////////////////////////////////////////////////////////////////
 // Filter
 //
+%include <Fdo/Filter/Filter.h>
+%include <Fdo/Filter/LogicalOperator.h>
+%include <Fdo/Filter/SearchCondition.h>
+%include <Fdo/Filter/GeometricCondition.h>
 %include <Fdo/Filter/BinaryLogicalOperations.h>
 %include <Fdo/Filter/BinaryLogicalOperator.h>
 %include <Fdo/Filter/ComparisonCondition.h>
@@ -262,14 +298,10 @@
 %include <Fdo/Filter/ConditionType.h>
 %include <Fdo/Filter/DistanceCondition.h>
 %include <Fdo/Filter/DistanceOperations.h>
-%include <Fdo/Filter/Filter.h>
 %include <Fdo/Filter/FilterException.h>
-%include <Fdo/Filter/GeometricCondition.h>
 %include <Fdo/Filter/IFilterProcessor.h>
 %include <Fdo/Filter/InCondition.h>
-%include <Fdo/Filter/LogicalOperator.h>
 %include <Fdo/Filter/NullCondition.h>
-%include <Fdo/Filter/SearchCondition.h>
 %include <Fdo/Filter/SpatialCondition.h>
 %include <Fdo/Filter/SpatialOperations.h>
 %include <Fdo/Filter/UnaryLogicalOperations.h>
@@ -279,12 +311,17 @@
 ////////////////////////////////////////////////////////////////
 // Schema
 //
+%include <Fdo/Schema/SchemaElement.h>
+%include <Fdo/Schema/SchemaException.h>
+%include <Fdo/Schema/PropertyDefinition.h>
+%include <Fdo/Schema/ClassDefinition.h>
+%template (FdoPropertyDefinitionCollectionBase) FdoSchemaCollection< FdoPropertyDefinition >;
+%include <Fdo/Schema/PropertyDefinitionCollection.h>
 %include <Fdo/Schema/AssociationPropertyDefinition.h>
 %include <Fdo/Schema/AutogenerationException.h>
 %include <Fdo/Schema/Class.h>
 %include <Fdo/Schema/ClassCapabilities.h>
 //%include <Fdo/Schema/ClassCollection.h>
-%include <Fdo/Schema/ClassDefinition.h>
 %include <Fdo/Schema/ClassType.h>
 %include <Fdo/Schema/DataPropertyDefinition.h>
 //%include <Fdo/Schema/DataPropertyDefinitionCollection.h>
@@ -300,19 +337,15 @@
 %include <Fdo/Schema/ObjectPropertyDefinition.h>
 %include <Fdo/Schema/ObjectType.h>
 %include <Fdo/Schema/OrderType.h>
-%include <Fdo/Schema/PropertyDefinition.h>
-%include <Fdo/Schema/PropertyDefinitionCollection.h>
 %include <Fdo/Schema/PropertyType.h>
+%include <Fdo/Schema/PropertyValueConstraint.h>
 %include <Fdo/Schema/PropertyValueConstraintRange.h>
 %include <Fdo/Schema/PropertyValueConstraintType.h>
-%include <Fdo/Schema/PropertyValueConstraint.h>
 %include <Fdo/Schema/PropertyValueConstraintList.h>
 //%include <Fdo/Schema/ReadOnlyPropertyDefinitionCollection.h>
 %include <Fdo/Schema/SchemaAttributeDictionary.h>
 %include <Fdo/Schema/SchemaCollection.h>
-%include <Fdo/Schema/SchemaElement.h>
 %include <Fdo/Schema/SchemaElementState.h>
-%include <Fdo/Schema/SchemaException.h>
 %include <Fdo/Schema/RasterPropertyDefinition.h>
 //%include <Fdo/Schema/ReadOnlyDataPropertyDefinitionCollection.h>
 //%include <Fdo/Schema/NetworkFeatureClass.h>
@@ -382,86 +415,3 @@
 %include <Fdo/Xml/SpatialContextWriter.h>
 %include <Fdo/Xml/GmlVersion.h>
 */
-
-//
-// Templates
-//
-%template (FdoByteArray) FdoArray<FdoByte>;
-
-%template (FdoArgumentDefinitionCollection) FdoCollection<FdoArgumentDefinition,FdoConnectionException >;
-%template (FdoFunctionDefinitionCollection) FdoCollection<FdoFunctionDefinition,FdoConnectionException >;
-%template (FdoNamedFunctionDefinitionCollection) FdoNamedCollection<FdoFunctionDefinition,FdoConnectionException >;
-
-// Handle FdoSignatureDefinition collections
-%template (FdoSignatureDefinitionCollection) FdoCollection<FdoSignatureDefinition,FdoConnectionException >;
-
-// Handle FdoArgumentDefinition ReadOnly Collections
-%template (FdoReadOnlyArgumentDefinitionCollection) FdoReadOnlyCollection<FdoArgumentDefinition,FdoArgumentDefinitionCollection,FdoConnectionException >;
-
-// Handle FdoReadOnlySignatureDefinition collections
-%template (FdoReadOnlySignatureDefinitionCollection) FdoReadOnlyUnnamedCollection<FdoSignatureDefinition,FdoSignatureDefinitionCollection,FdoSchemaException >;
-
-%template (FdoPropertyValueCollection) FdoCollection<FdoPropertyValue,FdoCommandException >;
-
-// Handle FdoParameterValue collections
-%template (FdoParameterValueCollection) FdoCollection<FdoParameterValue,FdoCommandException >;
-
-// Handle FdoParameterValueCollection collections
-%template (FdoBatchParameterValueCollection) FdoCollection<FdoParameterValueCollection,FdoCommandException >;
-
-// Handle FdoIdentifier collections
-%template (FdoIdentfierCollection) FdoCollection<FdoIdentifier,FdoCommandException >;
-
-// Handle FdoPhysicalSchemaMapping collections
-%template (FdoPhysicalSchemaMappingCollection) FdoCollection<FdoPhysicalSchemaMapping,FdoCommandException >;
-
-// Handle FdoDataVale Collections
-%template (FdoDataValueCollection) FdoCollection<FdoDataValue,FdoException >;
-
-// Handle FdoExpression Collections
-%template (FdoExpressionCollection) FdoCollection<FdoExpression,FdoExpressionException >;
-
-//  Handle FdoValueExpression collections
-%template (FdoValueExpressionCollection) FdoCollection<FdoValueExpression,FdoFilterException >;
-
-// Handle FdoClassDefinition Collections
-%template (FdoClassDefinitionCollection) FdoCollection<FdoClassDefinition, FdoSchemaException >;
-%template (FdoNamedClassDefinitionCollection) FdoNamedCollection<FdoClassDefinition, FdoSchemaException >;
-%template (FdoSchemaClassDefinitionCollection) FdoSchemaCollection<FdoClassDefinition >;
-
-// Handle FdoDataPropertyDefinition Collections
-%template (FdoDataPropertyDefinitionCollection) FdoCollection<FdoDataPropertyDefinition, FdoSchemaException >;
-%template (FdoNamedDataPropertyDefinitionCollection) FdoNamedCollection<FdoDataPropertyDefinition, FdoSchemaException >;
-%template (FdoSchemaDataPropertyDefinitionCollection) FdoSchemaCollection<FdoDataPropertyDefinition >;
-
-// Handle FdoFeatureClass Collections
-%template (FdoFeatureClassCollection) FdoCollection<FdoFeatureClass, FdoSchemaException >;
-%template (FdoNamedFeatureClassCollection) FdoNamedCollection<FdoFeatureClass, FdoSchemaException >;
-%template (FdoSchemaFeatureClassCollection) FdoSchemaCollection<FdoFeatureClass >;
-
-// Handle FdoFeatureSchema Collections
-%template (FdoFeatureSchemaCollection) FdoCollection<FdoFeatureSchema, FdoSchemaException >;
-%template (FdoNamedFeatureSchemaCollection) FdoNamedCollection<FdoFeatureSchema, FdoSchemaException >;
-%template (FdoSchemaFeatureSchemaCollection) FdoSchemaCollection<FdoFeatureSchema >;
-
-// Handle FdoPropertyDefinition Collections
-%template (FdoPropertyDefinitionCollection) FdoCollection<FdoPropertyDefinition, FdoSchemaException >;
-%template (FdoNamedPropertyDefinitionCollection) FdoNamedCollection<FdoPropertyDefinition, FdoSchemaException >;
-%template (FdoSchemaPropertyDefinitionCollection) FdoSchemaCollection<FdoPropertyDefinition >;
-
-// Handle FdoPropertyDefinition ReadOnly Collections
-%template (FdoReadOnlyPropertyDefinitionCollection) FdoReadOnlyCollection<FdoPropertyDefinition,FdoIDisposableCollection,FdoSchemaException >;
-%template (FdoReadOnlyDataPropertyDefinitionCollection) FdoReadOnlyCollection<FdoDataPropertyDefinition,FdoIDisposableCollection,FdoSchemaException >;
-
-// Handle FdoUniqueConstraint Collections
-%template (FdoUniqueConstraintDefinitionCollection) FdoCollection<FdoUniqueConstraint,FdoSchemaException >;
-
-// Handle FdoXmlElementMapping collections
-%template (FdoXmlElementMappingCollection) FdoCollection<FdoXmlElementMapping, FdoCommandException >;
-%template (FdoNamedXmlElementMappingCollection) FdoNamedCollection<FdoXmlElementMapping, FdoCommandException >;
-%template (FdoXmlElementMappingCollection2) FdoPhysicalElementMappingCollection<FdoXmlElementMapping >;
-
-// Handle FdoXmlClassMapping collections
-%template (FdoXmlClassMappingCollection) FdoCollection<FdoXmlClassMapping, FdoCommandException >;
-%template (NamedXmlClassMappingCollection) FdoNamedCollection<FdoXmlClassMapping, FdoCommandException >;
-%template (FdoXmlClassMappingCollection2) FdoPhysicalElementMappingCollection<FdoXmlClassMapping >;
