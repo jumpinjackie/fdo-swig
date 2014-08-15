@@ -1,6 +1,6 @@
 @echo off
 SET PLAT=Win32
-if "%PLAT%" == "x64" SET PLAT=x64
+if "%1" == "x64" SET PLAT=x64
 if exist Bin rd /S /Q Bin
 del /F /Q Wrapper\*.cs
 rem swig -csharp -c++ -nodefaultctor -nodefaultdtor -namespace OSGeo.FDO -outdir "%CD%\Wrapper" -o "%CD%\FdoDotNet\fdo_wrap.cpp" -I"%CD%\..\..\Fdo\Inc" fdo.i

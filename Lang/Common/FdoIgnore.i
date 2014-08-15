@@ -95,7 +95,11 @@
 %ignore FdoXmlFeatureFlags::Create;
 %ignore FdoSubSelectExpression::ToStringInternal;
 
+%ignore FdoFunction::Create;
 %ignore FdoFunctionDefinition::Create;
+%ignore FdoArgumentDefinitionCollection::Create(FdoArgumentDefinition**, FdoInt32);
+%ignore FdoSignatureDefinitionCollection::Create(FdoSignatureDefinition**, FdoInt32);
+%ignore FdoFunctionDefinitionCollection::Create(FdoFunctionDefinition**, FdoInt32);
 %ignore FdoIoFileStream::Create(FILE*);
 
 %ignore FdoStringElement::operator =;
@@ -104,6 +108,53 @@
 
 %ignore FdoStringCollection::Create(FdoStringCollection const *);
 %ignore FdoStringCollection::Create(FdoStringCollection const &);
+
+%ignore FdoAssociationPropertyDefinition::CheckReferences;
+%ignore FdoAssociationPropertyDefinition::InitFromXml;
+%ignore FdoAssociationPropertyDefinition::Set;
+%ignore FdoAssociationPropertyDefinition::_writeXml;
+%ignore FdoDataPropertyDefinition::InitFromXml;
+%ignore FdoDataPropertyDefinition::Set;
+%ignore FdoDataPropertyDefinition::_writeXml;
+%ignore FdoGeometricPropertyPropertyDefinition::InitFromXml;
+%ignore FdoGeometricPropertyPropertyDefinition::Set;
+%ignore FdoGeometricPropertyPropertyDefinition::_writeXml;
+%ignore FdoObjectPropertyDefinition::InitFromXml;
+%ignore FdoObjectPropertyDefinition::Set;
+%ignore FdoObjectPropertyDefinition::_writeXml;
+%ignore FdoRasterPropertyDefinition::InitFromXml;
+%ignore FdoRasterPropertyDefinition::Set;
+%ignore FdoRasterPropertyDefinition::_writeXml;
+%ignore FdoClassDefinition::CheckReferences;
+%ignore FdoClassDefinition::InitFromXml;
+%ignore FdoClassDefinition::Set;
+%ignore FdoClassDefinition::_writeXml;
+%ignore FdoClass::InitFromXml;
+%ignore FdoClass::_writeXml;
+%ignore FdoFeatureClass::InitFromXml;
+%ignore FdoFeatureClass::Set;
+%ignore FdoFeatureClass::_writeBaseXml;
+%ignore FdoFeatureClass::_writeXml;
+
+%ignore FdoIDirectPosition::GetOrdinates;
+%ignore FdoIEnvelope::GetOrdinates;
+%ignore FdoILinearRing::GetOrdinates;
+%ignore FdoILinearRing::GetItemByMembers;
+%ignore FdoILineString::GetOrdinates;
+%ignore FdoILineString::GetItemByMembers;
+%ignore FdoILineStringSegment::GetOrdinates;
+%ignore FdoIMultiPoint::GetOrdinates;
+%ignore FdoIPoint::GetOrdinates;
+%ignore FdoIPoint::GetPositionByMembers;
+%ignore FdoGeometryStreamReader::ReadDirectPositionByMembers(FdoInt32, double*, double*, double*, double*);
+
+%ignore FdoLOBValue::operator FdoByteArray*;
+
+%ignore FdoFgfGeometryFactory::CreateLinearRing(FdoInt32, FdoInt32, double*);
+%ignore FdoFgfGeometryFactory::CreateLineString(FdoInt32, FdoInt32, double*);
+%ignore FdoFgfGeometryFactory::CreateLineStringSegment(FdoInt32, FdoInt32, double*);
+%ignore FdoFgfGeometryFactory::CreateMultiPoint(FdoInt32, FdoInt32, double*);
+%ignore FdoFgfGeometryFactory::CreatePoint(FdoInt32, double*);
 
 /* Ignore all Topology classes */
 %ignore FdoIActivateTopologyArea;

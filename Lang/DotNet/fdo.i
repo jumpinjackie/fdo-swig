@@ -10,16 +10,12 @@
 //======= C#-specific ==========
 //Make all classes partial, so we can customize said classes outside of swig
 %typemap(csclassmodifiers) SWIGTYPE "public partial class"
-typedef unsigned char FdoByte;
-typedef short         FdoInt8;
-typedef short         FdoInt16;
-typedef int           FdoInt32;
-typedef long long     FdoInt64;
+//typedef unsigned char FdoByte;
+//typedef short         FdoInt8;
+//typedef short         FdoInt16;
+//typedef int           FdoInt32;
+//typedef long long     FdoInt64;
 
-%include "FdoCollections.i"
-%include "FdoExceptions.i"
-%include "../Common/FdoIgnore.i"
-%include "../Common/FdoIncludes.i"
 %{
 // FDO headers to include into SWIG wrapper
 #include "Fdo.h"
@@ -34,3 +30,9 @@ static std::string W2A_SLOW(const wchar_t* input)
 }
 
 %}
+
+%include "FdoCollections.i"
+%include "FdoExceptions.i"
+%include "../Common/FdoMarshal.i"
+%include "../Common/FdoIgnore.i"
+%include "../Common/FdoIncludes.i"
