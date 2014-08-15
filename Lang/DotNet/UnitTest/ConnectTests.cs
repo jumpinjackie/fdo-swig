@@ -21,7 +21,7 @@ namespace UnitTest
             conn.Close();
 
             conn.SetConnectionString("File=../IDontExist.sdf");
-            Assert.Throws<CustomApplicationException>(() =>
+            Assert.Throws<ManagedFdoException>(() =>
             {
                 FdoConnectionState state = conn.Open();
             });
@@ -41,7 +41,7 @@ namespace UnitTest
             conn.Close();
 
             conn.SetConnectionString("File=../IDontExist.shp");
-            Assert.Throws<CustomApplicationException>(() =>
+            Assert.Throws<ManagedFdoException>(() =>
             {
                 FdoConnectionState state = conn.Open();
             });
@@ -57,7 +57,7 @@ namespace UnitTest
             conn.Close();
 
             conn.SetConnectionString("File=../IDontExist.sqlite");
-            Assert.Throws<CustomApplicationException>(() =>
+            Assert.Throws<ManagedFdoException>(() =>
             {
                 FdoConnectionState state = conn.Open();
             });

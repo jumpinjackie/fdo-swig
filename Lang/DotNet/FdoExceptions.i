@@ -14,7 +14,7 @@
 // Copy-pasta'd from the SWIG example: http://www.swig.org/Doc3.0/SWIGDocumentation.html#CSharp_exceptions
 //
 %insert(runtime) %{
-  // Code to handle throwing of C# CustomApplicationException from C/C++ code.
+  // Code to handle throwing of C# ManagedFdoException from C/C++ code.
   // The equivalent delegate to the callback, CSharpExceptionCallback_t, is CustomExceptionDelegate
   // and the equivalent customExceptionCallback instance is customDelegate
   typedef void (SWIGSTDCALL* CSharpExceptionCallback_t)(const char *);
@@ -44,7 +44,7 @@
            void CustomExceptionRegisterCallback(CustomExceptionDelegate customCallback);
 
     static void SetPendingCustomException(string message) {
-      SWIGPendingException.Set(new CustomApplicationException(message));
+      SWIGPendingException.Set(new ManagedFdoException(message));
     }
 
     static CustomExceptionHelper() {

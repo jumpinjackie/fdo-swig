@@ -3,7 +3,7 @@ using System;
 namespace OSGeo.FDO
 {
     [global::System.Serializable]
-    public class CustomApplicationException : Exception
+    public class ManagedFdoException : Exception
     {
         //
         // For guidelines regarding the creation of new exception types, see
@@ -13,22 +13,22 @@ namespace OSGeo.FDO
         //
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomApplicationException"/> class.
+        /// Initializes a new instance of the <see cref="ManagedFdoException"/> class.
         /// </summary>
-        public CustomApplicationException() { }
+        public ManagedFdoException() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomApplicationException"/> class.
+        /// Initializes a new instance of the <see cref="ManagedFdoException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
-        public CustomApplicationException(string message) : base(message) { }
+        public ManagedFdoException(string message) : base(message) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomApplicationException"/> class.
+        /// Initializes a new instance of the <see cref="ManagedFdoException"/> class.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="inner">The inner.</param>
-        public CustomApplicationException(string message, Exception inner) : base(message, inner) { }
+        public ManagedFdoException(string message, Exception inner) : base(message, inner) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomApplicationException"/> class.
+        /// Initializes a new instance of the <see cref="ManagedFdoException"/> class.
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
@@ -38,7 +38,7 @@ namespace OSGeo.FDO
         /// <exception cref="T:System.Runtime.Serialization.SerializationException">
         /// The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0).
         /// </exception>
-        protected CustomApplicationException(
+        protected ManagedFdoException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
