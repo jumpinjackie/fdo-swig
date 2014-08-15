@@ -5,6 +5,10 @@
 %include <Common/Std.h>
 %include <Common/FdoTypes.h>
 %include <Common/IDisposable.h>
+
+//We interrupt your normal header parsing to add some custom FDO collections for wrapper convenience
+%include "FdoMarshal.i"
+
 %include <Common/Disposable.h>
 %include <Common/Exception.h>
 %include <Common/Ptr.h>
