@@ -16,7 +16,7 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
-            conn.SetConnectionString("File=../../TestData/SDF/World_Countries.sdf");
+            conn.SetConnectionString("File=../../../../../../TestData/SDF/World_Countries.sdf");
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
@@ -32,11 +32,11 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
-            conn.SetConnectionString("DefaultFileLocation=../../TestData/SHP/World_Countries.shp");
+            conn.SetConnectionString("DefaultFileLocation=../../../../../../TestData/SHP/World_Countries.shp");
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
-            conn.SetConnectionString("DefaultFileLocation=../../TestData/SHP/");
+            conn.SetConnectionString("DefaultFileLocation=../../../../../../TestData/SHP/");
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
@@ -51,8 +51,8 @@ namespace UnitTest
         public void TestSQLite()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
-            FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");    
-            conn.SetConnectionString("File=../../TestData/SQLite/World_Countries.sqlite");
+            FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
+            conn.SetConnectionString("File=../../../../../../TestData/SQLite/World_Countries.sqlite");
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
