@@ -76,11 +76,14 @@
 %ignore FDO_STRING_COLLECTION_H;
 %ignore MAX_GEOMETRY_TYPE_SIZE;
 %ignore MAX_GEOMETRIC_TYPE_SIZE;
+%ignore FDO_NAMED_COLLECTION_H;
+%ignore FDO_COLL_MAP_THRESHOLD;
 %ignore FdoInt64Max;
 %ignore FdoInt64Min;
 %ignore FdoFloatMax;
 %ignore FdoFloatMin;
 
+%ignore FdoContext;
 %ignore FdoArray;
 %ignore FdoStringP;
 %ignore FdoStringsP;
@@ -93,6 +96,7 @@
 %ignore FdoSubSelectExpression::ToStringInternal;
 
 %ignore FdoFunctionDefinition::Create;
+%ignore FdoIoFileStream::Create(FILE*);
 
 %ignore FdoStringElement::operator =;
 %ignore FdoStringCollection::operator +;

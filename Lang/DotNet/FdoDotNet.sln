@@ -5,6 +5,23 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FdoDotNet", "FdoDotNet\FdoD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper", "Wrapper\Wrapper.vcxproj", "{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{9564B5FF-B266-43C4-B5E8-0A278308E8D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589} = {0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest64", "UnitTest64\UnitTest64.csproj", "{EC390F5C-1260-470E-AB4C-468FA706C9B8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589} = {0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{348671FD-4943-42D9-87F1-2C2B460B1615}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -29,6 +46,18 @@ Global
 		{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}.Release|Win32.Build.0 = Release|Win32
 		{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}.Release|x64.ActiveCfg = Release|x64
 		{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}.Release|x64.Build.0 = Release|x64
+		{9564B5FF-B266-43C4-B5E8-0A278308E8D2}.Debug|Win32.ActiveCfg = Debug|x86
+		{9564B5FF-B266-43C4-B5E8-0A278308E8D2}.Debug|Win32.Build.0 = Debug|x86
+		{9564B5FF-B266-43C4-B5E8-0A278308E8D2}.Debug|x64.ActiveCfg = Debug|x86
+		{9564B5FF-B266-43C4-B5E8-0A278308E8D2}.Release|Win32.ActiveCfg = Release|x86
+		{9564B5FF-B266-43C4-B5E8-0A278308E8D2}.Release|Win32.Build.0 = Release|x86
+		{9564B5FF-B266-43C4-B5E8-0A278308E8D2}.Release|x64.ActiveCfg = Release|x86
+		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Debug|Win32.ActiveCfg = Debug|x64
+		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Debug|x64.ActiveCfg = Debug|x64
+		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Debug|x64.Build.0 = Debug|x64
+		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Release|Win32.ActiveCfg = Release|x64
+		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Release|x64.ActiveCfg = Release|x64
+		{EC390F5C-1260-470E-AB4C-468FA706C9B8}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

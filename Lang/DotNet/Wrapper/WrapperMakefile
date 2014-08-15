@@ -14,10 +14,10 @@ release: $(OUTDIR)\OSGeo.FDO.dll
 $(OUTDIR)\OSGeo.FDO.Debug.dll:
   echo Output directory is $(OUTDIR)
   if not exist "$(OUTDIR)" mkdir "$(OUTDIR)"
-  csc.exe /debug+ /debug:full    /optimize- /out:$(OUTDIR)\OSGeo.FDO.dll /doc:$(OUTDIR)\OSGeo.FDO.xml /platform:$(PLATFORM) /target:library .\*.cs
+  csc.exe /debug+ /debug:full    /optimize- /out:$(OUTDIR)\OSGeo.FDO.dll /doc:$(OUTDIR)\OSGeo.FDO.xml /platform:$(PLATFORM) /target:library .\*.cs .\Custom\*.cs
   copy /y $(OUTDIR)\OSGeo.FDO.dll $(OUTDIR)\OSGeo.FDO.Debug.dll
 
 $(OUTDIR)\OSGeo.FDO.dll:
   echo Output directory is $(OUTDIR)
   if not exist "$(OUTDIR)" mkdir "$(OUTDIR)"
-  csc.exe /debug+ /debug:pdbonly /optimize+ /out:$(OUTDIR)\OSGeo.FDO.dll /doc:$(OUTDIR)\OSGeo.FDO.xml /platform:$(PLATFORM) /target:library .\*.cs
+  csc.exe /debug+ /debug:pdbonly /optimize+ /out:$(OUTDIR)\OSGeo.FDO.dll /doc:$(OUTDIR)\OSGeo.FDO.xml /platform:$(PLATFORM) /target:library .\*.cs .\Custom\*.cs

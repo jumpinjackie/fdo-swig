@@ -14,3 +14,9 @@
 /Lang/DotNet/Wrapper/Win32
 /Lang/DotNet/FdoDotNet.opensdf
 /Lang/DotNet/FdoDotNet.sdf
+/Lang/DotNet/packages/NUnit.Runners.2.6.3
+/Lang/DotNet/packages/NUnit.2.6.3
+/Lang/DotNet/UnitTest/obj
+/Lang/DotNet/UnitTest/bin
+/Lang/DotNet/UnitTest64/obj
+/Lang/DotNet/UnitTest64/bin
