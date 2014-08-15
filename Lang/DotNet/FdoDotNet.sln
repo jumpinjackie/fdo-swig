@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FdoDotNet", "FdoDotNet.vcxproj", "{6C9F7D16-08F7-426D-864A-AF86A649414A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FdoDotNet", "FdoDotNet\FdoDotNet.vcxproj", "{6C9F7D16-08F7-426D-864A-AF86A649414A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper", "..\Wrapper\Wrapper.vcxproj", "{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper", "Wrapper\Wrapper.vcxproj", "{0AB0DBBB-0456-4EC5-AA20-FCD2FDFF4589}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -60,42 +60,42 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x86 OUTDIR=$(OutDir) debug</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
-    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=x86 OUTDIR=$(OutDir) debug</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x86 OUTDIR=$(OutDir) cleandebug</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" clean$(Configuration)</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x64 OUTDIR=$(OutDir) debug</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
-    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=x64 OUTDIR=$(OutDir) debug</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x64 OUTDIR=$(OutDir) cleandebug</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" clean$(Configuration)</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x86 OUTDIR=$(OutDir) release</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
-    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=x86 OUTDIR=$(OutDir) release</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x86 OUTDIR=$(OutDir) cleanrelease</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" clean$(Configuration)</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x64 OUTDIR=$(OutDir) release</NMakeBuildCommandLine>
+    <NMakeBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeBuildCommandLine>
     <NMakeOutput>
     </NMakeOutput>
-    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=x64 OUTDIR=$(OutDir) release</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=x64 OUTDIR=$(OutDir) cleanrelease</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>nmake -a -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" $(Configuration)</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>nmake -f WrapperMakefile PLATFORM=$(PlatformTarget) OUTDIR="$(SolutionDir)\Bin\$(Platform)\$(Configuration)" clean$(Configuration)</NMakeReBuildCommandLine>
     <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>..\Bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)\Bin\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup>
   </ItemDefinitionGroup>

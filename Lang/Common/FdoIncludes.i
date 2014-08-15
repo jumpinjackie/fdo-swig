@@ -378,6 +378,8 @@
 ////////////////////////////////////////////////////////////////
 // Client Services
 //
+%include <Fdo/IConnectionManager.h>
+%include <Fdo/IProviderRegistry.h>
 %include <Fdo/ClientServices/ClientServiceException.h>
 %include <Fdo/ClientServices/ConnectionManager.h>
 %include <Fdo/ClientServices/FeatureAccessManager.h>
