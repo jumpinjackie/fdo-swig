@@ -63,3 +63,67 @@
         return null;
     }
 }
+
+//Case 2: Anything that returns FdoClassDefinition*
+%typemap(csout) FdoClassDefinition* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoClassType ctype = tmp.GetClassType();
+        switch (ctype)
+        {
+            case FdoClassType.FdoClassType_Class:
+                return new FdoClass(cPtr, $owner);
+            case FdoClassType.FdoClassType_FeatureClass:
+                return new FdoFeatureClass(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("class type {0} is either invalid or not supported/implemented by this wrapper API", ctype));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
+
+//Case 3: Anything that returns FdoIGeometry*
+%typemap(csout) FdoIGeometry* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoGeometryType gtype = tmp.GetDerivedType();
+        switch (gtype)
+        {
+            case FdoGeometryType.FdoGeometryType_Point:
+                return new FdoIPoint(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_LineString:
+                return new FdoILineString(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_Polygon:
+                return new FdoIPolygon(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_MultiPoint:
+                return new FdoIMultiPoint(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_MultiLineString:
+                return new FdoIMultiLineString(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_MultiPolygon:
+                return new FdoIMultiPolygon(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_MultiGeometry:
+                return new FdoIMultiGeometry(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_CurveString:
+                return new FdoICurveString(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_CurvePolygon:
+                return new FdoICurvePolygon(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_MultiCurveString:
+                return new FdoIMultiCurveString(cPtr, $owner);
+            case FdoGeometryType.FdoGeometryType_MultiCurvePolygon:
+                return new FdoIMultiCurvePolygon(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("geometry type {0} is either invalid or not supported/implemented by this wrapper API", gtype));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}

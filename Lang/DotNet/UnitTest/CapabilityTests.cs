@@ -297,9 +297,9 @@ namespace UnitTest
             }
             Console.WriteLine("\tSupportedGeometryTypes:");
             var geomTypes = caps.SupportedGeometryTypes();
-            for (int i = 0; i < geomCompTypes.GetCount(); i++)
+            for (int i = 0; i < geomTypes.GetCount(); i++)
             {
-                var gt = geomCompTypes.GetItem(i);
+                var gt = geomTypes.GetItem(i);
                 Console.WriteLine("\t\t{0}", gt);
             }
         }

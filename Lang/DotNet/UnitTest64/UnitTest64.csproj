@@ -54,6 +54,12 @@
     <Compile Include="..\UnitTest\ConnectTests.cs">
       <Link>ConnectTests.cs</Link>
     </Compile>
+    <Compile Include="..\UnitTest\SchemaTests.cs">
+      <Link>SchemaTests.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTest\SelectTests.cs">
+      <Link>SelectTests.cs</Link>
+    </Compile>
     <Compile Include="..\UnitTest\TestDataStore.cs">
       <Link>TestDataStore.cs</Link>
     </Compile>
