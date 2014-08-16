@@ -87,6 +87,7 @@
 %ignore FdoIDisposable::AddRef;
 %ignore FdoIDisposable::Release;
 %ignore FdoIDisposable::Dispose;
+%ignore FdoIDisposable::EnableObjectThreadLocking;
 
 %ignore FdoContext;
 %ignore FdoArray;

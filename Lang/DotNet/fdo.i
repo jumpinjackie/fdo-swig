@@ -25,6 +25,8 @@ typedef long long     FdoInt64;
 %apply unsigned char INOUT[] { unsigned char* byteArray }
 %apply unsigned char INOUT[] { unsigned char* value }
 
+%include "DotNetPolymorphism.i"
+
 %{
 #include <vector>
 #include "Fdo.h"
