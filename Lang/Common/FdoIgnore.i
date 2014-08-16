@@ -90,7 +90,8 @@
 %ignore FdoProviderNameTokensP;
 %ignore FdoArrayHelper;
 %ignore FdoSchemaMergeContext;
-%ignore FdoSchemaAttributeDictionary;
+%ignore FdoSchemaAttributeDictionary::XmlStartElement;
+%ignore FdoSchemaAttributeDictionary::XmlEndElement;
 %ignore FdoDirectPositionImpl;
 %ignore FdoXmlFeatureFlags::Create;
 %ignore FdoSubSelectExpression::ToStringInternal;
@@ -152,6 +153,10 @@
 %ignore FdoPropertyValueConstraintRange::Set;
 %ignore FdoSchemaElement::Set;
 
+%ignore FdoStringElement::Create;
+
+%ignore FdoGeometricPropertyDefinition::SetSpecificGeometryTypes;
+
 %ignore FdoXmlCopyHandler::Create(FdoXmlWriter*, FdoString*, FdoString*, FdoString*, FdoXmlAttributeCollection*);
 %ignore FdoXmlCopyHandler::Create(FdoXmlWriter*, FdoString*, FdoString*, FdoString*, FdoXmlAttributeCollection*, FdoDictionary*);
 %ignore FdoGeometricPropertyDefinition::InitFromXml;
@@ -168,6 +173,13 @@
 %ignore FdoPhysicalElementMapping::_writeXml;
 %ignore FdoPhysicalPropertyMapping::_writeXml;
 
+%ignore FdoPhysicalElementMapping::ChoiceSubElementError;
+
+%ignore FdoInCondition::Create(FdoIdentifier*,FdoString**,FdoInt32);
+%ignore FdoInCondition::Create(FdoString*,FdoString**,FdoInt32);
+
+%ignore FdoValueExpressionCollection::Create(FdoString**, FdoInt32);
+
 %ignore FdoIDirectPosition::GetOrdinates;
 %ignore FdoIEnvelope::GetOrdinates;
 %ignore FdoILinearRing::GetOrdinates;
@@ -179,6 +191,9 @@
 %ignore FdoIPoint::GetOrdinates;
 %ignore FdoIPoint::GetPositionByMembers;
 %ignore FdoGeometryStreamReader::ReadDirectPositionByMembers(FdoInt32, double*, double*, double*, double*);
+
+%ignore FdoIFeatureReader::GetGeometry(FdoInt32, FdoInt32*);
+%ignore FdoIFeatureReader::GetGeometry(FdoString*, FdoInt32*);
 
 %ignore FdoLOBValue::operator FdoByteArray*;
 

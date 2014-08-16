@@ -13,8 +13,7 @@
 %include <Common/Exception.h>
 %include <Common/Ptr.h>
 %include <Common/Array.h>
-%template (FdoByteArrayImpl) FdoArray<unsigned char>;
-%include <Common/ArrayHelper.h>
+//%include <Common/ArrayHelper.h>
 %include <Common/Compare.h>
 %include <Common/StringP.h>
 %include <Common/Collection.h>
