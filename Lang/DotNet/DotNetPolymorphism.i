@@ -127,3 +127,229 @@
         return null;
     }
 }
+
+//Case 4: Anything that returns FdoExpression*
+%typemap(csout) FdoExpression* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoExpressionItemType etype = tmp.GetExpressionType();
+        switch (etype)
+        {
+            case FdoExpressionItemType.FdoExpressionItemType_Identifier:
+                return new FdoIdentifier(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_ComputedIdentifier:
+                return new FdoComputedIdentifier(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_SubSelectExpression:
+                return new FdoSubSelectExpression(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_Parameter:
+                return new FdoParameter(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_Function:
+                return new FdoFunction(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_BinaryExpression:
+                return new FdoBinaryExpression(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_UnaryExpression:
+                return new FdoUnaryExpression(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_DataValue:
+                {
+                    FdoDataValue tmpData = new FdoDataValue(cPtr, false);
+                    FdoDataType dt = tmpData.GetDataType();
+                    switch (dt)
+                    {
+                        case FdoDataType.FdoDataType_BLOB:
+                            return new FdoBLOBValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Boolean:
+                            return new FdoBooleanValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Byte:
+                            return new FdoByteValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_CLOB:
+                            return new FdoCLOBValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_DateTime:
+                            return new FdoDateTimeValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Decimal:
+                            return new FdoDecimalValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Double:
+                            return new FdoDoubleValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int16:
+                            return new FdoInt16Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int32:
+                            return new FdoInt32Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int64:
+                            return new FdoInt64Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Single:
+                            return new FdoSingleValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_String:
+                            return new FdoStringValue(cPtr, $owner);
+                        default:
+                            throw new global::System.NotSupportedException(global::System.String.Format("expression type {0} is either an invalid data type or not supported/implemented by this wrapper API", etype));
+                    }
+                }
+            case FdoExpressionItemType.FdoExpressionItemType_GeometryValue:
+                return new FdoGeometryValue(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("expression type {0} is either invalid or not supported/implemented by this wrapper API", etype));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
+
+//Case 5: Anything that returns FdoValueExpression*
+%typemap(csout) FdoValueExpression* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoExpressionItemType etype = tmp.GetExpressionType();
+        switch (etype)
+        {
+            case FdoExpressionItemType.FdoExpressionItemType_SubSelectExpression:
+                return new FdoSubSelectExpression(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_Parameter:
+                return new FdoParameter(cPtr, $owner);
+            case FdoExpressionItemType.FdoExpressionItemType_DataValue:
+                {
+                    FdoDataValue tmpData = new FdoDataValue(cPtr, false);
+                    FdoDataType dt = tmpData.GetDataType();
+                    switch (dt)
+                    {
+                        case FdoDataType.FdoDataType_BLOB:
+                            return new FdoBLOBValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Boolean:
+                            return new FdoBooleanValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Byte:
+                            return new FdoByteValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_CLOB:
+                            return new FdoCLOBValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_DateTime:
+                            return new FdoDateTimeValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Decimal:
+                            return new FdoDecimalValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Double:
+                            return new FdoDoubleValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int16:
+                            return new FdoInt16Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int32:
+                            return new FdoInt32Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int64:
+                            return new FdoInt64Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Single:
+                            return new FdoSingleValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_String:
+                            return new FdoStringValue(cPtr, $owner);
+                        default:
+                            throw new global::System.NotSupportedException(global::System.String.Format("expression type {0} is either an invalid data type or not supported/implemented by this wrapper API", etype));
+                    }
+                }
+            case FdoExpressionItemType.FdoExpressionItemType_GeometryValue:
+                return new FdoGeometryValue(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("expression type {0} is either invalid or not supported/implemented by this wrapper API", etype));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
+
+//Case 6: Anything that returns FdoLiteralValue*
+%typemap(csout) FdoLiteralValue* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoLiteralValueType lt = tmp.GetLiteralValueType();
+        switch (lt)
+        {
+            case FdoLiteralValueType.FdoLiteralValueType_Data:
+                {
+                    FdoDataValue tmpData = new FdoDataValue(cPtr, false);
+                    FdoDataType dt = tmpData.GetDataType();
+                    switch (dt)
+                    {
+                        case FdoDataType.FdoDataType_BLOB:
+                            return new FdoBLOBValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Boolean:
+                            return new FdoBooleanValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Byte:
+                            return new FdoByteValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_CLOB:
+                            return new FdoCLOBValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_DateTime:
+                            return new FdoDateTimeValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Decimal:
+                            return new FdoDecimalValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Double:
+                            return new FdoDoubleValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int16:
+                            return new FdoInt16Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int32:
+                            return new FdoInt32Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Int64:
+                            return new FdoInt64Value(cPtr, $owner);
+                        case FdoDataType.FdoDataType_Single:
+                            return new FdoSingleValue(cPtr, $owner);
+                        case FdoDataType.FdoDataType_String:
+                            return new FdoStringValue(cPtr, $owner);
+                        default:
+                            throw new global::System.NotSupportedException(global::System.String.Format("data type {0} is either an invalid data type or not supported/implemented by this wrapper API", dt));
+                    }
+                }
+            case FdoLiteralValueType.FdoLiteralValueType_Geometry:
+                return new FdoGeometryValue(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("literal value type {0} is either an invalid data type or not supported/implemented by this wrapper API", lt));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
+
+//Case 7: Anything that returns FdoDataValue*
+%typemap(csout) FdoDataValue* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoDataType dt = tmp.GetDataType();
+        switch (dt)
+        {
+            case FdoDataType.FdoDataType_BLOB:
+                return new FdoBLOBValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_Boolean:
+                return new FdoBooleanValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_Byte:
+                return new FdoByteValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_CLOB:
+                return new FdoCLOBValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_DateTime:
+                return new FdoDateTimeValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_Decimal:
+                return new FdoDecimalValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_Double:
+                return new FdoDoubleValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_Int16:
+                return new FdoInt16Value(cPtr, $owner);
+            case FdoDataType.FdoDataType_Int32:
+                return new FdoInt32Value(cPtr, $owner);
+            case FdoDataType.FdoDataType_Int64:
+                return new FdoInt64Value(cPtr, $owner);
+            case FdoDataType.FdoDataType_Single:
+                return new FdoSingleValue(cPtr, $owner);
+            case FdoDataType.FdoDataType_String:
+                return new FdoStringValue(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("data type {0} is either an invalid data type or not supported/implemented by this wrapper API", dt));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
