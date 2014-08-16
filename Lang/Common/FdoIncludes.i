@@ -395,6 +395,16 @@
 %include <Fdo/Connections/Capabilities/ArgumentDefinitionCollection.h>
 %include <Fdo/Connections/Capabilities/FunctionDefinition.h>
 %template (FdoFunctionDefinitionCollectionBase) FdoNamedCollection<FdoFunctionDefinition, FdoConnectionException>;
+
+//HACK/BOGUS: SWIG couldn't find GetCount() definition, so define it here
+%extend FdoFunctionDefinitionCollection
+{
+    FdoInt32 GetCount()
+    {
+        return $self->GetCount();
+    }
+};
+
 %include <Fdo/Connections/Capabilities/FunctionDefinitionCollection.h>
 %include <Fdo/Connections/Capabilities/ThreadCapability.h>
 %include <Fdo/Connections/Capabilities/ICommandCapabilities.h>

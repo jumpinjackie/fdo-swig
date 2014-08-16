@@ -334,13 +334,79 @@ namespace UnitTest
         {
             var caps = conn.GetExpressionCapabilities();
             Console.WriteLine("Expression Capabilities");
-            Console.WriteLine("Functions:");
+            Console.WriteLine("\tFunctions:");
             var funcs = caps.GetFunctions();
-            Console.WriteLine("SupportedExpressionTypes:");
+            for (int i = 0; i < funcs.GetCount(); i++)
+            {
+                var func = funcs.GetItem(i);
+                Console.WriteLine("\t\t{0}", func.GetName());
+                Console.WriteLine("\t\t\tDescription: {0}", func.GetDescription());
+                Console.WriteLine("\t\t\tCategory: {0}", func.GetFunctionCategoryType());
+                Console.WriteLine("\t\t\tReturnPropertyType: {0}", func.GetReturnPropertyType());
+                Console.WriteLine("\t\t\tReturnType: {0}", func.GetReturnType());
+                Console.WriteLine("\t\t\tSupportsVariableArgumentsList: {0}", func.SupportsVariableArgumentsList());
+                Console.WriteLine("\t\t\tIsAggregate: {0}", func.IsAggregate());
+                var args = func.GetArguments();
+                Console.WriteLine("\t\t\tArguments:");
+                for (int j = 0; j < args.GetCount(); j++)
+                {
+                    var arg = args.GetItem(j);
+                    Console.WriteLine("\t\t\t\tName: {0}", arg.GetName());
+                    Console.WriteLine("\t\t\t\tDescription: {0}", arg.GetDescription());
+                    Console.WriteLine("\t\t\t\tDataType: {0}", arg.GetDataType());
+                    Console.WriteLine("\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
+                    var valueList = arg.GetArgumentValueList();
+                    if (valueList != null)
+                    {
+                        Console.WriteLine("\t\t\t\tArgument Values:");
+                        Console.WriteLine("\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
+                        Console.WriteLine("\t\t\t\t\tConstraint List:");
+                        var list = valueList.GetConstraintList();
+                        for (var k = 0; k < list.GetCount(); k++)
+                        {
+                            var item = list.GetItem(k);
+                            Console.WriteLine("\t\t\t\t\t\t{0}", item.ToString());
+                        }
+                    }
+                }
+                var sigs = func.GetSignatures();
+                Console.WriteLine("\t\t\tSignatures:");
+                for (int j = 0; j < sigs.GetCount(); j++)
+                {
+                    Console.WriteLine("\t\t\t\tSIGNATURE {0}", (j+1));
+                    var sig = sigs.GetItem(j);
+                    Console.WriteLine("\t\t\t\tReturnType: {0}", sig.GetReturnType());
+                    Console.WriteLine("\t\t\t\tReturnPropertyType: {0}", sig.GetReturnPropertyType());
+                    var sigArgs = sig.GetArguments();
+                    Console.WriteLine("\t\t\t\tArguments:");
+                    for (int k = 0; k < sigArgs.GetCount(); k++)
+                    {
+                        var arg = sigArgs.GetItem(k);
+                        Console.WriteLine("\t\t\t\t\tName: {0}", arg.GetName());
+                        Console.WriteLine("\t\t\t\t\tDescription: {0}", arg.GetDescription());
+                        Console.WriteLine("\t\t\t\t\tDataType: {0}", arg.GetDataType());
+                        Console.WriteLine("\t\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
+                        var valueList = arg.GetArgumentValueList();
+                        if (valueList != null)
+                        {
+                            Console.WriteLine("\t\t\t\t\tArgument Values:");
+                            Console.WriteLine("\t\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
+                            Console.WriteLine("\t\t\t\t\t\tConstraint List:");
+                            var list = valueList.GetConstraintList();
+                            for (var l = 0; l < list.GetCount(); l++)
+                            {
+                                var item = list.GetItem(l);
+                                Console.WriteLine("\t\t\t\t\t\t\t{0}", item.ToString());
+                            }
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("\tSupportedExpressionTypes:");
             var exprTypes = caps.SupportedExpressionTypes();
             for (int i = 0; i < exprTypes.GetCount(); i++)
             {
-                Console.WriteLine("\t{0}", exprTypes.GetItem(i));
+                Console.WriteLine("\t\t{0}", exprTypes.GetItem(i));
             }
         }
 
@@ -348,6 +414,39 @@ namespace UnitTest
         {
             var caps = conn.GetConnectionCapabilities();
             Console.WriteLine("Connection Capabilities");
+            int jtypes = caps.GetJoinTypes();
+            Console.WriteLine("\tJoinTypes:");
+            foreach (FdoJoinType jt in Enum.GetValues(typeof(FdoJoinType)))
+            {
+                Console.WriteLine("\t\t{0} - {1}", jt, ((jtypes & (int)jt) == (int)jt));
+            }
+            Console.WriteLine("\tThreadCapability: {0}", caps.GetThreadCapability());
+            var ltypes = caps.SupportedLockTypes();
+            Console.WriteLine("\tSupportedLockTypes:");
+            for (int i = 0; i < ltypes.GetCount(); i++)
+            {
+                Console.WriteLine("\t\t{0}", ltypes.GetItem(i));
+            }
+            var sceTypes = caps.SupportedSpatialContextExtentTypes();
+            Console.WriteLine("\tSupportedSpatialContextExtentTypes:");
+            for (int i = 0; i < sceTypes.GetCount(); i++)
+            {
+                Console.WriteLine("\t\t{0}", sceTypes.GetItem(i));
+            }
+            Console.WriteLine("\tSupportsConfiguration: {0}", caps.SupportsConfiguration());
+            Console.WriteLine("\tSupportsCSysWKTFromCSysName: {0}", caps.SupportsCSysWKTFromCSysName());
+            Console.WriteLine("\tSupportsFlush: {0}", caps.SupportsFlush());
+            Console.WriteLine("\tSupportsJoins: {0}", caps.SupportsJoins());
+            Console.WriteLine("\tSupportsLocking: {0}", caps.SupportsLocking());
+            Console.WriteLine("\tSupportsLongTransactions: {0}", caps.SupportsLongTransactions());
+            Console.WriteLine("\tSupportsMultipleSpatialContexts: {0}", caps.SupportsMultipleSpatialContexts());
+            Console.WriteLine("\tSupportsMultiUserWrite: {0}", caps.SupportsMultiUserWrite());
+            Console.WriteLine("\tSupportsSavePoint: {0}", caps.SupportsSavePoint());
+            Console.WriteLine("\tSupportsSQL: {0}", caps.SupportsSQL());
+            Console.WriteLine("\tSupportsSubSelects: {0}", caps.SupportsSubSelects());
+            Console.WriteLine("\tSupportsTimeout: {0}", caps.SupportsTimeout());
+            Console.WriteLine("\tSupportsTransactions: {0}", caps.SupportsTransactions());
+            Console.WriteLine("\tSupportsWrite: {0}", caps.SupportsWrite());
         }
 
         [Test]
