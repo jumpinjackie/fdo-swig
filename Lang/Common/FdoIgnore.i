@@ -83,6 +83,11 @@
 %ignore FdoFloatMax;
 %ignore FdoFloatMin;
 
+// C++ refcounting facets should not be exposed
+%ignore FdoIDisposable::AddRef;
+%ignore FdoIDisposable::Release;
+%ignore FdoIDisposable::Dispose;
+
 %ignore FdoContext;
 %ignore FdoArray;
 %ignore FdoStringP;
