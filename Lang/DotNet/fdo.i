@@ -4,7 +4,7 @@
 %include <csharp.swg>
 
 //SWIG is ref-counting aware, so let's take advantage of it!
-%feature("ref") FdoIDisposable "FDO_SAFE_ADDREF($this);"
+%feature("ref") FdoIDisposable ""
 %feature("unref") FdoIDisposable "FDO_SAFE_RELEASE($this);"
 %newobject *::Create;
 

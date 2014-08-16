@@ -197,11 +197,11 @@ namespace UnitTest
         {
             Console.WriteLine("Topology Capabilities");
             var caps = conn.GetTopologyCapabilities();
-            Console.WriteLine("ActivatesTopologyByArea: {0}", caps.ActivatesTopologyByArea());
-            Console.WriteLine("BreaksCurveCrossingsAutomatically: {0}", caps.BreaksCurveCrossingsAutomatically());
-            Console.WriteLine("ConstrainsFeatureMovements: {0}", caps.ConstrainsFeatureMovements());
-            Console.WriteLine("SupportsTopologicalHierarchy: {0}", caps.SupportsTopologicalHierarchy());
-            Console.WriteLine("SupportsTopology: {0}", caps.SupportsTopology());
+            Console.WriteLine("\tActivatesTopologyByArea: {0}", caps.ActivatesTopologyByArea());
+            Console.WriteLine("\tBreaksCurveCrossingsAutomatically: {0}", caps.BreaksCurveCrossingsAutomatically());
+            Console.WriteLine("\tConstrainsFeatureMovements: {0}", caps.ConstrainsFeatureMovements());
+            Console.WriteLine("\tSupportsTopologicalHierarchy: {0}", caps.SupportsTopologicalHierarchy());
+            Console.WriteLine("\tSupportsTopology: {0}", caps.SupportsTopology());
         }
 
         private static void ProcessSchemaCapabilities(FdoIConnection conn)
