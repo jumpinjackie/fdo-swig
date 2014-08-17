@@ -11,6 +11,18 @@ namespace UnitTest
     [TestFixture]
     public class CapabilityTests
     {
+        static void Log(string format, params object[] args)
+        {
+            if (false)
+            {
+#if DEBUG
+                System.Diagnostics.Debug.WriteLine(string.Format(format, args));
+#else
+                System.Diagnostics.Trace.WriteLine(string.Format(format, args));
+#endif
+            }
+        }
+
         private static void ValidateCommandType(FdoICommand cmd, int cmdType)
         {
             //Custom FDO commands may fall out of this range, so only test for
@@ -158,17 +170,17 @@ namespace UnitTest
 
         private static void ProcessCommandCapabilities(FdoIConnection conn)
         {
-            Console.WriteLine("Command Capabilities");
+            Log("Command Capabilities");
             var caps = conn.GetCommandCapabilities();
             var cmds = caps.SupportedCommands();
-            Console.WriteLine("\tSupportedCommands:");
+            Log("\tSupportedCommands:");
             for (int i = 0; i < cmds.GetCount(); i++)
             {
                 int cmdType = cmds.GetItem(i);
                 try
                 {
                     FdoICommand cmd = conn.CreateCommand(cmdType);
-                    Console.WriteLine("\t\t{0}", ((FdoCommandType)cmdType).ToString());
+                    Log("\t\t{0}", ((FdoCommandType)cmdType).ToString());
                     if (Enum.IsDefined(typeof(FdoCommandType), cmdType))
                     {
                         Assert.NotNull(cmd, "{0}", ((FdoCommandType)cmdType));
@@ -176,7 +188,7 @@ namespace UnitTest
                     }
                     else
                     {
-                        Console.WriteLine("\tWARNING: Non-standard FDO command {0} encountered", cmdType);
+                        Log("\tWARNING: Non-standard FDO command {0} encountered", cmdType);
                     }
                 }
                 catch (ManagedFdoException ex)
@@ -184,275 +196,275 @@ namespace UnitTest
                     Assert.Fail("Failed to create command ({0}). Cause: {1}", ((FdoCommandType)cmdType), ex.ToString());
                 }
             }
-            Console.WriteLine("\tSupportsParameters: {0}", caps.SupportsParameters());
-            Console.WriteLine("\tSupportsSelectDistinct: {0}", caps.SupportsSelectDistinct());
-            Console.WriteLine("\tSupportsSelectExpressions: {0}", caps.SupportsSelectExpressions());
-            Console.WriteLine("\tSupportsSelectFunctions: {0}", caps.SupportsSelectFunctions());
-            Console.WriteLine("\tSupportsSelectGrouping: {0}", caps.SupportsSelectGrouping());
-            Console.WriteLine("\tSupportsSelectOrdering: {0}", caps.SupportsSelectOrdering());
-            Console.WriteLine("\tSupportsTimeout: {0}", caps.SupportsTimeout());
+            Log("\tSupportsParameters: {0}", caps.SupportsParameters());
+            Log("\tSupportsSelectDistinct: {0}", caps.SupportsSelectDistinct());
+            Log("\tSupportsSelectExpressions: {0}", caps.SupportsSelectExpressions());
+            Log("\tSupportsSelectFunctions: {0}", caps.SupportsSelectFunctions());
+            Log("\tSupportsSelectGrouping: {0}", caps.SupportsSelectGrouping());
+            Log("\tSupportsSelectOrdering: {0}", caps.SupportsSelectOrdering());
+            Log("\tSupportsTimeout: {0}", caps.SupportsTimeout());
         }
 
         private static void ProcessTopologyCapabilities(FdoIConnection conn)
         {
-            Console.WriteLine("Topology Capabilities");
+            Log("Topology Capabilities");
             var caps = conn.GetTopologyCapabilities();
-            Console.WriteLine("\tActivatesTopologyByArea: {0}", caps.ActivatesTopologyByArea());
-            Console.WriteLine("\tBreaksCurveCrossingsAutomatically: {0}", caps.BreaksCurveCrossingsAutomatically());
-            Console.WriteLine("\tConstrainsFeatureMovements: {0}", caps.ConstrainsFeatureMovements());
-            Console.WriteLine("\tSupportsTopologicalHierarchy: {0}", caps.SupportsTopologicalHierarchy());
-            Console.WriteLine("\tSupportsTopology: {0}", caps.SupportsTopology());
+            Log("\tActivatesTopologyByArea: {0}", caps.ActivatesTopologyByArea());
+            Log("\tBreaksCurveCrossingsAutomatically: {0}", caps.BreaksCurveCrossingsAutomatically());
+            Log("\tConstrainsFeatureMovements: {0}", caps.ConstrainsFeatureMovements());
+            Log("\tSupportsTopologicalHierarchy: {0}", caps.SupportsTopologicalHierarchy());
+            Log("\tSupportsTopology: {0}", caps.SupportsTopology());
         }
 
         private static void ProcessSchemaCapabilities(FdoIConnection conn)
         {
-            Console.WriteLine("Schema Capabilities");
+            Log("Schema Capabilities");
             var caps = conn.GetSchemaCapabilities();
-            Console.WriteLine("\tMaximumDataValueLength:");
+            Log("\tMaximumDataValueLength:");
             foreach (FdoDataType dt in Enum.GetValues(typeof(FdoDataType)))
             {
-                Console.WriteLine("\t\t{0} - {1}", dt, caps.GetMaximumDataValueLength(dt));
+                Log("\t\t{0} - {1}", dt, caps.GetMaximumDataValueLength(dt));
             }
-            Console.WriteLine("\tMaximumDecimalPrecision: {0}", caps.GetMaximumDecimalPrecision());
-            Console.WriteLine("\tMaximumDecimalScale: {0}", caps.GetMaximumDecimalScale());
-            Console.WriteLine("\tNameSizeLimit:");
+            Log("\tMaximumDecimalPrecision: {0}", caps.GetMaximumDecimalPrecision());
+            Log("\tMaximumDecimalScale: {0}", caps.GetMaximumDecimalScale());
+            Log("\tNameSizeLimit:");
             foreach (FdoSchemaElementNameType snt in Enum.GetValues(typeof(FdoSchemaElementNameType)))
             {
-                Console.WriteLine("\t\t{0} - {1}", snt, caps.GetNameSizeLimit(snt));
+                Log("\t\t{0} - {1}", snt, caps.GetNameSizeLimit(snt));
             }
-            Console.WriteLine("\tReservedCharactersForName: {0}", caps.GetReservedCharactersForName());
-            Console.WriteLine("\tSupportedAutogeneratedDataTypes:");
+            Log("\tReservedCharactersForName: {0}", caps.GetReservedCharactersForName());
+            Log("\tSupportedAutogeneratedDataTypes:");
             var dataTypes = caps.SupportedAutogeneratedDataTypes();
             for (int i = 0; i < dataTypes.GetCount(); i++)
             {
                 var dt = dataTypes.GetItem(i);
-                Console.WriteLine("\t\t{0}", dt);
+                Log("\t\t{0}", dt);
             }
             var clsTypes = caps.SupportedClassTypes();
-            Console.WriteLine("\tSupportedClassTypes:");
+            Log("\tSupportedClassTypes:");
             for (int i = 0; i < clsTypes.GetCount(); i++)
             {
                 var clsType = clsTypes.GetItem(i);
-                Console.WriteLine("\t\t{0}", clsType);
+                Log("\t\t{0}", clsType);
             }
-            Console.WriteLine("\tSupportedDataTypes:");
+            Log("\tSupportedDataTypes:");
             dataTypes = caps.SupportedDataTypes();
             for (int i = 0; i < dataTypes.GetCount(); i++)
             {
                 var dt = dataTypes.GetItem(i);
-                Console.WriteLine("\t\t{0}", dt);
+                Log("\t\t{0}", dt);
             }
-            Console.WriteLine("\tSupportedIdentityPropertyTypes:");
+            Log("\tSupportedIdentityPropertyTypes:");
             dataTypes = caps.SupportedIdentityPropertyTypes();
             for (int i = 0; i < dataTypes.GetCount(); i++)
             {
                 var dt = dataTypes.GetItem(i);
-                Console.WriteLine("\t\t{0}", dt);
+                Log("\t\t{0}", dt);
             }
-            Console.WriteLine("\tSupportsAssociationProperties: {0}", caps.SupportsAssociationProperties());
-            Console.WriteLine("\tSupportsAutoIdGeneration: {0}", caps.SupportsAutoIdGeneration());
-            Console.WriteLine("\tSupportsCompositeId: {0}", caps.SupportsCompositeId());
-            Console.WriteLine("\tSupportsCompositeUniqueValueConstraints: {0}", caps.SupportsCompositeUniqueValueConstraints());
-            Console.WriteLine("\tSupportsDataStoreScopeUniqueIdGeneration: {0}", caps.SupportsDataStoreScopeUniqueIdGeneration());
-            Console.WriteLine("\tSupportsDefaultValue: {0}", caps.SupportsDefaultValue());
-            Console.WriteLine("\tSupportsExclusiveValueRangeConstraints: {0}", caps.SupportsExclusiveValueRangeConstraints());
-            Console.WriteLine("\tSupportsInclusiveValueRangeConstraints: {0}", caps.SupportsInclusiveValueRangeConstraints());
-            Console.WriteLine("\tSupportsInheritance: {0}", caps.SupportsInheritance());
-            Console.WriteLine("\tSupportsMultipleSchemas: {0}", caps.SupportsMultipleSchemas());
-            Console.WriteLine("\tSupportsNetworkModel: {0}", caps.SupportsNetworkModel());
-            Console.WriteLine("\tSupportsNullValueConstraints: {0}", caps.SupportsNullValueConstraints());
-            Console.WriteLine("\tSupportsObjectProperties: {0}", caps.SupportsObjectProperties());
-            Console.WriteLine("\tSupportsSchemaModification: {0}", caps.SupportsSchemaModification());
-            Console.WriteLine("\tSupportsSchemaOverrides: {0}", caps.SupportsSchemaOverrides());
-            Console.WriteLine("\tSupportsUniqueValueConstraints: {0}", caps.SupportsUniqueValueConstraints());
-            Console.WriteLine("\tSupportsValueConstraintsList: {0}", caps.SupportsValueConstraintsList());
+            Log("\tSupportsAssociationProperties: {0}", caps.SupportsAssociationProperties());
+            Log("\tSupportsAutoIdGeneration: {0}", caps.SupportsAutoIdGeneration());
+            Log("\tSupportsCompositeId: {0}", caps.SupportsCompositeId());
+            Log("\tSupportsCompositeUniqueValueConstraints: {0}", caps.SupportsCompositeUniqueValueConstraints());
+            Log("\tSupportsDataStoreScopeUniqueIdGeneration: {0}", caps.SupportsDataStoreScopeUniqueIdGeneration());
+            Log("\tSupportsDefaultValue: {0}", caps.SupportsDefaultValue());
+            Log("\tSupportsExclusiveValueRangeConstraints: {0}", caps.SupportsExclusiveValueRangeConstraints());
+            Log("\tSupportsInclusiveValueRangeConstraints: {0}", caps.SupportsInclusiveValueRangeConstraints());
+            Log("\tSupportsInheritance: {0}", caps.SupportsInheritance());
+            Log("\tSupportsMultipleSchemas: {0}", caps.SupportsMultipleSchemas());
+            Log("\tSupportsNetworkModel: {0}", caps.SupportsNetworkModel());
+            Log("\tSupportsNullValueConstraints: {0}", caps.SupportsNullValueConstraints());
+            Log("\tSupportsObjectProperties: {0}", caps.SupportsObjectProperties());
+            Log("\tSupportsSchemaModification: {0}", caps.SupportsSchemaModification());
+            Log("\tSupportsSchemaOverrides: {0}", caps.SupportsSchemaOverrides());
+            Log("\tSupportsUniqueValueConstraints: {0}", caps.SupportsUniqueValueConstraints());
+            Log("\tSupportsValueConstraintsList: {0}", caps.SupportsValueConstraintsList());
         }
 
         private static void ProcessRasterCapabilities(FdoIConnection conn)
         {
             var caps = conn.GetRasterCapabilities();
-            Console.WriteLine("Raster Capabilities");
-            Console.WriteLine("\tSupportsRaster: {0}", caps.SupportsRaster());
-            Console.WriteLine("\tSupportsStitching: {0}", caps.SupportsStitching());
-            Console.WriteLine("\tSupportsSubsampling: {0}", caps.SupportsSubsampling());
+            Log("Raster Capabilities");
+            Log("\tSupportsRaster: {0}", caps.SupportsRaster());
+            Log("\tSupportsStitching: {0}", caps.SupportsStitching());
+            Log("\tSupportsSubsampling: {0}", caps.SupportsSubsampling());
         }
 
         private static void ProcessGeometryCapabilities(FdoIConnection conn)
         {
             var caps = conn.GetGeometryCapabilities();
-            Console.WriteLine("Geometry Capabilities");
+            Log("Geometry Capabilities");
             int dims = caps.GetDimensionalities();
-            Console.WriteLine("\tDimensionalities:");
+            Log("\tDimensionalities:");
             foreach (FdoDimensionality dim in Enum.GetValues(typeof(FdoDimensionality)))
             {
                 int d = (int)dim;
-                Console.WriteLine("\t\t{0} - {1}", dim, ((dims & d) == d));
+                Log("\t\t{0} - {1}", dim, ((dims & d) == d));
             }
-            Console.WriteLine("\tSupportedGeometryComponentTypes:");
+            Log("\tSupportedGeometryComponentTypes:");
             var geomCompTypes = caps.SupportedGeometryComponentTypes();
             for (int i = 0; i < geomCompTypes.GetCount(); i++)
             {
                 var gct = geomCompTypes.GetItem(i);
-                Console.WriteLine("\t\t{0}", gct);
+                Log("\t\t{0}", gct);
             }
-            Console.WriteLine("\tSupportedGeometryTypes:");
+            Log("\tSupportedGeometryTypes:");
             var geomTypes = caps.SupportedGeometryTypes();
             for (int i = 0; i < geomTypes.GetCount(); i++)
             {
                 var gt = geomTypes.GetItem(i);
-                Console.WriteLine("\t\t{0}", gt);
+                Log("\t\t{0}", gt);
             }
         }
 
         private static void ProcessFilterCapabilities(FdoIConnection conn)
         {
             var caps = conn.GetFilterCapabilities();
-            Console.WriteLine("Filter Capabilities");
-            Console.WriteLine("\tSupportedConditionTypes:");
+            Log("Filter Capabilities");
+            Log("\tSupportedConditionTypes:");
             var condTypes = caps.SupportedConditionTypes();
             for (int i = 0; i < condTypes.GetCount(); i++)
             {
-                Console.WriteLine("\t\t{0}", condTypes.GetItem(i));
+                Log("\t\t{0}", condTypes.GetItem(i));
             }
-            Console.WriteLine("\tSupportedDistanceOperations:");
+            Log("\tSupportedDistanceOperations:");
             var distOps = caps.SupportedDistanceOperations();
             for (int i = 0; i < distOps.GetCount(); i++)
             {
-                Console.WriteLine("\t\t{0}", distOps.GetItem(i));
+                Log("\t\t{0}", distOps.GetItem(i));
             }
-            Console.WriteLine("\tSupportedSpatialOperations:");
+            Log("\tSupportedSpatialOperations:");
             var spOps = caps.SupportedSpatialOperations();
             for (int i = 0; i < spOps.GetCount(); i++)
             {
-                Console.WriteLine("\t\t{0}", spOps.GetItem(i));
+                Log("\t\t{0}", spOps.GetItem(i));
             }
-            Console.WriteLine("\tSupportsGeodesicDistance: {0}", caps.SupportsGeodesicDistance());
-            Console.WriteLine("\tSupportsNonLiteralGeometricOperations: {0}", caps.SupportsNonLiteralGeometricOperations());
+            Log("\tSupportsGeodesicDistance: {0}", caps.SupportsGeodesicDistance());
+            Log("\tSupportsNonLiteralGeometricOperations: {0}", caps.SupportsNonLiteralGeometricOperations());
         }
 
         private static void ProcessExpressionCapabilities(FdoIConnection conn)
         {
             var caps = conn.GetExpressionCapabilities();
-            Console.WriteLine("Expression Capabilities");
-            Console.WriteLine("\tFunctions:");
+            Log("Expression Capabilities");
+            Log("\tFunctions:");
             var funcs = caps.GetFunctions();
             for (int i = 0; i < funcs.GetCount(); i++)
             {
                 var func = funcs.GetItem(i);
-                Console.WriteLine("\t\t{0}", func.GetName());
-                Console.WriteLine("\t\t\tDescription: {0}", func.GetDescription());
-                Console.WriteLine("\t\t\tCategory: {0}", func.GetFunctionCategoryType());
-                Console.WriteLine("\t\t\tReturnPropertyType: {0}", func.GetReturnPropertyType());
-                Console.WriteLine("\t\t\tReturnType: {0}", func.GetReturnType());
-                Console.WriteLine("\t\t\tSupportsVariableArgumentsList: {0}", func.SupportsVariableArgumentsList());
-                Console.WriteLine("\t\t\tIsAggregate: {0}", func.IsAggregate());
+                Log("\t\t{0}", func.GetName());
+                Log("\t\t\tDescription: {0}", func.GetDescription());
+                Log("\t\t\tCategory: {0}", func.GetFunctionCategoryType());
+                Log("\t\t\tReturnPropertyType: {0}", func.GetReturnPropertyType());
+                Log("\t\t\tReturnType: {0}", func.GetReturnType());
+                Log("\t\t\tSupportsVariableArgumentsList: {0}", func.SupportsVariableArgumentsList());
+                Log("\t\t\tIsAggregate: {0}", func.IsAggregate());
                 var args = func.GetArguments();
-                Console.WriteLine("\t\t\tArguments:");
+                Log("\t\t\tArguments:");
                 for (int j = 0; j < args.GetCount(); j++)
                 {
                     var arg = args.GetItem(j);
-                    Console.WriteLine("\t\t\t\tName: {0}", arg.GetName());
-                    Console.WriteLine("\t\t\t\tDescription: {0}", arg.GetDescription());
-                    Console.WriteLine("\t\t\t\tDataType: {0}", arg.GetDataType());
-                    Console.WriteLine("\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
+                    Log("\t\t\t\tName: {0}", arg.GetName());
+                    Log("\t\t\t\tDescription: {0}", arg.GetDescription());
+                    Log("\t\t\t\tDataType: {0}", arg.GetDataType());
+                    Log("\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
                     var valueList = arg.GetArgumentValueList();
                     if (valueList != null)
                     {
-                        Console.WriteLine("\t\t\t\tArgument Values:");
-                        Console.WriteLine("\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
-                        Console.WriteLine("\t\t\t\t\tConstraint List:");
+                        Log("\t\t\t\tArgument Values:");
+                        Log("\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
+                        Log("\t\t\t\t\tConstraint List:");
                         var list = valueList.GetConstraintList();
                         for (var k = 0; k < list.GetCount(); k++)
                         {
                             var item = list.GetItem(k);
-                            Console.WriteLine("\t\t\t\t\t\t{0}", item.ToString());
+                            Log("\t\t\t\t\t\t{0}", item.ToString());
                         }
                     }
                 }
                 var sigs = func.GetSignatures();
-                Console.WriteLine("\t\t\tSignatures:");
+                Log("\t\t\tSignatures:");
                 for (int j = 0; j < sigs.GetCount(); j++)
                 {
-                    Console.WriteLine("\t\t\t\tSIGNATURE {0}", (j+1));
+                    Log("\t\t\t\tSIGNATURE {0}", (j+1));
                     var sig = sigs.GetItem(j);
-                    Console.WriteLine("\t\t\t\tReturnType: {0}", sig.GetReturnType());
-                    Console.WriteLine("\t\t\t\tReturnPropertyType: {0}", sig.GetReturnPropertyType());
+                    Log("\t\t\t\tReturnType: {0}", sig.GetReturnType());
+                    Log("\t\t\t\tReturnPropertyType: {0}", sig.GetReturnPropertyType());
                     var sigArgs = sig.GetArguments();
-                    Console.WriteLine("\t\t\t\tArguments:");
+                    Log("\t\t\t\tArguments:");
                     for (int k = 0; k < sigArgs.GetCount(); k++)
                     {
                         var arg = sigArgs.GetItem(k);
-                        Console.WriteLine("\t\t\t\t\tName: {0}", arg.GetName());
-                        Console.WriteLine("\t\t\t\t\tDescription: {0}", arg.GetDescription());
-                        Console.WriteLine("\t\t\t\t\tDataType: {0}", arg.GetDataType());
-                        Console.WriteLine("\t\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
+                        Log("\t\t\t\t\tName: {0}", arg.GetName());
+                        Log("\t\t\t\t\tDescription: {0}", arg.GetDescription());
+                        Log("\t\t\t\t\tDataType: {0}", arg.GetDataType());
+                        Log("\t\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
                         var valueList = arg.GetArgumentValueList();
                         if (valueList != null)
                         {
-                            Console.WriteLine("\t\t\t\t\tArgument Values:");
-                            Console.WriteLine("\t\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
-                            Console.WriteLine("\t\t\t\t\t\tConstraint List:");
+                            Log("\t\t\t\t\tArgument Values:");
+                            Log("\t\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
+                            Log("\t\t\t\t\t\tConstraint List:");
                             var list = valueList.GetConstraintList();
                             for (var l = 0; l < list.GetCount(); l++)
                             {
                                 var item = list.GetItem(l);
-                                Console.WriteLine("\t\t\t\t\t\t\t{0}", item.ToString());
+                                Log("\t\t\t\t\t\t\t{0}", item.ToString());
                             }
                         }
                     }
                 }
             }
-            Console.WriteLine("\tSupportedExpressionTypes:");
+            Log("\tSupportedExpressionTypes:");
             var exprTypes = caps.SupportedExpressionTypes();
             for (int i = 0; i < exprTypes.GetCount(); i++)
             {
-                Console.WriteLine("\t\t{0}", exprTypes.GetItem(i));
+                Log("\t\t{0}", exprTypes.GetItem(i));
             }
         }
 
         private static void ProcessConnectionCapabilities(FdoIConnection conn)
         {
             var caps = conn.GetConnectionCapabilities();
-            Console.WriteLine("Connection Capabilities");
+            Log("Connection Capabilities");
             int jtypes = caps.GetJoinTypes();
-            Console.WriteLine("\tJoinTypes:");
+            Log("\tJoinTypes:");
             foreach (FdoJoinType jt in Enum.GetValues(typeof(FdoJoinType)))
             {
-                Console.WriteLine("\t\t{0} - {1}", jt, ((jtypes & (int)jt) == (int)jt));
+                Log("\t\t{0} - {1}", jt, ((jtypes & (int)jt) == (int)jt));
             }
-            Console.WriteLine("\tThreadCapability: {0}", caps.GetThreadCapability());
+            Log("\tThreadCapability: {0}", caps.GetThreadCapability());
             var ltypes = caps.SupportedLockTypes();
-            Console.WriteLine("\tSupportedLockTypes:");
+            Log("\tSupportedLockTypes:");
             for (int i = 0; i < ltypes.GetCount(); i++)
             {
-                Console.WriteLine("\t\t{0}", ltypes.GetItem(i));
+                Log("\t\t{0}", ltypes.GetItem(i));
             }
             var sceTypes = caps.SupportedSpatialContextExtentTypes();
-            Console.WriteLine("\tSupportedSpatialContextExtentTypes:");
+            Log("\tSupportedSpatialContextExtentTypes:");
             for (int i = 0; i < sceTypes.GetCount(); i++)
             {
-                Console.WriteLine("\t\t{0}", sceTypes.GetItem(i));
+                Log("\t\t{0}", sceTypes.GetItem(i));
             }
-            Console.WriteLine("\tSupportsConfiguration: {0}", caps.SupportsConfiguration());
-            Console.WriteLine("\tSupportsCSysWKTFromCSysName: {0}", caps.SupportsCSysWKTFromCSysName());
-            Console.WriteLine("\tSupportsFlush: {0}", caps.SupportsFlush());
-            Console.WriteLine("\tSupportsJoins: {0}", caps.SupportsJoins());
-            Console.WriteLine("\tSupportsLocking: {0}", caps.SupportsLocking());
-            Console.WriteLine("\tSupportsLongTransactions: {0}", caps.SupportsLongTransactions());
-            Console.WriteLine("\tSupportsMultipleSpatialContexts: {0}", caps.SupportsMultipleSpatialContexts());
-            Console.WriteLine("\tSupportsMultiUserWrite: {0}", caps.SupportsMultiUserWrite());
-            Console.WriteLine("\tSupportsSavePoint: {0}", caps.SupportsSavePoint());
-            Console.WriteLine("\tSupportsSQL: {0}", caps.SupportsSQL());
-            Console.WriteLine("\tSupportsSubSelects: {0}", caps.SupportsSubSelects());
-            Console.WriteLine("\tSupportsTimeout: {0}", caps.SupportsTimeout());
-            Console.WriteLine("\tSupportsTransactions: {0}", caps.SupportsTransactions());
-            Console.WriteLine("\tSupportsWrite: {0}", caps.SupportsWrite());
+            Log("\tSupportsConfiguration: {0}", caps.SupportsConfiguration());
+            Log("\tSupportsCSysWKTFromCSysName: {0}", caps.SupportsCSysWKTFromCSysName());
+            Log("\tSupportsFlush: {0}", caps.SupportsFlush());
+            Log("\tSupportsJoins: {0}", caps.SupportsJoins());
+            Log("\tSupportsLocking: {0}", caps.SupportsLocking());
+            Log("\tSupportsLongTransactions: {0}", caps.SupportsLongTransactions());
+            Log("\tSupportsMultipleSpatialContexts: {0}", caps.SupportsMultipleSpatialContexts());
+            Log("\tSupportsMultiUserWrite: {0}", caps.SupportsMultiUserWrite());
+            Log("\tSupportsSavePoint: {0}", caps.SupportsSavePoint());
+            Log("\tSupportsSQL: {0}", caps.SupportsSQL());
+            Log("\tSupportsSubSelects: {0}", caps.SupportsSubSelects());
+            Log("\tSupportsTimeout: {0}", caps.SupportsTimeout());
+            Log("\tSupportsTransactions: {0}", caps.SupportsTransactions());
+            Log("\tSupportsWrite: {0}", caps.SupportsWrite());
         }
 
         [Test]
         public void TestSDFCapabilities()
         {
-            Console.WriteLine("\n====== Testing SDF Capabilities =======\n");
+            Log("\n====== Testing SDF Capabilities =======\n");
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
@@ -470,7 +482,7 @@ namespace UnitTest
         [Test]
         public void TestSHPCapabilities()
         {
-            Console.WriteLine("\n====== Testing SHP Capabilities =======\n");
+            Log("\n====== Testing SHP Capabilities =======\n");
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
@@ -488,7 +500,7 @@ namespace UnitTest
         [Test]
         public void TestSQLiteCapabilities()
         {
-            Console.WriteLine("\n====== Testing SQLite Capabilities =======\n");
+            Log("\n====== Testing SQLite Capabilities =======\n");
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);

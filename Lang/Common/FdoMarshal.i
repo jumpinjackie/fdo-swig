@@ -7,6 +7,11 @@
 // We probably should use typemaps here, but until we can actually grok how they
 // work, we'll take the wrap and box approach that we're doing here
 //
+
+//Ignore these methods as the collections being returned should be read-only
+%ignore FdoBasicValueCollection::Add;
+%ignore FdoBasicValueCollection::Clear;
+
 %include "../Common/BasicValueCollection.h"
 %template (FdoClassTypeCollectionBase) FdoBasicValueCollection<FdoClassType>;
 %include "../Common/ClassTypeCollection.h"
