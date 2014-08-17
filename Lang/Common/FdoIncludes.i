@@ -48,10 +48,10 @@
 %include <Common/Io/FileStream.h>
 %include <Common/Io/TextReader.h>
 %include <Common/Io/TextWriter.h>
-%template (FdoObjectStreamReader) FdoIStreamReaderTmpl< unsigned char >;
-%include <Common/Io/ObjectStreamReader.h>
+//%template (FdoObjectStreamReader) FdoIStreamReaderTmpl< unsigned char >;
+//%include <Common/Io/ObjectStreamReader.h>
 //%include <Common/Io/ByteStreamReader.h>
-%template (FdoByteStreamReader) FdoIoObjectStreamReader< FdoByte >;
+//%template (FdoByteStreamReader) FdoIoObjectStreamReader< FdoByte >;
 
 %include <Common/Xml/Xml.h>
 %include <Common/Xml/XmlException.h>

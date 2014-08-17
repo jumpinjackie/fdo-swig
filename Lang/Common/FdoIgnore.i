@@ -89,8 +89,11 @@
 %ignore FdoIDisposable::Dispose;
 %ignore FdoIDisposable::EnableObjectThreadLocking;
 
+%ignore FdoGml212;
+%ignore FdoGml311;
+%ignore FdoXml;
+
 %ignore FdoContext;
-%ignore FdoArray;
 %ignore FdoStringP;
 %ignore FdoStringsP;
 %ignore FdoProviderNameTokensP;
@@ -101,6 +104,7 @@
 %ignore FdoDirectPositionImpl;
 %ignore FdoXmlFeatureFlags::Create;
 %ignore FdoSubSelectExpression::ToStringInternal;
+%ignore FdoGeometryStreamFactory::CreateGeometryStreamReader;
 
 %ignore FdoFunction::Create;
 %ignore FdoFunctionDefinition::Create;
@@ -149,6 +153,9 @@
 %ignore FdoGeometricPropertyDefinition::_writeXml;
 %ignore FdoPropertyDefinition::_writeXml;
 
+%ignore FdoFgfGeometryFactory::GetByteArray;
+%ignore FdoFgfGeometryFactory::TakeReleasedByteArray;
+
 %ignore FdoFeatureSchema::CheckReferences;
 %ignore FdoObjectPropertyDefinition::CheckReferences;
 %ignore FdoSchemaElement::CheckReferences;
@@ -196,7 +203,9 @@
 %ignore FdoIMultiPoint::GetOrdinates;
 %ignore FdoIPoint::GetOrdinates;
 %ignore FdoIPoint::GetPositionByMembers;
-%ignore FdoGeometryStreamReader::ReadDirectPositionByMembers(FdoInt32, double*, double*, double*, double*);
+%ignore FdoGeometryStreamFactory;
+%ignore FdoGeometryStreamWriter;
+%ignore FdoGeometryStreamReader;
 
 %ignore FdoIFeatureReader::GetGeometry(FdoInt32, FdoInt32*);
 %ignore FdoIFeatureReader::GetGeometry(FdoString*, FdoInt32*);
