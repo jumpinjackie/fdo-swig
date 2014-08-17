@@ -24,3 +24,11 @@
 /Lang/DotNet/TestRunner64/obj
 /Lang/DotNet/TestRunner/obj
 /Lang/DotNet/TestRunner/bin
+/Lang/DotNet/TestRunner64Dbg/obj
+/Lang/DotNet/TestRunner64Dbg/bin
+/Lang/DotNet/TestRunnerDbg/obj
+/Lang/DotNet/TestRunnerDbg/bin
+/Lang/DotNet/UnitTest64Dbg/obj
+/Lang/DotNet/UnitTest64Dbg/bin
+/Lang/DotNet/UnitTestDbg/obj
+/Lang/DotNet/UnitTestDbg/bin
