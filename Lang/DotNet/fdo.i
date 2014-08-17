@@ -92,5 +92,5 @@ static std::string W2A_SLOW(const wchar_t* input)
 %include "FdoExceptions.i"
 %include "../Common/FdoIgnore.i"
 %include "../Common/FdoMarshal_Ignore.i"
-%include "../Common/FdoIncludes.i"
 %include "../Common/FdoMarshal.i"
+%include "../Common/FdoIncludes.i"

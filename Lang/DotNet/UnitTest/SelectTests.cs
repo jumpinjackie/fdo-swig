@@ -24,22 +24,43 @@ namespace UnitTest
             selectCmd.SetFeatureClassName("World_Countries");
 
             FdoIFeatureReader reader = selectCmd.Execute();
-            int count = 0;
-            while (reader.ReadNext())
+            try
             {
-                string name = null;
-                string key = null;
-                string mapkey = null;
-                if (!reader.IsNull("NAME"))
-                    name = reader.GetString("NAME");
-                if (!reader.IsNull("KEY"))
-                    key = reader.GetString("KEY");
-                if (!reader.IsNull("MAPKEY"))
-                    mapkey = reader.GetString("MAPKEY");
-                count++;
+                int count = 0;
+                FdoFeatureClass clsDef = reader.GetClassDefinition() as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                string geomName = geomProp.GetName();
+                Assert.NotNull(geomProp);
+                while (reader.ReadNext())
+                {
+                    string name = null;
+                    string key = null;
+                    string mapkey = null;
+                    if (!reader.IsNull("NAME"))
+                        name = reader.GetString("NAME");
+                    if (!reader.IsNull("KEY"))
+                        key = reader.GetString("KEY");
+                    if (!reader.IsNull("MAPKEY"))
+                        mapkey = reader.GetString("MAPKEY");
+                    if (!reader.IsNull(geomName))
+                    {
+                        FdoByteArrayHandle fgf = reader.GetGeometryBytes(geomName);
+                        Assert.NotNull(fgf);
+                        FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
+                        Assert.NotNull(geom);
+                        string wkt = geom.GetText();
+                        Assert.IsNotNullOrEmpty(wkt);
+                    }
+                    count++;
+                }
+                Assert.AreEqual(419, count, "Expected 419 features");
             }
-            reader.Close();
-            Assert.AreEqual(419, count, "Expected 419 features");
+            finally
+            {
+                reader.Close();
+            }
         }
 
         [Test]
@@ -56,22 +77,43 @@ namespace UnitTest
             selectCmd.SetFilter("NAME = 'Canada'");
 
             FdoIFeatureReader reader = selectCmd.Execute();
-            int count = 0;
-            while (reader.ReadNext())
+            try
             {
-                string name = null;
-                string key = null;
-                string mapkey = null;
-                if (!reader.IsNull("NAME"))
-                    name = reader.GetString("NAME");
-                if (!reader.IsNull("KEY"))
-                    key = reader.GetString("KEY");
-                if (!reader.IsNull("MAPKEY"))
-                    mapkey = reader.GetString("MAPKEY");
-                count++;
+                int count = 0;
+                FdoFeatureClass clsDef = reader.GetClassDefinition() as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                string geomName = geomProp.GetName();
+                Assert.NotNull(geomProp);
+                while (reader.ReadNext())
+                {
+                    string name = null;
+                    string key = null;
+                    string mapkey = null;
+                    if (!reader.IsNull("NAME"))
+                        name = reader.GetString("NAME");
+                    if (!reader.IsNull("KEY"))
+                        key = reader.GetString("KEY");
+                    if (!reader.IsNull("MAPKEY"))
+                        mapkey = reader.GetString("MAPKEY");
+                    if (!reader.IsNull(geomName))
+                    {
+                        FdoByteArrayHandle fgf = reader.GetGeometryBytes(geomName);
+                        Assert.NotNull(fgf);
+                        FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
+                        Assert.NotNull(geom);
+                        string wkt = geom.GetText();
+                        Assert.IsNotNullOrEmpty(wkt);
+                    }
+                    count++;
+                }
+                Assert.AreEqual(66, count, "Expected 66 features");
             }
-            reader.Close();
-            Assert.AreEqual(66, count, "Expected 66 features");
+            finally
+            {
+                reader.Close();
+            }
         }
 
         [Test]
@@ -87,22 +129,43 @@ namespace UnitTest
             selectCmd.SetFeatureClassName("World_Countries");
 
             FdoIFeatureReader reader = selectCmd.Execute();
-            int count = 0;
-            while (reader.ReadNext())
+            try
             {
-                string name = null;
-                string key = null;
-                string mapkey = null;
-                if (!reader.IsNull("NAME"))
-                    name = reader.GetString("NAME");
-                if (!reader.IsNull("KEY"))
-                    key = reader.GetString("KEY");
-                if (!reader.IsNull("MAPKEY"))
-                    mapkey = reader.GetString("MAPKEY");
-                count++;
+                int count = 0;
+                FdoFeatureClass clsDef = reader.GetClassDefinition() as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                string geomName = geomProp.GetName();
+                Assert.NotNull(geomProp);
+                while (reader.ReadNext())
+                {
+                    string name = null;
+                    string key = null;
+                    string mapkey = null;
+                    if (!reader.IsNull("NAME"))
+                        name = reader.GetString("NAME");
+                    if (!reader.IsNull("KEY"))
+                        key = reader.GetString("KEY");
+                    if (!reader.IsNull("MAPKEY"))
+                        mapkey = reader.GetString("MAPKEY");
+                    if (!reader.IsNull(geomName))
+                    {
+                        FdoByteArrayHandle fgf = reader.GetGeometryBytes(geomName);
+                        Assert.NotNull(fgf);
+                        FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
+                        Assert.NotNull(geom);
+                        string wkt = geom.GetText();
+                        Assert.IsNotNullOrEmpty(wkt);
+                    }
+                    count++;
+                }
+                Assert.AreEqual(419, count, "Expected 419 features");
             }
-            reader.Close();
-            Assert.AreEqual(419, count, "Expected 419 features");
+            finally
+            {
+                reader.Close();
+            }
         }
 
         [Test]
@@ -119,13 +182,43 @@ namespace UnitTest
             selectCmd.SetFilter("NAME = 'Canada'");
 
             FdoIFeatureReader reader = selectCmd.Execute();
-            int count = 0;
-            while (reader.ReadNext())
+            try
             {
-                count++;
+                int count = 0;
+                FdoFeatureClass clsDef = reader.GetClassDefinition() as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                string geomName = geomProp.GetName();
+                Assert.NotNull(geomProp);
+                while (reader.ReadNext())
+                {
+                    string name = null;
+                    string key = null;
+                    string mapkey = null;
+                    if (!reader.IsNull("NAME"))
+                        name = reader.GetString("NAME");
+                    if (!reader.IsNull("KEY"))
+                        key = reader.GetString("KEY");
+                    if (!reader.IsNull("MAPKEY"))
+                        mapkey = reader.GetString("MAPKEY");
+                    if (!reader.IsNull(geomName))
+                    {
+                        FdoByteArrayHandle fgf = reader.GetGeometryBytes(geomName);
+                        Assert.NotNull(fgf);
+                        FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
+                        Assert.NotNull(geom);
+                        string wkt = geom.GetText();
+                        Assert.IsNotNullOrEmpty(wkt);
+                    }
+                    count++;
+                }
+                Assert.AreEqual(66, count, "Expected 66 features");
             }
-            reader.Close();
-            Assert.AreEqual(66, count, "Expected 66 features");
+            finally
+            {
+                reader.Close();
+            }
         }
 
         [Test]
@@ -141,13 +234,43 @@ namespace UnitTest
             selectCmd.SetFeatureClassName("World_Countries");
 
             FdoIFeatureReader reader = selectCmd.Execute();
-            int count = 0;
-            while (reader.ReadNext())
+            try
             {
-                count++;
+                int count = 0;
+                FdoFeatureClass clsDef = reader.GetClassDefinition() as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                string geomName = geomProp.GetName();
+                Assert.NotNull(geomProp);
+                while (reader.ReadNext())
+                {
+                    string name = null;
+                    string key = null;
+                    string mapkey = null;
+                    if (!reader.IsNull("NAME"))
+                        name = reader.GetString("NAME");
+                    if (!reader.IsNull("KEY"))
+                        key = reader.GetString("KEY");
+                    if (!reader.IsNull("MAPKEY"))
+                        mapkey = reader.GetString("MAPKEY");
+                    if (!reader.IsNull(geomName))
+                    {
+                        FdoByteArrayHandle fgf = reader.GetGeometryBytes(geomName);
+                        Assert.NotNull(fgf);
+                        FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
+                        Assert.NotNull(geom);
+                        string wkt = geom.GetText();
+                        Assert.IsNotNullOrEmpty(wkt);
+                    }
+                    count++;
+                }
+                Assert.AreEqual(419, count, "Expected 419 features");
             }
-            reader.Close();
-            Assert.AreEqual(419, count, "Expected 419 features");
+            finally
+            {
+                reader.Close();
+            }
         }
 
         [Test]
@@ -164,13 +287,43 @@ namespace UnitTest
             selectCmd.SetFilter("NAME = 'Canada'");
 
             FdoIFeatureReader reader = selectCmd.Execute();
-            int count = 0;
-            while (reader.ReadNext())
+            try
             {
-                count++;
+                int count = 0;
+                FdoFeatureClass clsDef = reader.GetClassDefinition() as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                string geomName = geomProp.GetName();
+                Assert.NotNull(geomProp);
+                while (reader.ReadNext())
+                {
+                    string name = null;
+                    string key = null;
+                    string mapkey = null;
+                    if (!reader.IsNull("NAME"))
+                        name = reader.GetString("NAME");
+                    if (!reader.IsNull("KEY"))
+                        key = reader.GetString("KEY");
+                    if (!reader.IsNull("MAPKEY"))
+                        mapkey = reader.GetString("MAPKEY");
+                    if (!reader.IsNull(geomName))
+                    {
+                        FdoByteArrayHandle fgf = reader.GetGeometryBytes(geomName);
+                        Assert.NotNull(fgf);
+                        FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
+                        Assert.NotNull(geom);
+                        string wkt = geom.GetText();
+                        Assert.IsNotNullOrEmpty(wkt);
+                    }
+                    count++;
+                }
+                Assert.AreEqual(66, count, "Expected 66 features");
             }
-            reader.Close();
-            Assert.AreEqual(66, count, "Expected 66 features");
+            finally
+            {
+                reader.Close();
+            }
         }
     }
 }

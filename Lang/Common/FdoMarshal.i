@@ -549,7 +549,7 @@
         $self->SetData(arr);
     }
     
-    FdoByteArrayHandle* GetData()
+    FdoByteArrayHandle* GetDataBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetData();
@@ -583,7 +583,7 @@
         $self->SetData(arr);
     }
     
-    FdoByteArrayHandle* GetData()
+    FdoByteArrayHandle* GetDataBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetData();
@@ -605,7 +605,7 @@
         $self->SetData(arr);
     }
     
-    FdoByteArrayHandle* GetData()
+    FdoByteArrayHandle* GetDataBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetData();
@@ -653,7 +653,7 @@
         $self->SetGeometry(arr);
     }
     
-    FdoByteArrayHandle* GetGeometry()
+    FdoByteArrayHandle* GetGeometryBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry();
@@ -687,7 +687,7 @@
         return $self->CreateGeometryFromWkb(arr);
     }
     
-    FdoByteArrayHandle* GetFgf(FdoIGeometry* geom)
+    FdoByteArrayHandle* GetFgfBytes(FdoIGeometry* geom)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetFgf(geom);
@@ -695,7 +695,7 @@
         return ret.Detach();
     }
     
-    FdoByteArrayHandle* GetWkb(FdoIGeometry* geom)
+    FdoByteArrayHandle* GetWkbBytes(FdoIGeometry* geom)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetWkb(geom);
@@ -717,10 +717,10 @@
         $self->SetBounds(arr);
     }
     
-    FdoByteArrayHandle* GetBounds()
+    FdoByteArrayHandle* GetBoundsBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
-        FdoPtr<FdoByteArray> arr = $self->GetExtent();
+        FdoPtr<FdoByteArray> arr = $self->GetBounds();
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
@@ -733,7 +733,13 @@
         $self->SetExtent(arr);
     }
     
-    FdoByteArrayHandle* GetExtent()
+    void SetExtent(FdoByteArrayHandle* handle)
+    {
+        FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
+        $self->SetExtent(arr);
+    }
+    
+    FdoByteArrayHandle* GetExtentBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetExtent();
@@ -743,7 +749,7 @@
 }
 %extend FdoISpatialContextReader
 {
-    FdoByteArrayHandle* GetExtent()
+    FdoByteArrayHandle* GetExtentBytes()
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetExtent();
@@ -753,7 +759,7 @@
 }
 %extend FdoIReader
 {
-    FdoByteArrayHandle* GetGeometry(FdoInt32 index)
+    FdoByteArrayHandle* GetGeometryBytes(FdoInt32 index)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry(index);
@@ -761,7 +767,7 @@
         return ret.Detach();
     }
     
-    FdoByteArrayHandle* GetGeometry(FdoString* propertyName)
+    FdoByteArrayHandle* GetGeometryBytes(FdoString* propertyName)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry(propertyName);
@@ -771,7 +777,7 @@
 }
 %extend FdoIFeatureReader
 {
-    FdoByteArrayHandle* GetGeometry(FdoInt32 index)
+    FdoByteArrayHandle* GetGeometryBytes(FdoInt32 index)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry(index);
@@ -779,7 +785,7 @@
         return ret.Detach();
     }
     
-    FdoByteArrayHandle* GetGeometry(FdoString* propertyName)
+    FdoByteArrayHandle* GetGeometryBytes(FdoString* propertyName)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry(propertyName);
@@ -789,7 +795,7 @@
 }
 %extend FdoISQLDataReader
 {
-    FdoByteArrayHandle* GetGeometry(FdoInt32 index)
+    FdoByteArrayHandle* GetGeometryBytes(FdoInt32 index)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry(index);
@@ -797,7 +803,7 @@
         return ret.Detach();
     }
     
-    FdoByteArrayHandle* GetGeometry(FdoString* propertyName)
+    FdoByteArrayHandle* GetGeometryBytes(FdoString* propertyName)
     {
         FdoPtr<FdoByteArrayHandle> ret;
         FdoPtr<FdoByteArray> arr = $self->GetGeometry(propertyName);
