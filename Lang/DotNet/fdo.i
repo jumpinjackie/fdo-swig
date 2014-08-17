@@ -3,12 +3,40 @@
 %include "wchar.i"
 %include <csharp.swg>
 
+//
 //SWIG is ref-counting aware, so let's take advantage of it!
+//
+
+//Do not AddRef() as any pointer returned will either already be AddRef()'d at the C++ level or
+//(if freshly allocated) will start off with a refcount of 1
 %feature("ref") FdoIDisposable ""
+//However, we still do need to release
 %feature("unref") FdoIDisposable "FDO_SAFE_RELEASE($this);"
 %newobject *::Create;
 
 //======= C#-specific ==========
+//Need to override Dispose() for proxy classes derived from FdoIDisposable
+%typemap(csdestruct_derived, methodname="Dispose", methodmodifiers="public") SWIGTYPE {
+    lock(this) {
+      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        if (swigCMemOwn) {
+          swigCMemOwn = false;
+          //Anything derived from FdoIDisposable can simply chain up to the parent Dispose()
+          //where it will be properly de-referenced', otherwise call the SWIG generated
+          //free function
+          //
+          //HACK: This should not be a runtime check, it should be a check we should ideally do from SWIG
+          if (!typeof(FdoIDisposable).IsAssignableFrom(this.GetType())) {
+            $imcall;
+          }
+        }
+        swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+      }
+      global::System.GC.SuppressFinalize(this);
+      base.Dispose();
+    }
+  }
+
 //Make all classes partial, so we can customize said classes outside of swig
 %typemap(csclassmodifiers) SWIGTYPE "public partial class"
 

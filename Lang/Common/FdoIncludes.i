@@ -1,3 +1,9 @@
+// Symbol renaming to avoid collisions with key method names in target languages
+
+//To avoid collision with .net System.Object.GetType
+%rename (GetStreamReaderType) FdoIStreamReader::GetType;
+%rename (GetStreamReaderType) FdoBLOBStreamReader::GetType;
+
 ////////////////////////////////////////////////////////////////
 // FDO Common
 //
