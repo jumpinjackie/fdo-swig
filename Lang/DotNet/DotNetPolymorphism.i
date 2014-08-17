@@ -8,7 +8,7 @@
 // Case 1: FdoIConnection::CreateCommand(FdoInt32 commandType)
 // HACK: Note the hard-coded "commandType" parameter name. If this name ever changes in the C++ header
 // we must update it here. If there was a way in SWIG to do this (ala. $1) we would've done that!
-%typemap(csout) FdoICommand* FdoIConnection::CreateCommand {
+%typemap(csout, excode=SWIGEXCODE) FdoICommand* FdoIConnection::CreateCommand {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero && global::System.Enum.IsDefined(typeof(FdoCommandType), commandType))
     {
@@ -65,7 +65,7 @@
 }
 
 //Case 2: Anything that returns FdoClassDefinition*
-%typemap(csout) FdoClassDefinition* {
+%typemap(csout, excode=SWIGEXCODE) FdoClassDefinition* {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero)
     {
@@ -88,7 +88,7 @@
 }
 
 //Case 3: Anything that returns FdoIGeometry*
-%typemap(csout) FdoIGeometry* {
+%typemap(csout, excode=SWIGEXCODE) FdoIGeometry* {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero)
     {
@@ -129,7 +129,7 @@
 }
 
 //Case 4: Anything that returns FdoExpression*
-%typemap(csout) FdoExpression* {
+%typemap(csout, excode=SWIGEXCODE) FdoExpression* {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero)
     {
@@ -198,7 +198,7 @@
 }
 
 //Case 5: Anything that returns FdoValueExpression*
-%typemap(csout) FdoValueExpression* {
+%typemap(csout, excode=SWIGEXCODE) FdoValueExpression* {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero)
     {
@@ -257,7 +257,7 @@
 }
 
 //Case 6: Anything that returns FdoLiteralValue*
-%typemap(csout) FdoLiteralValue* {
+%typemap(csout, excode=SWIGEXCODE) FdoLiteralValue* {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero)
     {
@@ -312,7 +312,7 @@
 }
 
 //Case 7: Anything that returns FdoDataValue*
-%typemap(csout) FdoDataValue* {
+%typemap(csout, excode=SWIGEXCODE) FdoDataValue* {
     global::System.IntPtr cPtr = $imcall;$excode;
     if (cPtr != global::System.IntPtr.Zero)
     {
@@ -346,6 +346,61 @@
                 return new FdoStringValue(cPtr, $owner);
             default:
                 throw new global::System.NotSupportedException(global::System.String.Format("data type {0} is either an invalid data type or not supported/implemented by this wrapper API", dt));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
+
+//Case 8: Anything that returns FdoFilter*
+//HACK: FdoFilter does not have a type code that gives us a hint as to what to cast to, so we'll monkey-patch this API in
+%extend FdoFilter
+{
+    FdoInt32 GetFilterType()
+    {
+        if (dynamic_cast<FdoBinaryLogicalOperator*>($self) != NULL)
+            return 1;
+        if (dynamic_cast<FdoUnaryLogicalOperator*>($self) != NULL)
+            return 2;
+        if (dynamic_cast<FdoComparisonCondition*>($self) != NULL)
+            return 3;
+        if (dynamic_cast<FdoDistanceCondition*>($self) != NULL)
+            return 4;
+        if (dynamic_cast<FdoSpatialCondition*>($self) != NULL)
+            return 5;
+        if (dynamic_cast<FdoInCondition*>($self) != NULL)
+            return 6;
+        if (dynamic_cast<FdoNullCondition*>($self) != NULL)
+            return 7;
+        return -1;
+    }
+};
+%typemap(csout, excode=SWIGEXCODE) FdoFilter* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        int filterType = tmp.GetFilterType();
+        switch (filterType)
+        {
+            case 1:
+                return new FdoBinaryLogicalOperator(cPtr, $owner);
+            case 2:
+                return new FdoUnaryLogicalOperator(cPtr, $owner);
+            case 3:
+                return new FdoComparisonCondition(cPtr, $owner);
+            case 4:
+                return new FdoDistanceCondition(cPtr, $owner);
+            case 5:
+                return new FdoSpatialCondition(cPtr, $owner);
+            case 6:
+                return new FdoInCondition(cPtr, $owner);
+            case 7:
+                return new FdoNullCondition(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("filter type {0} is either invalid or not supported/implemented by this wrapper API", filterType));
         }
     }
     else

@@ -57,6 +57,12 @@
     <Compile Include="..\UnitTest\ExpressionTests.cs">
       <Link>ExpressionTests.cs</Link>
     </Compile>
+    <Compile Include="..\UnitTest\FilterTests.cs">
+      <Link>FilterTests.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTest\GeometryTests.cs">
+      <Link>GeometryTests.cs</Link>
+    </Compile>
     <Compile Include="..\UnitTest\SchemaTests.cs">
       <Link>SchemaTests.cs</Link>
     </Compile>

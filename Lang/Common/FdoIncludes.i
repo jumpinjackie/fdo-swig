@@ -116,6 +116,55 @@
 
 %include <Geometry/Fgf/Factory.h>
 
+//HACK:
+//FdoGeometryFactoryAbstract methods aren't being picked up by SWIG. Including the GeometryFactoryAbstract
+//header doesn't pick them up
+%extend FdoFgfGeometryFactory
+{
+    FdoIDirectPosition* CreatePositionXY(double x, double y)
+    {
+        return $self->CreatePositionXY(x, y);
+    }
+    
+    FdoIDirectPosition* CreatePositionXYM(double x, double y, double m)
+    {
+        return $self->CreatePositionXYM(x, y, m);
+    }
+    
+    FdoIDirectPosition* CreatePositionXYZ(double x, double y, double z)
+    {
+        return $self->CreatePositionXYZ(x, y, z);
+    }
+    
+    FdoIDirectPosition* CreatePositionXYZM(double x, double y, double z, double m)
+    {
+        return $self->CreatePositionXYZM(x, y, z, m);
+    }
+    
+    FdoIEnvelope* CreateEnvelope(FdoIDirectPosition* pos1, FdoIDirectPosition* pos2)
+    {
+        return $self->CreateEnvelope(pos1, pos2);
+    }
+    
+    FdoIEnvelope* CreateEnvelopeXY(double lowerLeftX,
+                                   double lowerLeftY,
+                                   double upperRightX, 
+                                   double upperRightY)
+    {
+        return $self->CreateEnvelopeXY(lowerLeftX, lowerLeftY, upperRightX, upperRightY);
+    }
+        
+    FdoIEnvelope* CreateEnvelopeXYZ(double lowerLeftX,
+                                    double lowerLeftY,
+                                    double lowerLeftZ,
+                                    double upperRightX,
+                                    double upperRightY,
+                                    double upperRightZ)
+    {
+        return $self->CreateEnvelopeXYZ(lowerLeftX, lowerLeftY, lowerLeftZ, upperRightX, upperRightY, upperRightZ);
+    }
+}
+
 //
 // FDO Core
 //

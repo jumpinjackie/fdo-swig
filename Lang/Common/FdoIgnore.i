@@ -203,6 +203,7 @@
 
 %ignore FdoLOBValue::operator FdoByteArray*;
 
+%ignore FdoFgfGeometryFactory::GetPrivateInstance;
 %ignore FdoFgfGeometryFactory::CreateLinearRing(FdoInt32, FdoInt32, double*);
 %ignore FdoFgfGeometryFactory::CreateLineString(FdoInt32, FdoInt32, double*);
 %ignore FdoFgfGeometryFactory::CreateLineStringSegment(FdoInt32, FdoInt32, double*);
