@@ -67,3 +67,32 @@
         FDO_SAFE_RELEASE(ex);
     }
 }
+
+//Specialized case
+%exception FdoIConnection::Open {
+    try {
+        $action
+    }
+    catch (FdoException *ex) {
+        FdoString* msg = ex->GetExceptionMessage();
+        std::string mbMsg = W2A_SLOW(msg);
+        SWIG_CSharpSetPendingExceptionCustomFdo(mbMsg.c_str());
+        FDO_SAFE_RELEASE(ex);
+        //Need to set a value even if managed wrapper never get this value
+        result = FdoConnectionState_Closed;
+    }
+}
+//Specialized case
+%exception FdoIConnection::GetConnectionState {
+    try {
+        $action
+    }
+    catch (FdoException *ex) {
+        FdoString* msg = ex->GetExceptionMessage();
+        std::string mbMsg = W2A_SLOW(msg);
+        SWIG_CSharpSetPendingExceptionCustomFdo(mbMsg.c_str());
+        FDO_SAFE_RELEASE(ex);
+        //Need to set a value even if managed wrapper never get this value
+        result = FdoConnectionState_Closed;
+    }
+}

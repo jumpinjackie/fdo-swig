@@ -26,7 +26,7 @@ namespace UnitTest
             {
                 pFilter = FdoFilter.Parse(pwzFilter);
             }
-            catch (ManagedFdoException exception)
+            catch (ManagedFdoException)
             {
                 return;
             }
