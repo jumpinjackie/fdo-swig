@@ -30,11 +30,6 @@ namespace UnitTest
             {
                 return;
             }
-            catch (ApplicationException ex)
-            {
-                System.Diagnostics.Debugger.Break();
-                return;
-            }
             Assert.Null(pFilter, "FdoFilter::Parse() should have returned NULL!");
         }
 
