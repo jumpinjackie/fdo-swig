@@ -46,6 +46,14 @@ namespace UnitTest
             Assert.GreaterOrEqual(clsProps.IndexOf("KEY"), 0);
             Assert.GreaterOrEqual(clsProps.IndexOf("MAPKEY"), 0);
             Assert.GreaterOrEqual(clsProps.IndexOf(geomProp), 0);
+
+            var name = clsProps.GetItem("NAME");
+            var key = clsProps.GetItem("KEY");
+            var mapkey = clsProps.GetItem("MAPKEY");
+
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(name);
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(key);
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(mapkey);
         }
 
         [Test]
@@ -74,6 +82,14 @@ namespace UnitTest
 
             FdoDataPropertyDefinitionCollection clsIdProps = clsDef.GetIdentityProperties();
             Assert.AreEqual(1, clsIdProps.GetCount());
+
+            var name = clsProps.GetItem("NAME");
+            var key = clsProps.GetItem("KEY");
+            var mapkey = clsProps.GetItem("MAPKEY");
+
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(name);
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(key);
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(mapkey);
         }
 
         [Test]
@@ -102,6 +118,14 @@ namespace UnitTest
 
             FdoDataPropertyDefinitionCollection clsIdProps = clsDef.GetIdentityProperties();
             Assert.AreEqual(1, clsIdProps.GetCount());
+
+            var name = clsProps.GetItem("NAME");
+            var key = clsProps.GetItem("KEY");
+            var mapkey = clsProps.GetItem("MAPKEY");
+
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(name);
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(key);
+            Assert.IsInstanceOf<FdoDataPropertyDefinition>(mapkey);
         }
     }
 }

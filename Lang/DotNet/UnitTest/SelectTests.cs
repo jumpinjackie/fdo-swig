@@ -27,6 +27,15 @@ namespace UnitTest
             int count = 0;
             while (reader.ReadNext())
             {
+                string name = null;
+                string key = null;
+                string mapkey = null;
+                if (!reader.IsNull("NAME"))
+                    name = reader.GetString("NAME");
+                if (!reader.IsNull("KEY"))
+                    key = reader.GetString("KEY");
+                if (!reader.IsNull("MAPKEY"))
+                    mapkey = reader.GetString("MAPKEY");
                 count++;
             }
             reader.Close();
@@ -50,6 +59,15 @@ namespace UnitTest
             int count = 0;
             while (reader.ReadNext())
             {
+                string name = null;
+                string key = null;
+                string mapkey = null;
+                if (!reader.IsNull("NAME"))
+                    name = reader.GetString("NAME");
+                if (!reader.IsNull("KEY"))
+                    key = reader.GetString("KEY");
+                if (!reader.IsNull("MAPKEY"))
+                    mapkey = reader.GetString("MAPKEY");
                 count++;
             }
             reader.Close();
@@ -72,6 +90,15 @@ namespace UnitTest
             int count = 0;
             while (reader.ReadNext())
             {
+                string name = null;
+                string key = null;
+                string mapkey = null;
+                if (!reader.IsNull("NAME"))
+                    name = reader.GetString("NAME");
+                if (!reader.IsNull("KEY"))
+                    key = reader.GetString("KEY");
+                if (!reader.IsNull("MAPKEY"))
+                    mapkey = reader.GetString("MAPKEY");
                 count++;
             }
             reader.Close();

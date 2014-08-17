@@ -354,7 +354,36 @@
     }
 }
 
-//Case 8: Anything that returns FdoFilter*
+//Case 8: Anything that returns FdoPropertyDefinition*
+%typemap(csout, excode=SWIGEXCODE) FdoPropertyDefinition* {
+    global::System.IntPtr cPtr = $imcall;$excode;
+    if (cPtr != global::System.IntPtr.Zero)
+    {
+        $csclassname tmp = new $csclassname(cPtr, false);
+        FdoPropertyType pt = tmp.GetPropertyType();
+        switch (pt)
+        {
+            case FdoPropertyType.FdoPropertyType_DataProperty:
+                return new FdoDataPropertyDefinition(cPtr, $owner);
+            case FdoPropertyType.FdoPropertyType_GeometricProperty:
+                return new FdoGeometricPropertyDefinition(cPtr, $owner);
+            case FdoPropertyType.FdoPropertyType_RasterProperty:
+                return new FdoRasterPropertyDefinition(cPtr, $owner);
+            case FdoPropertyType.FdoPropertyType_ObjectProperty:
+                return new FdoObjectPropertyDefinition(cPtr, $owner);
+            case FdoPropertyType.FdoPropertyType_AssociationProperty:
+                return new FdoAssociationPropertyDefinition(cPtr, $owner);
+            default:
+                throw new global::System.NotSupportedException(global::System.String.Format("property type {0} is either an invalid data type or not supported/implemented by this wrapper API", pt));
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
+
+//Case 9: Anything that returns FdoFilter*
 //HACK: FdoFilter does not have a type code that gives us a hint as to what to cast to, so we'll monkey-patch this API in
 %extend FdoFilter
 {
