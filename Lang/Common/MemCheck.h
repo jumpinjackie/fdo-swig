@@ -1,7 +1,7 @@
 #ifndef FDO_MEM_CHECK_H
 #define FDO_MEM_CHECK_H
 
-#define USE_VLD
+//#define USE_VLD
 
 #ifdef USE_VLD
 #ifdef _WIN32
