@@ -32,3 +32,5 @@
 /Lang/DotNet/UnitTest64Dbg/bin
 /Lang/DotNet/UnitTestDbg/obj
 /Lang/DotNet/UnitTestDbg/bin
+/Fdo/Release64
+/Fdo/Debug64
