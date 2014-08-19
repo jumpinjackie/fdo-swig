@@ -50,15 +50,18 @@
   <ItemGroup>
     <Compile Include="CapabilityTests.cs" />
     <Compile Include="ConnectTests.cs" />
+    <Compile Include="DeleteTests.cs" />
     <Compile Include="ExpressionTests.cs" />
     <Compile Include="FilterTests.cs" />
     <Compile Include="GeometryTests.cs" />
+    <Compile Include="InsertTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SchemaTests.cs" />
     <Compile Include="SelectAggregateTests.cs" />
     <Compile Include="SelectTests.cs" />
     <Compile Include="SpatialContextTests.cs" />
     <Compile Include="TestDataStore.cs" />
+    <Compile Include="UpdateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

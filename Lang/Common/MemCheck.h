@@ -1,6 +1,9 @@
 #ifndef FDO_MEM_CHECK_H
 #define FDO_MEM_CHECK_H
 
+//NOTE: For memory leak checking to work, you must be running a debug version of this library, and in the executing
+//application project in Visual Studio, the "Enable native code debugging" box must be ticked
+
 //#define USE_VLD
 
 #ifdef USE_VLD

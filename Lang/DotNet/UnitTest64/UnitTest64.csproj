@@ -54,6 +54,9 @@
     <Compile Include="..\UnitTest\ConnectTests.cs">
       <Link>ConnectTests.cs</Link>
     </Compile>
+    <Compile Include="..\UnitTest\DeleteTests.cs">
+      <Link>DeleteTests.cs</Link>
+    </Compile>
     <Compile Include="..\UnitTest\ExpressionTests.cs">
       <Link>ExpressionTests.cs</Link>
     </Compile>
@@ -62,6 +65,9 @@
     </Compile>
     <Compile Include="..\UnitTest\GeometryTests.cs">
       <Link>GeometryTests.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTest\InsertTests.cs">
+      <Link>InsertTests.cs</Link>
     </Compile>
     <Compile Include="..\UnitTest\SchemaTests.cs">
       <Link>SchemaTests.cs</Link>
@@ -77,6 +83,9 @@
     </Compile>
     <Compile Include="..\UnitTest\TestDataStore.cs">
       <Link>TestDataStore.cs</Link>
+    </Compile>
+    <Compile Include="..\UnitTest\UpdateTests.cs">
+      <Link>UpdateTests.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

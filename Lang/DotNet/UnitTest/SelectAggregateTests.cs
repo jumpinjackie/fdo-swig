@@ -30,6 +30,21 @@ namespace UnitTest
             }
             rdr.Close();
             Assert.AreEqual(419L, total, "Expected 419 features");
+
+            //Re-test with sugar methods
+            propNames.Clear();
+            Assert.AreEqual(0, propNames.GetCount());
+            propNames.AddComputedIdentifier("TOTAL_COUNT", "COUNT(NAME)");
+            Assert.AreEqual(1, propNames.GetCount());
+
+            rdr = selectCmd.Execute();
+            total = 0;
+            while (rdr.ReadNext())
+            {
+                total += rdr.GetInt64("TOTAL_COUNT");
+            }
+            rdr.Close();
+            Assert.AreEqual(419L, total, "Expected 419 features");
         }
 
         private void DoFilteredCount(FdoIConnection conn)
@@ -46,6 +61,21 @@ namespace UnitTest
 
             FdoIDataReader rdr = selectCmd.Execute();
             long total = 0;
+            while (rdr.ReadNext())
+            {
+                total += rdr.GetInt64("TOTAL_COUNT");
+            }
+            rdr.Close();
+            Assert.AreEqual(66L, total, "Expected 66 features");
+
+            //Re-test with sugar methods
+            propNames.Clear();
+            Assert.AreEqual(0, propNames.GetCount());
+            propNames.AddComputedIdentifier("TOTAL_COUNT", "COUNT(NAME)");
+            Assert.AreEqual(1, propNames.GetCount());
+
+            rdr = selectCmd.Execute();
+            total = 0;
             while (rdr.ReadNext())
             {
                 total += rdr.GetInt64("TOTAL_COUNT");
@@ -154,6 +184,31 @@ namespace UnitTest
             }
             rdr.Close();
             Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
+            
+            //Re-test with sugar methods
+            propNames.Clear();
+            Assert.AreEqual(0, propNames.GetCount());
+            propNames.AddComputedIdentifier("EXTENTS", "SpatialExtents(" + geomName + ")");
+            Assert.AreEqual(1, propNames.GetCount());
+
+            rdr = selectCmd.Execute();
+            iterations = 0;
+            while (rdr.ReadNext())
+            {
+                Assert.False(rdr.IsNull("EXTENTS"));
+                Assert.AreEqual(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
+
+                FdoByteArrayHandle bytes = rdr.GetGeometryBytes("EXTENTS");
+                Assert.NotNull(bytes);
+                FdoIGeometry geom = geomFactory.CreateGeometryFromFgf(bytes);
+                Assert.NotNull(geom);
+                string wkt = geom.GetText();
+                Assert.NotNull(wkt);
+                System.Diagnostics.Debug.WriteLine(string.Format("SpatialExtents() - {0}", wkt));
+                iterations++;
+            }
+            rdr.Close();
+            Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
         }
 
         private void DoFilteredSpatialExtents(FdoIConnection conn)
@@ -192,6 +247,31 @@ namespace UnitTest
             FdoIDataReader rdr = selectCmd.Execute();
             FdoFgfGeometryFactory geomFactory = FdoFgfGeometryFactory.GetInstance();
             int iterations = 0;
+            while (rdr.ReadNext())
+            {
+                Assert.False(rdr.IsNull("EXTENTS"));
+                Assert.AreEqual(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
+
+                FdoByteArrayHandle bytes = rdr.GetGeometryBytes("EXTENTS");
+                Assert.NotNull(bytes);
+                FdoIGeometry geom = geomFactory.CreateGeometryFromFgf(bytes);
+                Assert.NotNull(geom);
+                string wkt = geom.GetText();
+                Assert.NotNull(wkt);
+                System.Diagnostics.Debug.WriteLine(string.Format("SpatialExtents() - {0}", wkt));
+                iterations++;
+            }
+            rdr.Close();
+            Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
+
+            //Re-test with sugar methods
+            propNames.Clear();
+            Assert.AreEqual(0, propNames.GetCount());
+            propNames.AddComputedIdentifier("EXTENTS", "SpatialExtents(" + geomName + ")");
+            Assert.AreEqual(1, propNames.GetCount());
+
+            rdr = selectCmd.Execute();
+            iterations = 0;
             while (rdr.ReadNext())
             {
                 Assert.False(rdr.IsNull("EXTENTS"));
