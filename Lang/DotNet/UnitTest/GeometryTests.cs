@@ -208,7 +208,7 @@ namespace UnitTest
         }
 
         [Test]
-        public void TestFGFT()
+        public void TestFGFTAndRoundtrip()
         {
             FdoFgfGeometryFactory gf = FdoFgfGeometryFactory.GetInstance();
 
@@ -235,6 +235,103 @@ namespace UnitTest
             Assert.IsInstanceOf<FdoICurvePolygon>(cpg);
             Assert.IsInstanceOf<FdoIMultiCurveString>(mcs);
             Assert.IsInstanceOf<FdoIMultiCurvePolygon>(mcpg);
+
+            FdoByteArrayHandle fgf_pt = gf.GetFgfBytes(pt);
+            FdoByteArrayHandle fgf_ls = gf.GetFgfBytes(ls);
+            FdoByteArrayHandle fgf_pg = gf.GetFgfBytes(pg);
+            FdoByteArrayHandle fgf_mpt = gf.GetFgfBytes(mpt);
+            FdoByteArrayHandle fgf_mls = gf.GetFgfBytes(mls);
+            FdoByteArrayHandle fgf_mpg = gf.GetFgfBytes(mpg);
+            FdoByteArrayHandle fgf_mg = gf.GetFgfBytes(mg);
+            FdoByteArrayHandle fgf_cs = gf.GetFgfBytes(cs);
+            FdoByteArrayHandle fgf_cpg = gf.GetFgfBytes(cpg);
+            FdoByteArrayHandle fgf_mcs = gf.GetFgfBytes(mcs);
+            FdoByteArrayHandle fgf_mcpg = gf.GetFgfBytes(mcpg);
+
+            Assert.NotNull(fgf_pt);
+            Assert.NotNull(fgf_ls);
+            Assert.NotNull(fgf_pg);
+            Assert.NotNull(fgf_mpt);
+            Assert.NotNull(fgf_mls);
+            Assert.NotNull(fgf_mpg);
+            Assert.NotNull(fgf_mg);
+            Assert.NotNull(fgf_cs);
+            Assert.NotNull(fgf_cpg);
+            Assert.NotNull(fgf_mcs);
+            Assert.NotNull(fgf_mcpg);
+
+            //Only test geometries we know are transferrable to WKB
+            FdoByteArrayHandle wkb_pt = gf.GetWkbBytes(pt);
+            FdoByteArrayHandle wkb_ls = gf.GetWkbBytes(ls);
+            FdoByteArrayHandle wkb_pg = gf.GetWkbBytes(pg);
+            //FdoByteArrayHandle wkb_mpt = gf.GetWkbBytes(mpt);
+            //FdoByteArrayHandle wkb_mls = gf.GetWkbBytes(mls);
+            FdoByteArrayHandle wkb_mpg = gf.GetWkbBytes(mpg);
+            //FdoByteArrayHandle wkb_mg = gf.GetWkbBytes(mg);
+            //FdoByteArrayHandle wkb_cs = gf.GetWkbBytes(cs);
+            //FdoByteArrayHandle wkb_cpg = gf.GetWkbBytes(cpg);
+            //FdoByteArrayHandle wkb_mcs = gf.GetWkbBytes(mcs);
+            //FdoByteArrayHandle wkb_mcpg = gf.GetWkbBytes(mcpg);
+
+            Assert.NotNull(wkb_pt);
+            Assert.NotNull(wkb_ls);
+            Assert.NotNull(wkb_pg);
+            //Assert.NotNull(wkb_mpt);
+            //Assert.NotNull(wkb_mls);
+            Assert.NotNull(wkb_mpg);
+            //Assert.NotNull(wkb_mg);
+            //Assert.NotNull(wkb_cs);
+            //Assert.NotNull(wkb_cpg);
+            //Assert.NotNull(wkb_mcs);
+            //Assert.NotNull(wkb_mcpg);
+
+            pt = gf.CreateGeometryFromFgf(fgf_pt);
+            ls = gf.CreateGeometryFromFgf(fgf_ls);
+            pg = gf.CreateGeometryFromFgf(fgf_pg);
+            mpt = gf.CreateGeometryFromFgf(fgf_mpt);
+            mls = gf.CreateGeometryFromFgf(fgf_mls);
+            mpg = gf.CreateGeometryFromFgf(fgf_mpg);
+            mg = gf.CreateGeometryFromFgf(fgf_mg);
+            cs = gf.CreateGeometryFromFgf(fgf_cs);
+            cpg = gf.CreateGeometryFromFgf(fgf_cpg);
+            mcs = gf.CreateGeometryFromFgf(fgf_mcs);
+            mcpg = gf.CreateGeometryFromFgf(fgf_mcpg);
+
+            Assert.IsInstanceOf<FdoIPoint>(pt);
+            Assert.IsInstanceOf<FdoILineString>(ls);
+            Assert.IsInstanceOf<FdoIPolygon>(pg);
+            Assert.IsInstanceOf<FdoIMultiPoint>(mpt);
+            Assert.IsInstanceOf<FdoIMultiLineString>(mls);
+            Assert.IsInstanceOf<FdoIMultiPolygon>(mpg);
+            Assert.IsInstanceOf<FdoIMultiGeometry>(mg);
+            Assert.IsInstanceOf<FdoICurveString>(cs);
+            Assert.IsInstanceOf<FdoICurvePolygon>(cpg);
+            Assert.IsInstanceOf<FdoIMultiCurveString>(mcs);
+            Assert.IsInstanceOf<FdoIMultiCurvePolygon>(mcpg);
+
+            pt = gf.CreateGeometryFromWkb(wkb_pt);
+            ls = gf.CreateGeometryFromWkb(wkb_ls);
+            pg = gf.CreateGeometryFromWkb(wkb_pg);
+            //mpt = gf.CreateGeometryFromWkb(wkb_mpt);
+            //mls = gf.CreateGeometryFromWkb(wkb_mls);
+            mpg = gf.CreateGeometryFromWkb(wkb_mpg);
+            //mg = gf.CreateGeometryFromWkb(wkb_mg);
+            //cs = gf.CreateGeometryFromWkb(wkb_cs);
+            //cpg = gf.CreateGeometryFromWkb(wkb_cpg);
+            //mcs = gf.CreateGeometryFromWkb(wkb_mcs);
+            //mcpg = gf.CreateGeometryFromWkb(wkb_mcpg);
+
+            Assert.IsInstanceOf<FdoIPoint>(pt);
+            Assert.IsInstanceOf<FdoILineString>(ls);
+            Assert.IsInstanceOf<FdoIPolygon>(pg);
+            //Assert.IsInstanceOf<FdoIMultiPoint>(mpt);
+            //Assert.IsInstanceOf<FdoIMultiLineString>(mls);
+            Assert.IsInstanceOf<FdoIMultiPolygon>(mpg);
+            //Assert.IsInstanceOf<FdoIMultiGeometry>(mg);
+            //Assert.IsInstanceOf<FdoICurveString>(cs);
+            //Assert.IsInstanceOf<FdoICurvePolygon>(cpg);
+            //Assert.IsInstanceOf<FdoIMultiCurveString>(mcs);
+            //Assert.IsInstanceOf<FdoIMultiCurvePolygon>(mcpg);
         }
     }
 }
