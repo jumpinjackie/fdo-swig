@@ -108,9 +108,16 @@ namespace UnitTest
             conn.SetConnectionString("File=" + TestDataStore.SDF);
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
-            FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
-            Assert.NotNull(selectCmd);
-            TestSelectCommand(selectCmd);
+            try
+            {
+                FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
+                Assert.NotNull(selectCmd);
+                TestSelectCommand(selectCmd);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         [Test]
@@ -121,9 +128,16 @@ namespace UnitTest
             conn.SetConnectionString("File=" + TestDataStore.SDF);
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
-            FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
-            Assert.NotNull(selectCmd);
-            TestFilteredSelectCommand(selectCmd);
+            try
+            {
+                FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
+                Assert.NotNull(selectCmd);
+                TestFilteredSelectCommand(selectCmd);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         [Test]
@@ -134,9 +148,16 @@ namespace UnitTest
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
-            FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
-            Assert.NotNull(selectCmd);
-            TestSelectCommand(selectCmd);
+            try
+            {
+                FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
+                Assert.NotNull(selectCmd);
+                TestSelectCommand(selectCmd);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         [Test]
@@ -147,9 +168,16 @@ namespace UnitTest
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
-            FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
-            Assert.NotNull(selectCmd);
-            TestFilteredSelectCommand(selectCmd);
+            try
+            {
+                FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
+                Assert.NotNull(selectCmd);
+                TestFilteredSelectCommand(selectCmd);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         [Test]
@@ -160,9 +188,16 @@ namespace UnitTest
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
-            FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
-            Assert.NotNull(selectCmd);
-            TestSelectCommand(selectCmd);
+            try
+            {
+                FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
+                Assert.NotNull(selectCmd);
+                TestSelectCommand(selectCmd);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         [Test]
@@ -173,9 +208,16 @@ namespace UnitTest
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
             Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
-            FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
-            Assert.NotNull(selectCmd);
-            TestFilteredSelectCommand(selectCmd);
+            try
+            {
+                FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
+                Assert.NotNull(selectCmd);
+                TestFilteredSelectCommand(selectCmd);
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }
