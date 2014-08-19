@@ -99,11 +99,17 @@ namespace UnitTest
         {
             FdoIFeatureReader reader = insertCmd.Execute();
             int inserted = 0;
-            while (reader.ReadNext())
+            try
             {
-                inserted++;
+                while (reader.ReadNext())
+                {
+                    inserted++;
+                }
             }
-            reader.Close();
+            finally
+            {
+                reader.Close();
+            }
             return inserted;
         }
 
@@ -115,9 +121,16 @@ namespace UnitTest
             selectCmd.SetFilter("NAME = '" + name + "'");
             FdoIFeatureReader selReader = selectCmd.Execute();
             int count = 0;
-            while (selReader.ReadNext())
+            try
             {
-                count++;
+                while (selReader.ReadNext())
+                {
+                    count++;
+                }
+            }
+            finally
+            {
+                selReader.Close();
             }
             return count;
         }
@@ -130,9 +143,16 @@ namespace UnitTest
             selectCmd.SetFilter("MAPKEY = '" + key + "'");
             FdoIFeatureReader selReader = selectCmd.Execute();
             int count = 0;
-            while (selReader.ReadNext())
+            try
             {
-                count++;
+                while (selReader.ReadNext())
+                {
+                    count++;
+                }
+            }
+            finally
+            {
+                selReader.Close();
             }
             return count;
         }

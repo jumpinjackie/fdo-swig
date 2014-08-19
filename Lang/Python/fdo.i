@@ -11,17 +11,13 @@
 //(if freshly allocated) will start off with a refcount of 1
 %feature("ref") FdoIDisposable ""
 //However, we still do need to release
-%feature("unref") FdoIDisposable "FDO_SAFE_RELEASE($this);"
+%feature("unref") FdoIDisposable "FdoCleanup($this);"
 
 //======= Python specific =======
 %include "PythonTypemaps.i"
 
 //======= Memory Management =========
-%newobject *::Create;
-%newobject *::CreateCommand;
-%newobject *::GetFeatureObject;
-%newobject *::GetClassDefinition;
-%newobject *::GetItem;
+%include "../Common/FdoMemory.i"
 
 %{
 #include <cstdint>
@@ -55,6 +51,20 @@ static std::string W2A_SLOW(const wchar_t* input)
     char* mbs = (char*)alloca(mbslen);
     wcstombs(mbs, input, mbslen);
     return std::string(mbs);
+}
+
+static void FdoCleanup(FdoIDisposable* obj)
+{
+    if (NULL != obj)
+    {
+        FdoInt32 refCount = obj->Release();
+        if (refCount <= 0)
+            printf("Deleted\n");
+        else
+            printf("Un-refd(%d)\n", refCount);
+    }
+
+    //FDO_SAFE_RELEASE(obj);
 }
 
 %}

@@ -165,6 +165,7 @@
 %ignore FdoPropertyValueConstraintList::Set;
 %ignore FdoPropertyValueConstraintRange::Set;
 %ignore FdoSchemaElement::Set;
+%ignore FdoFeatureSchema::GetFromInternalStylesheet;
 
 %ignore FdoStringElement::Create;
 
