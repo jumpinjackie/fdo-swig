@@ -34,3 +34,8 @@
 /Lang/DotNet/UnitTestDbg/bin
 /Fdo/Release64
 /Fdo/Debug64
+/Lang/Python/FdoPython.sdf
+/Lang/Python/FdoPython.opensdf
+/Lang/Python/Bin
+/Lang/Python/FdoPython/x64
+/Lang/Python/FdoPython/fdo_wrap.cpp
