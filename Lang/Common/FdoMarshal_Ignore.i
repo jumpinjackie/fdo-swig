@@ -77,3 +77,5 @@
 %ignore FdoISQLDataReader::GetGeometry(FdoInt32);
 %ignore FdoISQLDataReader::GetGeometry(FdoString*);
 %ignore FdoIRaster::GetBounds();
+%ignore FdoXmlSpatialContextWriter::GetExtent();
+%ignore FdoXmlSpatialContextWriter::SetExtent(FdoByteArray*);

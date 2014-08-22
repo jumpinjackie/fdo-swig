@@ -493,6 +493,19 @@
 ////////////////////////////////////////////////////////////////
 // XML Services
 //
+%include <Fdo/Xml/Flags.h>
+%include <Fdo/Xml/FeatureFlags.h>
+%include <Fdo/Xml/FeatureContext.h>
+%include <Fdo/Xml/FeatureHandler.h>
+%include <Fdo/Xml/FeaturePropertyReader.h>
+%include <Fdo/Xml/FeaturePropertyWriter.h>
+%include <Fdo/Xml/FeatureReader.h>
+%include <Fdo/Xml/FeatureWriter.h>
+%include <Fdo/Xml/SpatialContextFlags.h>
+%include <Fdo/Xml/SpatialContextReader.h>
+%include <Fdo/Xml/SpatialContextSerializer.h>
+%include <Fdo/Xml/SpatialContextWriter.h>
+%include <Fdo/Xml/GmlVersion.h>
 /*
 %include <Fdo/Xml/ClassMapping.h>
 //%include <Fdo/Xml/ClassMappingCollection.h>
@@ -500,21 +513,11 @@
 %include <Fdo/Xml/Deserializable.h>
 %include <Fdo/Xml/ElementMapping.h>
 //%include <Fdo/Xml/ElementMappingCollection.h>
-%include <Fdo/Xml/FeatureContext.h>
-%include <Fdo/Xml/FeatureFlags.h>
-%include <Fdo/Xml/FeatureHandler.h>
-%include <Fdo/Xml/FeaturePropertyReader.h>
-%include <Fdo/Xml/FeaturePropertyWriter.h>
 %include <Fdo/Xml/FeatureReader.h>
 %include <Fdo/Xml/FeatureSerializer.h>
 %include <Fdo/Xml/FeatureWriter.h>
-%include <Fdo/Xml/Flags.h>
 %include <Fdo/Xml/NameCollectionHandler.h>
 %include <Fdo/Xml/SchemaMapping.h>
 %include <Fdo/Xml/Serializable.h>
-%include <Fdo/Xml/SpatialContextFlags.h>
-%include <Fdo/Xml/SpatialContextReader.h>
-%include <Fdo/Xml/SpatialContextSerializer.h>
-%include <Fdo/Xml/SpatialContextWriter.h>
-%include <Fdo/Xml/GmlVersion.h>
+
 */

@@ -571,7 +571,7 @@
         $self->SetData(arr);
     }
     
-    void SetData(FdoByteArrayHandle* handle)
+    void SetDataBytes(FdoByteArrayHandle* handle)
     {
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         $self->SetData(arr);
@@ -584,7 +584,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoCLOBValue
 {
     static FdoCLOBValue* Create(FdoByteArray* handle)
@@ -605,7 +605,7 @@
         $self->SetData(arr);
     }
     
-    void SetData(FdoByteArrayHandle* handle)
+    void SetDataBytes(FdoByteArrayHandle* handle)
     {
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         $self->SetData(arr);
@@ -618,7 +618,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoLOBValue
 {
     void SetDataInternal(const FdoByte* array, const FdoInt32 length)
@@ -627,7 +627,7 @@
         $self->SetData(arr);
     }
     
-    void SetData(FdoByteArrayHandle* handle)
+    void SetDataBytes(FdoByteArrayHandle* handle)
     {
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         $self->SetData(arr);
@@ -640,7 +640,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoDataValue
 {
     static FdoDataValue* CreateInternal(const FdoByte* array, const FdoInt32 length, FdoDataType dataType)
@@ -654,7 +654,7 @@
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         return FdoDataValue::Create(arr, dataType);
     }
-}
+};
 %extend FdoGeometryValue
 {
     static FdoGeometryValue* CreateInternal(const FdoByte* array, const FdoInt32 length)
@@ -675,7 +675,7 @@
         $self->SetGeometry(arr);
     }
     
-    void SetGeometry(FdoByteArrayHandle* handle)
+    void SetGeometryBytes(FdoByteArrayHandle* handle)
     {
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         $self->SetGeometry(arr);
@@ -688,7 +688,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoFgfGeometryFactory
 {
     FdoIGeometry* CreateGeometryFromFgfInternal(const FdoByte* array, const FdoInt32 length)
@@ -730,7 +730,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoIRaster
 {
     void SetBoundsInternal(const FdoByte* array, const FdoInt32 length)
@@ -739,7 +739,7 @@
         $self->SetBounds(arr);
     }
     
-    void SetBounds(FdoByteArray* handle)
+    void SetBoundsBytes(FdoByteArrayHandle* handle)
     {
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         $self->SetBounds(arr);
@@ -752,16 +752,10 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
-%extend FdoICreateSpatialContext
+};
+%extend FdoXmlSpatialContextWriter
 {
-    void SetExtentInternal(const FdoByte* array, const FdoInt32 length)
-    {
-        FdoPtr<FdoByteArray> arr = FdoByteArray::Create(array, length);
-        $self->SetExtent(arr);
-    }
-    
-    void SetExtent(FdoByteArrayHandle* handle)
+    void SetExtentBytes(FdoByteArrayHandle* handle)
     {
         FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
         $self->SetExtent(arr);
@@ -774,7 +768,29 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
+%extend FdoICreateSpatialContext
+{
+    void SetExtentInternal(const FdoByte* array, const FdoInt32 length)
+    {
+        FdoPtr<FdoByteArray> arr = FdoByteArray::Create(array, length);
+        $self->SetExtent(arr);
+    }
+    
+    void SetExtentBytes(FdoByteArrayHandle* handle)
+    {
+        FdoPtr<FdoByteArray> arr = handle->GetInternalArray();
+        $self->SetExtent(arr);
+    }
+    
+    FdoByteArrayHandle* GetExtentBytes()
+    {
+        FdoPtr<FdoByteArrayHandle> ret;
+        FdoPtr<FdoByteArray> arr = $self->GetExtent();
+        ret = FdoByteArrayHandle::Create(arr);
+        return ret.Detach();
+    }
+};
 %extend FdoISpatialContextReader
 {
     FdoByteArrayHandle* GetExtentBytes()
@@ -784,7 +800,17 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
+%extend FdoXmlSpatialContextReader
+{
+    FdoByteArrayHandle* GetExtentBytes()
+    {
+        FdoPtr<FdoByteArrayHandle> ret;
+        FdoPtr<FdoByteArray> arr = $self->GetExtent();
+        ret = FdoByteArrayHandle::Create(arr);
+        return ret.Detach();
+    }
+};
 %extend FdoIReader
 {
     FdoByteArrayHandle* GetGeometryBytes(FdoInt32 index)
@@ -802,7 +828,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoIFeatureReader
 {
     FdoByteArrayHandle* GetGeometryBytes(FdoInt32 index)
@@ -820,7 +846,7 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};
 %extend FdoISQLDataReader
 {
     FdoByteArrayHandle* GetGeometryBytes(FdoInt32 index)
@@ -838,4 +864,4 @@
         ret = FdoByteArrayHandle::Create(arr);
         return ret.Detach();
     }
-}
+};

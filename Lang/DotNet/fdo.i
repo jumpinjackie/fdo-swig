@@ -57,6 +57,7 @@ typedef long long     FdoInt64;
 %apply unsigned char INOUT[] { unsigned char* data }
 %apply unsigned char INOUT[] { unsigned char* bytes }
 %apply unsigned char INOUT[] { unsigned char* byteArray }
+%apply unsigned char INOUT[] { unsigned char* geometryByteArray }
 %apply unsigned char INOUT[] { unsigned char* value }
 %apply unsigned char INPUT[] { const FdoByte* array }
 

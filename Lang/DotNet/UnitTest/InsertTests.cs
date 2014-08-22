@@ -80,7 +80,7 @@ namespace UnitTest
             mapkeyVal.SetString("MOC123");
             FdoIGeometry geom = geomFactory.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
             FdoByteArrayHandle fgf = geomFactory.GetFgfBytes(geom);
-            geomVal.SetGeometry(fgf);
+            geomVal.SetGeometryBytes(fgf);
 
             int inserted = GetInsertedFeatures(insertCmd);
             Assert.AreEqual(1, inserted, "Expected 1 feature inserted");

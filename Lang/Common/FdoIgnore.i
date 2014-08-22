@@ -90,8 +90,15 @@
 %ignore FdoIDisposable::EnableObjectThreadLocking;
 
 %ignore FdoGml212;
+%ignore FdoGml212Schema;
 %ignore FdoGml311;
 %ignore FdoXml;
+
+%ignore FdoExpression::ToStringInternal;
+%ignore FdoFilter::ToStringInternal;
+
+%ignore FdoXmlSpatialContextReader::XmlEndElement;
+%ignore FdoXmlSpatialContextReader::XmlStartDocument;
 
 %ignore FdoContext;
 %ignore FdoStringP;
