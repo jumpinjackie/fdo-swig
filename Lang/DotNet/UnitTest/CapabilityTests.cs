@@ -353,9 +353,9 @@ namespace UnitTest
                 var func = funcs.GetItem(i);
                 Log("\t\t{0}", func.GetName());
                 Log("\t\t\tDescription: {0}", func.GetDescription());
-                Log("\t\t\tCategory: {0}", func.GetFunctionCategoryType());
-                Log("\t\t\tReturnPropertyType: {0}", func.GetReturnPropertyType());
-                Log("\t\t\tReturnType: {0}", func.GetReturnType());
+                Log("\t\t\tCategory: {0}", func.FunctionCategoryType);
+                Log("\t\t\tReturnPropertyType: {0}", func.ReturnPropertyType);
+                Log("\t\t\tReturnType: {0}", func.ReturnType);
                 Log("\t\t\tSupportsVariableArgumentsList: {0}", func.SupportsVariableArgumentsList());
                 Log("\t\t\tIsAggregate: {0}", func.IsAggregate());
                 var args = func.GetArguments();
@@ -365,8 +365,8 @@ namespace UnitTest
                     var arg = args.GetItem(j);
                     Log("\t\t\t\tName: {0}", arg.GetName());
                     Log("\t\t\t\tDescription: {0}", arg.GetDescription());
-                    Log("\t\t\t\tDataType: {0}", arg.GetDataType());
-                    Log("\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
+                    Log("\t\t\t\tDataType: {0}", arg.DataType);
+                    Log("\t\t\t\tPropertyType: {0}", arg.PropertyType);
                     var valueList = arg.GetArgumentValueList();
                     if (valueList != null)
                     {
@@ -387,8 +387,8 @@ namespace UnitTest
                 {
                     Log("\t\t\t\tSIGNATURE {0}", (j+1));
                     var sig = sigs.GetItem(j);
-                    Log("\t\t\t\tReturnType: {0}", sig.GetReturnType());
-                    Log("\t\t\t\tReturnPropertyType: {0}", sig.GetReturnPropertyType());
+                    Log("\t\t\t\tReturnType: {0}", sig.ReturnType);
+                    Log("\t\t\t\tReturnPropertyType: {0}", sig.ReturnPropertyType);
                     var sigArgs = sig.GetArguments();
                     Log("\t\t\t\tArguments:");
                     for (int k = 0; k < sigArgs.GetCount(); k++)
@@ -396,8 +396,8 @@ namespace UnitTest
                         var arg = sigArgs.GetItem(k);
                         Log("\t\t\t\t\tName: {0}", arg.GetName());
                         Log("\t\t\t\t\tDescription: {0}", arg.GetDescription());
-                        Log("\t\t\t\t\tDataType: {0}", arg.GetDataType());
-                        Log("\t\t\t\t\tPropertyType: {0}", arg.GetPropertyType());
+                        Log("\t\t\t\t\tDataType: {0}", arg.DataType);
+                        Log("\t\t\t\t\tPropertyType: {0}", arg.PropertyType);
                         var valueList = arg.GetArgumentValueList();
                         if (valueList != null)
                         {

@@ -115,6 +115,7 @@ static void FdoCleanup(FdoIDisposable* obj)
 %include "../Common/MemCheck.h"
 %include "../Common/FdoIgnore.i"
 %include "../Common/FdoMarshal_Ignore.i"
+%include "../Common/FdoAttributes.i"
 %include "../Common/FdoIncludes.i"
 %include "FdoCollections.i"
 %include "../Common/FdoMarshal.i"

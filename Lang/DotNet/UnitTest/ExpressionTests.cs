@@ -30,7 +30,7 @@ namespace UnitTest
 
             if (expectedType.HasValue)
             {
-                Assert.AreEqual(expectedType.Value, expr.GetExpressionType());
+                Assert.AreEqual(expectedType.Value, expr.ExpressionType);
                 switch (expectedType.Value)
                 {
                     case FdoExpressionItemType.FdoExpressionItemType_BinaryExpression:

@@ -70,7 +70,7 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoClassType ctype = tmp.GetClassType();
+        FdoClassType ctype = tmp.ClassType;
         switch (ctype)
         {
             case FdoClassType.FdoClassType_Class:
@@ -93,7 +93,7 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoGeometryType gtype = tmp.GetDerivedType();
+        FdoGeometryType gtype = tmp.DerivedType;
         switch (gtype)
         {
             case FdoGeometryType.FdoGeometryType_Point:
@@ -134,7 +134,7 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoExpressionItemType etype = tmp.GetExpressionType();
+        FdoExpressionItemType etype = tmp.ExpressionType;
         switch (etype)
         {
             case FdoExpressionItemType.FdoExpressionItemType_Identifier:
@@ -154,7 +154,7 @@
             case FdoExpressionItemType.FdoExpressionItemType_DataValue:
                 {
                     FdoDataValue tmpData = new FdoDataValue(cPtr, false);
-                    FdoDataType dt = tmpData.GetDataType();
+                    FdoDataType dt = tmpData.DataType;
                     switch (dt)
                     {
                         case FdoDataType.FdoDataType_BLOB:
@@ -203,7 +203,7 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoExpressionItemType etype = tmp.GetExpressionType();
+        FdoExpressionItemType etype = tmp.ExpressionType;
         switch (etype)
         {
             case FdoExpressionItemType.FdoExpressionItemType_SubSelectExpression:
@@ -213,7 +213,7 @@
             case FdoExpressionItemType.FdoExpressionItemType_DataValue:
                 {
                     FdoDataValue tmpData = new FdoDataValue(cPtr, false);
-                    FdoDataType dt = tmpData.GetDataType();
+                    FdoDataType dt = tmpData.DataType;
                     switch (dt)
                     {
                         case FdoDataType.FdoDataType_BLOB:
@@ -262,13 +262,13 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoLiteralValueType lt = tmp.GetLiteralValueType();
+        FdoLiteralValueType lt = tmp.LiteralValueType;
         switch (lt)
         {
             case FdoLiteralValueType.FdoLiteralValueType_Data:
                 {
                     FdoDataValue tmpData = new FdoDataValue(cPtr, false);
-                    FdoDataType dt = tmpData.GetDataType();
+                    FdoDataType dt = tmpData.DataType;
                     switch (dt)
                     {
                         case FdoDataType.FdoDataType_BLOB:
@@ -317,7 +317,7 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoDataType dt = tmp.GetDataType();
+        FdoDataType dt = tmp.DataType;
         switch (dt)
         {
             case FdoDataType.FdoDataType_BLOB:
@@ -360,7 +360,7 @@
     if (cPtr != global::System.IntPtr.Zero)
     {
         $csclassname tmp = new $csclassname(cPtr, false);
-        FdoPropertyType pt = tmp.GetPropertyType();
+        FdoPropertyType pt = tmp.PropertyType;
         switch (pt)
         {
             case FdoPropertyType.FdoPropertyType_DataProperty:

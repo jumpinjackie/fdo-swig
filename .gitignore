@@ -39,3 +39,6 @@
 /Lang/Python/Bin
 /Lang/Python/FdoPython/x64
 /Lang/Python/FdoPython/fdo_wrap.cpp
+/Fdo/Release
+/Fdo/Debug
+/Lang/Python/FdoPython/Win32

@@ -13,69 +13,69 @@ namespace UnitTest
     {
         void CheckPositionXY(FdoIDirectPosition pos, double x, double y)
         {
-            Assert.AreEqual(x, pos.GetX(), "X value mismatch");
-            Assert.AreEqual(y, pos.GetY(), "Y value mismatch");
+            Assert.AreEqual(x, pos.X, "X value mismatch");
+            Assert.AreEqual(y, pos.Y, "Y value mismatch");
         }
 
         void CheckPositionXYM(FdoIDirectPosition pos, double x, double y, double m)
         {
             CheckPositionXY(pos, x, y);
-            Assert.AreEqual(m, pos.GetM(), "M value mismatch");
+            Assert.AreEqual(m, pos.M, "M value mismatch");
         }
 
         void CheckPositionXYZ(FdoIDirectPosition pos, double x, double y, double z)
         {
             CheckPositionXY(pos, x, y);
-            Assert.AreEqual(z, pos.GetZ(), "Z value mismatch");
+            Assert.AreEqual(z, pos.Z, "Z value mismatch");
         }
 
         void CheckPositionXYZM(FdoIDirectPosition pos, double x, double y, double z, double m)
         {
             CheckPositionXYZ(pos, x, y, z);
-            Assert.AreEqual(m, pos.GetM(), "M value mismatch");
+            Assert.AreEqual(m, pos.M, "M value mismatch");
         }
 
         void CheckEnvelope(FdoIEnvelope envl, double[] ordsXY)
         {
-            Assert.AreEqual(ordsXY[0], envl.GetMinX(), "MinX mismatch");
-            Assert.AreEqual(ordsXY[1], envl.GetMinY(), "MinY mismatch");
-            Assert.AreEqual(ordsXY[2], envl.GetMaxX(), "MaxX mismatch");
-            Assert.AreEqual(ordsXY[3], envl.GetMaxY(), "MaxY mismatch");
+            Assert.AreEqual(ordsXY[0], envl.MinX, "MinX mismatch");
+            Assert.AreEqual(ordsXY[1], envl.MinY, "MinY mismatch");
+            Assert.AreEqual(ordsXY[2], envl.MaxX, "MaxX mismatch");
+            Assert.AreEqual(ordsXY[3], envl.MaxY, "MaxY mismatch");
         }
 
         void CheckEnvelope(FdoIEnvelope envl, FdoIDirectPosition pos1, FdoIDirectPosition pos2)
         {
-            Assert.AreEqual(pos1.GetX(), envl.GetMinX(), "MinX mismatch");
-            Assert.AreEqual(pos1.GetY(), envl.GetMinY(), "MinY mismatch");
-            Assert.True((pos1.GetDimensionality() & (int)FdoDimensionality.FdoDimensionality_Z) == 0 || envl.GetMinZ() == pos1.GetZ(), "MinZ mismatch");
-            Assert.AreEqual(pos2.GetX(), envl.GetMaxX(), "MaxX mismatch");
-            Assert.AreEqual(pos2.GetY(), envl.GetMaxY(), "MaxY mismatch");
-            Assert.True((pos2.GetDimensionality() & (int)FdoDimensionality.FdoDimensionality_Z) == 0 || envl.GetMaxZ() == pos2.GetZ(), "MaxZ mismatch");
+            Assert.AreEqual(pos1.X, envl.MinX, "MinX mismatch");
+            Assert.AreEqual(pos1.Y, envl.MinY, "MinY mismatch");
+            Assert.True((pos1.Dimensionality & (int)FdoDimensionality.FdoDimensionality_Z) == 0 || envl.MinZ == pos1.Z, "MinZ mismatch");
+            Assert.AreEqual(pos2.X, envl.MaxX, "MaxX mismatch");
+            Assert.AreEqual(pos2.Y, envl.MaxY, "MaxY mismatch");
+            Assert.True((pos2.Dimensionality & (int)FdoDimensionality.FdoDimensionality_Z) == 0 || envl.MaxZ == pos2.Z, "MaxZ mismatch");
         }
 
         void CheckEnvelopeXY(FdoIEnvelope envl, double minx, double miny, double maxx, double maxy)
         {
-            Assert.AreEqual(minx, envl.GetMinX(), "MinX mismatch");
-            Assert.AreEqual(miny, envl.GetMinY(), "MinY mismatch");
-            Assert.AreEqual(maxx, envl.GetMaxX(), "MaxX mismatch");
-            Assert.AreEqual(maxy, envl.GetMaxY(), "MaxY mismatch");
+            Assert.AreEqual(minx, envl.MinX, "MinX mismatch");
+            Assert.AreEqual(miny, envl.MinY, "MinY mismatch");
+            Assert.AreEqual(maxx, envl.MaxX, "MaxX mismatch");
+            Assert.AreEqual(maxy, envl.MaxY, "MaxY mismatch");
         }
 
         void CheckEnvelopeXYZ(FdoIEnvelope envl, double minx, double miny, double minz, double maxx, double maxy, double maxz)
         {
             CheckEnvelopeXY(envl, minx, miny, maxx, maxy);
-            Assert.AreEqual(minz, envl.GetMinZ(), "MinZ mismatch");
-            Assert.AreEqual(maxz, envl.GetMaxZ(), "MaxZ mismatch");
+            Assert.AreEqual(minz, envl.MinZ, "MinZ mismatch");
+            Assert.AreEqual(maxz, envl.MaxZ, "MaxZ mismatch");
         }
 
         void CheckEqualEnvelopes(FdoIEnvelope envl1, FdoIEnvelope envl2)
         {
-            Assert.AreEqual(envl1.GetMinX(), envl2.GetMinX(), "Envelope MinX mismatch");
-            Assert.AreEqual(envl1.GetMinY(), envl2.GetMinY(), "Envelope MinY mismatch");
-            Assert.AreEqual(envl1.GetMinZ(), envl2.GetMinZ(), "Envelope MinZ mismatch");
-            Assert.AreEqual(envl1.GetMaxX(), envl2.GetMaxX(), "Envelope MaxX mismatch");
-            Assert.AreEqual(envl1.GetMaxY(), envl2.GetMaxY(), "Envelope MaxY mismatch");
-            Assert.AreEqual(envl1.GetMaxZ(), envl2.GetMaxZ(), "Envelope MaxZ mismatch");
+            Assert.AreEqual(envl1.MinX, envl2.MinX, "Envelope MinX mismatch");
+            Assert.AreEqual(envl1.MinY, envl2.MinY, "Envelope MinY mismatch");
+            Assert.AreEqual(envl1.MinZ, envl2.MinZ, "Envelope MinZ mismatch");
+            Assert.AreEqual(envl1.MaxX, envl2.MaxX, "Envelope MaxX mismatch");
+            Assert.AreEqual(envl1.MaxY, envl2.MaxY, "Envelope MaxY mismatch");
+            Assert.AreEqual(envl1.MaxZ, envl2.MaxZ, "Envelope MaxZ mismatch");
         }
 
         [Test]
@@ -154,8 +154,8 @@ namespace UnitTest
                 FdoIDirectPosition posExpect = positions.GetItem(i);
                 FdoIDirectPosition posActual = positions2.GetItem(i);
 
-                Assert.AreEqual(posExpect.GetDimensionality(), posActual.GetDimensionality(), "Dimensionality mismatch");
-                CheckPositionXY(posExpect, posActual.GetX(), posActual.GetY());
+                Assert.AreEqual(posExpect.Dimensionality, posActual.Dimensionality, "Dimensionality mismatch");
+                CheckPositionXY(posExpect, posActual.X, posActual.Y);
             }
         }
 
@@ -183,8 +183,8 @@ namespace UnitTest
                 FdoIDirectPosition posExpect = positions.GetItem(i);
                 FdoIDirectPosition posActual = positions2.GetItem(i);
 
-                Assert.AreEqual(posExpect.GetDimensionality(), posActual.GetDimensionality(), "Dimensionality mismatch");
-                CheckPositionXY(posExpect, posActual.GetX(), posActual.GetY());
+                Assert.AreEqual(posExpect.Dimensionality, posActual.Dimensionality, "Dimensionality mismatch");
+                CheckPositionXY(posExpect, posActual.X, posActual.Y);
             }
         }
 
@@ -202,9 +202,9 @@ namespace UnitTest
             var mid2 = arcSeg.GetMidPoint();
             var end2 = arcSeg.GetEndPosition();
 
-            CheckPositionXYZ(start, start2.GetX(), start2.GetY(), start2.GetZ());
-            CheckPositionXYZ(mid, mid2.GetX(), mid2.GetY(), mid2.GetZ());
-            CheckPositionXYZ(end, end2.GetX(), end2.GetY(), end2.GetZ());
+            CheckPositionXYZ(start, start2.X, start2.Y, start2.Z);
+            CheckPositionXYZ(mid, mid2.X, mid2.Y, mid2.Z);
+            CheckPositionXYZ(end, end2.X, end2.Y, end2.Z);
         }
 
         [Test]

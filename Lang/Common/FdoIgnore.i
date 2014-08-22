@@ -100,6 +100,8 @@
 %ignore FdoXmlSpatialContextReader::XmlEndElement;
 %ignore FdoXmlSpatialContextReader::XmlStartDocument;
 
+%ignore FdoBLOBStreamReader;
+
 %ignore FdoContext;
 %ignore FdoStringP;
 %ignore FdoStringsP;

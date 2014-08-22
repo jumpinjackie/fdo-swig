@@ -13,7 +13,7 @@ namespace UnitTest
     {
         private static void VerifyClass(FdoClassDefinition clsDef)
         {
-            Assert.AreEqual(FdoClassType.FdoClassType_FeatureClass, clsDef.GetClassType());
+            Assert.AreEqual(FdoClassType.FdoClassType_FeatureClass, clsDef.ClassType);
             Assert.IsInstanceOf<FdoFeatureClass>(clsDef);
             FdoFeatureClass featCls = (FdoFeatureClass)clsDef;
 
