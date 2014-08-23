@@ -345,3 +345,30 @@
 %attribute(FdoXmlSpatialContextFlags, FdoBoolean, IncludeDefault, GetIncludeDefault, SetIncludeDefault);
 
 %attribute(FdoXmlWriter, FdoBoolean, DefaultRoot, GetDefaultRoot, SetDefaultRoot);
+
+%attribute(FdoArgumentDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoBatchParameterValueCollection, FdoInt32, Count, GetCount);
+%attribute(FdoClassCollection, FdoInt32, Count, GetCount);
+%attribute(FdoCurvePolygonCollection, FdoInt32, Count, GetCount);
+%attribute(FdoCurveStringCollection, FdoInt32, Count, GetCount);
+%attribute(FdoDataPropertyDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoDataValueCollection, FdoInt32, Count, GetCount);
+%attribute(FdoDirectPositionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoExpressionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoFeatureClassCollection, FdoInt32, Count, GetCount);
+%attribute(FdoFeatureSchemaCollection, FdoInt32, Count, GetCount);
+%attribute(FdoFunctionDefintionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoIdentifierCollection, FdoInt32, Count, GetCount);
+%attribute(FdoJoinCriteriaCollection, FdoInt32, Count, GetCount);
+%attribute(FdoLinearRingCollection, FdoInt32, Count, GetCount);
+%attribute(FdoLineStringCollection, FdoInt32, Count, GetCount);
+%attribute(FdoParameterValueCollection, FdoInt32, Count, GetCount);
+%attribute(FdoPhysicalSchemaMappingCollection, FdoInt32, Count, GetCount);
+%attribute(FdoPropertyDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoRingCollection, FdoInt32, Count, GetCount);
+%attribute(FdoSignatureDefinitionCollection, FdoInt32, Count, GetCount);
+
+%attribute(FdoReadOnlyArgumentDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoReadOnlyDataPropertyDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoReadOnlyPropertyDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoReadOnlySignatureDefinitionCollection, FdoInt32, Count, GetCount);

@@ -121,11 +121,13 @@ static void FdoCleanup(FdoIDisposable* obj)
 
 %}
 
+%include "DotNetCollections.i"
+
 %include "FdoExceptions.i"
 %include "../Common/MemCheck.h"
 %include "../Common/FdoIgnore.i"
 %include "../Common/FdoMarshal_Ignore.i"
 %include "../Common/FdoAttributes.i"
 %include "../Common/FdoIncludes.i"
-%include "FdoCollections.i"
+%include "../Common/FdoCollections.i"
 %include "../Common/FdoMarshal.i"

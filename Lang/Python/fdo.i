@@ -157,4 +157,5 @@ PyObject *pFdoSpatialContextMismatchException;
 %include "../Common/FdoIgnore.i"
 %include "../Common/FdoMarshal_Ignore.i"
 %include "../Common/FdoIncludes.i"
+%include "../Common/FdoCollections.i"
 %include "../Common/FdoMarshal.i"
