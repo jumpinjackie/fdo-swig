@@ -19,7 +19,7 @@ namespace UnitTest
             int count = 0;
             while (scReader.ReadNext())
             {
-                Assert.IsNotNullOrEmpty(scReader.GetName());
+                Assert.IsNotNullOrEmpty(scReader.Name);
                 count++;
             }
             Assert.AreEqual(1, count, "Expect one spatial context in data store");

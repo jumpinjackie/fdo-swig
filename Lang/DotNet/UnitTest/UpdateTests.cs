@@ -45,7 +45,7 @@ namespace UnitTest
             Assert.NotNull(clsDef);
             FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
             Assert.NotNull(geomProp);
-            geomName = geomProp.GetName();
+            geomName = geomProp.Name;
 
             FdoIUpdate updateCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Update) as FdoIUpdate;
             Assert.NotNull(updateCmd);
@@ -72,8 +72,8 @@ namespace UnitTest
             propVals.Add(pMapKey);
 
             //Set the actual values
-            keyVal.SetString("MOC");
-            mapkeyVal.SetString("MOC123");
+            keyVal.String = "MOC";
+            mapkeyVal.String = "MOC123";
 
             int updated = updateCmd.Execute();
             Assert.AreEqual(66, updated, "Expect 66 features updated");

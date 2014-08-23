@@ -351,8 +351,8 @@ namespace UnitTest
             for (int i = 0; i < funcs.GetCount(); i++)
             {
                 var func = funcs.GetItem(i);
-                Log("\t\t{0}", func.GetName());
-                Log("\t\t\tDescription: {0}", func.GetDescription());
+                Log("\t\t{0}", func.Name);
+                Log("\t\t\tDescription: {0}", func.Description);
                 Log("\t\t\tCategory: {0}", func.FunctionCategoryType);
                 Log("\t\t\tReturnPropertyType: {0}", func.ReturnPropertyType);
                 Log("\t\t\tReturnType: {0}", func.ReturnType);
@@ -363,8 +363,8 @@ namespace UnitTest
                 for (int j = 0; j < args.GetCount(); j++)
                 {
                     var arg = args.GetItem(j);
-                    Log("\t\t\t\tName: {0}", arg.GetName());
-                    Log("\t\t\t\tDescription: {0}", arg.GetDescription());
+                    Log("\t\t\t\tName: {0}", arg.Name);
+                    Log("\t\t\t\tDescription: {0}", arg.Description);
                     Log("\t\t\t\tDataType: {0}", arg.DataType);
                     Log("\t\t\t\tPropertyType: {0}", arg.PropertyType);
                     var valueList = arg.GetArgumentValueList();
@@ -394,8 +394,8 @@ namespace UnitTest
                     for (int k = 0; k < sigArgs.GetCount(); k++)
                     {
                         var arg = sigArgs.GetItem(k);
-                        Log("\t\t\t\t\tName: {0}", arg.GetName());
-                        Log("\t\t\t\t\tDescription: {0}", arg.GetDescription());
+                        Log("\t\t\t\t\tName: {0}", arg.Name);
+                        Log("\t\t\t\t\tDescription: {0}", arg.Description);
                         Log("\t\t\t\t\tDataType: {0}", arg.DataType);
                         Log("\t\t\t\t\tPropertyType: {0}", arg.PropertyType);
                         var valueList = arg.GetArgumentValueList();

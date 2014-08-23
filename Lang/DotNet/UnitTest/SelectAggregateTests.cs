@@ -89,7 +89,7 @@ namespace UnitTest
             FdoISelectAggregates selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_SelectAggregates) as FdoISelectAggregates;
             Assert.NotNull(selectCmd);
             selectCmd.SetFeatureClassName("World_Countries");
-            selectCmd.SetDistinct(true);
+            selectCmd.Distinct = true;
 
             FdoIdentifierCollection propNames = selectCmd.GetPropertyNames();
             FdoIdentifier ident = FdoIdentifier.Create("NAME");
@@ -114,7 +114,7 @@ namespace UnitTest
             Assert.NotNull(selectCmd);
             selectCmd.SetFeatureClassName("World_Countries");
             selectCmd.SetFilter("NAME = 'Canada'");
-            selectCmd.SetDistinct(true);
+            selectCmd.Distinct = true;
 
             FdoIdentifierCollection propNames = selectCmd.GetPropertyNames();
             FdoIdentifier ident = FdoIdentifier.Create("KEY");
@@ -146,12 +146,12 @@ namespace UnitTest
             for (int i = 0; i < classes.GetCount(); i++)
             {
                 FdoClassDefinition cls = classes.GetItem(i);
-                if (cls.GetName() == "World_Countries")
+                if (cls.Name == "World_Countries")
                 {
                     Assert.IsInstanceOf<FdoFeatureClass>(cls);
                     FdoGeometricPropertyDefinition geomProp = ((FdoFeatureClass)cls).GetGeometryProperty();
                     Assert.NotNull(geomProp);
-                    geomName = geomProp.GetName();
+                    geomName = geomProp.Name;
                 }
             }
             Assert.NotNull(geomName);
@@ -177,7 +177,7 @@ namespace UnitTest
                 Assert.NotNull(bytes);
                 FdoIGeometry geom = geomFactory.CreateGeometryFromFgf(bytes);
                 Assert.NotNull(geom);
-                string wkt = geom.GetText();
+                string wkt = geom.Text;
                 Assert.NotNull(wkt);
                 System.Diagnostics.Debug.WriteLine(string.Format("SpatialExtents() - {0}", wkt));
                 iterations++;
@@ -202,7 +202,7 @@ namespace UnitTest
                 Assert.NotNull(bytes);
                 FdoIGeometry geom = geomFactory.CreateGeometryFromFgf(bytes);
                 Assert.NotNull(geom);
-                string wkt = geom.GetText();
+                string wkt = geom.Text;
                 Assert.NotNull(wkt);
                 System.Diagnostics.Debug.WriteLine(string.Format("SpatialExtents() - {0}", wkt));
                 iterations++;
@@ -224,12 +224,12 @@ namespace UnitTest
             for (int i = 0; i < classes.GetCount(); i++)
             {
                 FdoClassDefinition cls = classes.GetItem(i);
-                if (cls.GetName() == "World_Countries")
+                if (cls.Name == "World_Countries")
                 {
                     Assert.IsInstanceOf<FdoFeatureClass>(cls);
                     FdoGeometricPropertyDefinition geomProp = ((FdoFeatureClass)cls).GetGeometryProperty();
                     Assert.NotNull(geomProp);
-                    geomName = geomProp.GetName();
+                    geomName = geomProp.Name;
                 }
             }
             Assert.NotNull(geomName);
@@ -256,7 +256,7 @@ namespace UnitTest
                 Assert.NotNull(bytes);
                 FdoIGeometry geom = geomFactory.CreateGeometryFromFgf(bytes);
                 Assert.NotNull(geom);
-                string wkt = geom.GetText();
+                string wkt = geom.Text;
                 Assert.NotNull(wkt);
                 System.Diagnostics.Debug.WriteLine(string.Format("SpatialExtents() - {0}", wkt));
                 iterations++;
@@ -281,7 +281,7 @@ namespace UnitTest
                 Assert.NotNull(bytes);
                 FdoIGeometry geom = geomFactory.CreateGeometryFromFgf(bytes);
                 Assert.NotNull(geom);
-                string wkt = geom.GetText();
+                string wkt = geom.Text;
                 Assert.NotNull(wkt);
                 System.Diagnostics.Debug.WriteLine(string.Format("SpatialExtents() - {0}", wkt));
                 iterations++;

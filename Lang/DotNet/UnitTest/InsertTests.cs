@@ -45,7 +45,7 @@ namespace UnitTest
             Assert.NotNull(clsDef);
             FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
             Assert.NotNull(geomProp);
-            geomName = geomProp.GetName();
+            geomName = geomProp.Name;
 
             FdoIInsert insertCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Insert) as FdoIInsert;
             Assert.NotNull(insertCmd);
@@ -75,9 +75,9 @@ namespace UnitTest
             propVals.Add(pGeom);
 
             //Set the actual values
-            nameVal.SetString("My Own Country");
-            keyVal.SetString("MOC");
-            mapkeyVal.SetString("MOC123");
+            nameVal.String = "My Own Country";
+            keyVal.String = "MOC";
+            mapkeyVal.String = "MOC123";
             FdoIGeometry geom = geomFactory.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
             FdoByteArrayHandle fgf = geomFactory.GetFgfBytes(geom);
             geomVal.SetGeometryBytes(fgf);
@@ -88,7 +88,7 @@ namespace UnitTest
             int count = GetFeatureCountForName(conn, "My Own Country");
             Assert.AreEqual(1, count, "Expected 1 feature");
 
-            mapkeyVal.SetString("MOC234");
+            mapkeyVal.String = "MOC234";
             Assert.AreEqual(1, GetInsertedFeatures(insertCmd), "Expected 1 feature inserted");
             Assert.AreEqual(2, GetFeatureCountForName(conn, "My Own Country"));
             Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC123"));

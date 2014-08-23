@@ -45,7 +45,7 @@ namespace UnitTest
             Assert.NotNull(clsDef);
             FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
             Assert.NotNull(geomProp);
-            geomName = geomProp.GetName();
+            geomName = geomProp.Name;
 
             FdoIDelete deleteCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Delete) as FdoIDelete;
             Assert.NotNull(deleteCmd);

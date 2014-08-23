@@ -23,7 +23,7 @@ namespace UnitTest
                 Assert.NotNull(clsDef);
                 FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
                 FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
-                string geomName = geomProp.GetName();
+                string geomName = geomProp.Name;
                 Assert.NotNull(geomProp);
                 while (reader.ReadNext())
                 {
@@ -42,7 +42,7 @@ namespace UnitTest
                         Assert.NotNull(fgf);
                         FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
                         Assert.NotNull(geom);
-                        string wkt = geom.GetText();
+                        string wkt = geom.Text;
                         Assert.IsNotNullOrEmpty(wkt);
                     }
                     count++;
@@ -68,7 +68,7 @@ namespace UnitTest
                 Assert.NotNull(clsDef);
                 FdoFgfGeometryFactory geomFact = FdoFgfGeometryFactory.GetInstance();
                 FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
-                string geomName = geomProp.GetName();
+                string geomName = geomProp.Name;
                 Assert.NotNull(geomProp);
                 while (reader.ReadNext())
                 {
@@ -87,7 +87,7 @@ namespace UnitTest
                         Assert.NotNull(fgf);
                         FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
                         Assert.NotNull(geom);
-                        string wkt = geom.GetText();
+                        string wkt = geom.Text;
                         Assert.IsNotNullOrEmpty(wkt);
                     }
                     count++;

@@ -61,7 +61,7 @@ namespace UnitTest
             VerifyClass(clsDef);
             
             //Re-test with sugar
-            clsDef = schemas.GetClassDefinition(schema.GetName(), "World_Countries");
+            clsDef = schemas.GetClassDefinition(schema.Name, "World_Countries");
             Assert.NotNull(clsDef);
             VerifyClass(clsDef);
             clsDef = schemas.GetClassDefinition(null, "World_Countries");
@@ -92,7 +92,7 @@ namespace UnitTest
             VerifyClass(clsDef);
 
             //Re-test with sugar
-            clsDef = schemas.GetClassDefinition(schema.GetName(), "World_Countries");
+            clsDef = schemas.GetClassDefinition(schema.Name, "World_Countries");
             Assert.NotNull(clsDef);
             VerifyClass(clsDef);
             clsDef = schemas.GetClassDefinition(null, "World_Countries");
@@ -123,7 +123,7 @@ namespace UnitTest
             VerifyClass(clsDef);
 
             //Re-test with sugar
-            clsDef = schemas.GetClassDefinition(schema.GetName(), "World_Countries");
+            clsDef = schemas.GetClassDefinition(schema.Name, "World_Countries");
             Assert.NotNull(clsDef);
             VerifyClass(clsDef);
             clsDef = schemas.GetClassDefinition(null, "World_Countries");

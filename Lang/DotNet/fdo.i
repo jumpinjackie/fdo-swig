@@ -1,6 +1,6 @@
 %module FdoDotNet
 
-%include "wchar.i"
+%include <wchar.i>
 %include <csharp.swg>
 
 //
@@ -60,6 +60,16 @@ typedef long long     FdoInt64;
 %apply unsigned char INOUT[] { unsigned char* geometryByteArray }
 %apply unsigned char INOUT[] { unsigned char* value }
 %apply unsigned char INPUT[] { const FdoByte* array }
+
+//The default csharp typemaps do not cover properties wrapping methods that return wchar_t
+//we'll add it here.
+//
+//This is needed for string properties in FdoAttributes.i to work
+%typemap(csvarout, excode=SWIGEXCODE2) wchar_t *, wchar_t *&, wchar_t[ANY], wchar_t[] %{
+    get {
+      global::System.IntPtr cPtr = $imcall;$excode;
+      return global::System.Runtime.InteropServices.Marshal.PtrToStringUni(cPtr);
+    } %}
 
 %include "DotNetPolymorphism.i"
 
