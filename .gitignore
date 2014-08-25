@@ -42,3 +42,4 @@
 /Fdo/Release
 /Fdo/Debug
 /Lang/Python/FdoPython/Win32
+/Lang/DotNet/FdoDotNet_AppVeyor.sdf
