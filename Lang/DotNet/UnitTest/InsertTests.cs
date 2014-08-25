@@ -44,62 +44,65 @@ namespace UnitTest
         private void DoInsert(FdoIConnection conn)
         {
             string geomName = null;
-            FdoIDescribeSchema desc = conn.CreateCommand((int)FdoCommandType.FdoCommandType_DescribeSchema) as FdoIDescribeSchema;
-            Assert.NotNull(desc);
-            FdoFeatureSchemaCollection schemas = desc.Execute();
-            Assert.NotNull(schemas);
-            FdoFeatureClass clsDef = schemas.GetClassDefinition(null, "World_Countries") as FdoFeatureClass;
-            Assert.NotNull(clsDef);
-            FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
-            Assert.NotNull(geomProp);
-            geomName = geomProp.Name;
+            using (FdoIDescribeSchema desc = conn.CreateCommand((int)FdoCommandType.FdoCommandType_DescribeSchema) as FdoIDescribeSchema)
+            {
+                Assert.NotNull(desc);
+                FdoFeatureSchemaCollection schemas = desc.Execute();
+                Assert.NotNull(schemas);
+                FdoFeatureClass clsDef = schemas.GetClassDefinition(null, "World_Countries") as FdoFeatureClass;
+                Assert.NotNull(clsDef);
+                FdoGeometricPropertyDefinition geomProp = clsDef.GetGeometryProperty();
+                Assert.NotNull(geomProp);
+                geomName = geomProp.Name;
+            }
+            using (FdoIInsert insertCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Insert) as FdoIInsert)
+            {
+                Assert.NotNull(insertCmd);
 
-            FdoIInsert insertCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Insert) as FdoIInsert;
-            Assert.NotNull(insertCmd);
+                insertCmd.SetFeatureClassName("World_Countries");
 
-            insertCmd.SetFeatureClassName("World_Countries");
+                FdoFgfGeometryFactory geomFactory = FdoFgfGeometryFactory.GetInstance();
+                FdoPropertyValueCollection propVals = insertCmd.GetPropertyValues();
 
-            FdoFgfGeometryFactory geomFactory = FdoFgfGeometryFactory.GetInstance();
-            FdoPropertyValueCollection propVals = insertCmd.GetPropertyValues();
+                FdoStringValue nameVal = FdoStringValue.Create();
+                Assert.True(nameVal.IsNull());
+                FdoStringValue keyVal = FdoStringValue.Create();
+                Assert.True(keyVal.IsNull());
+                FdoStringValue mapkeyVal = FdoStringValue.Create();
+                Assert.True(mapkeyVal.IsNull());
+                FdoGeometryValue geomVal = FdoGeometryValue.Create();
+                Assert.True(geomVal.IsNull());
 
-            FdoStringValue nameVal = FdoStringValue.Create();
-            Assert.True(nameVal.IsNull());
-            FdoStringValue keyVal = FdoStringValue.Create();
-            Assert.True(keyVal.IsNull());
-            FdoStringValue mapkeyVal = FdoStringValue.Create();
-            Assert.True(mapkeyVal.IsNull());
-            FdoGeometryValue geomVal = FdoGeometryValue.Create();
-            Assert.True(geomVal.IsNull());
+                FdoPropertyValue pName = FdoPropertyValue.Create("NAME", nameVal);
+                FdoPropertyValue pKey = FdoPropertyValue.Create("KEY", keyVal);
+                FdoPropertyValue pMapKey = FdoPropertyValue.Create("MAPKEY", mapkeyVal);
+                FdoPropertyValue pGeom = FdoPropertyValue.Create(geomName, geomVal);
 
-            FdoPropertyValue pName = FdoPropertyValue.Create("NAME", nameVal);
-            FdoPropertyValue pKey = FdoPropertyValue.Create("KEY", keyVal);
-            FdoPropertyValue pMapKey = FdoPropertyValue.Create("MAPKEY", mapkeyVal);
-            FdoPropertyValue pGeom = FdoPropertyValue.Create(geomName, geomVal);
+                propVals.Add(pName);
+                propVals.Add(pKey);
+                propVals.Add(pMapKey);
+                propVals.Add(pGeom);
 
-            propVals.Add(pName);
-            propVals.Add(pKey);
-            propVals.Add(pMapKey);
-            propVals.Add(pGeom);
+                //Set the actual values
+                nameVal.String = "My Own Country";
+                keyVal.String = "MOC";
+                mapkeyVal.String = "MOC123";
+                FdoIGeometry geom = geomFactory.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
+                FdoByteArrayHandle fgf = geomFactory.GetFgfBytes(geom);
+                geomVal.SetGeometryBytes(fgf);
 
-            //Set the actual values
-            nameVal.String = "My Own Country";
-            keyVal.String = "MOC";
-            mapkeyVal.String = "MOC123";
-            FdoIGeometry geom = geomFactory.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
-            FdoByteArrayHandle fgf = geomFactory.GetFgfBytes(geom);
-            geomVal.SetGeometryBytes(fgf);
+                int inserted = GetInsertedFeatures(insertCmd);
+                Assert.AreEqual(1, inserted, "Expected 1 feature inserted");
 
-            int inserted = GetInsertedFeatures(insertCmd);
-            Assert.AreEqual(1, inserted, "Expected 1 feature inserted");
+                int count = GetFeatureCountForName(conn, "My Own Country");
+                Assert.AreEqual(1, count, "Expected 1 feature");
 
-            int count = GetFeatureCountForName(conn, "My Own Country");
-            Assert.AreEqual(1, count, "Expected 1 feature");
-
-            mapkeyVal.String = "MOC234";
-            Assert.AreEqual(1, GetInsertedFeatures(insertCmd), "Expected 1 feature inserted");
-            Assert.AreEqual(2, GetFeatureCountForName(conn, "My Own Country"));
-            Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC123"));
-            Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC234"));
+                mapkeyVal.String = "MOC234";
+                Assert.AreEqual(1, GetInsertedFeatures(insertCmd), "Expected 1 feature inserted");
+                Assert.AreEqual(2, GetFeatureCountForName(conn, "My Own Country"));
+                Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC123"));
+                Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC234"));
+            }
         }
 
         private static int GetInsertedFeatures(FdoIInsert insertCmd)
