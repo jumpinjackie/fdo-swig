@@ -31,7 +31,14 @@ namespace UnitTest
         [TestFixtureTearDown]
         public void Teardown()
         {
-            Directory.Delete("UpdateTest", true);
+            try
+            {
+                Directory.Delete("UpdateTest", true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("{0}{0}WARNING: Exception during teardown:{0}{1}{0}", Environment.NewLine, ex.ToString());
+            }
         }
 
         private void DoUpdate(FdoIConnection conn)
