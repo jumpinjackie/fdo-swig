@@ -1,4 +1,6 @@
 @echo off
+SET FDO_PYTHON=C:\Python27
+SET FDO_PYTHON_LIB=python27.lib
 SET PLAT=Win32
 SET CONFIG=Release
 if "%1" == "x64" SET PLAT=x64
