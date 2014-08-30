@@ -1,84 +1,83 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
     public class GeometryTests
     {
         void CheckPositionXY(FdoIDirectPosition pos, double x, double y)
         {
-            Assert.AreEqual(x, pos.X, "X value mismatch");
-            Assert.AreEqual(y, pos.Y, "Y value mismatch");
+            Assert.Equal(x, pos.X);
+            Assert.Equal(y, pos.Y);
         }
 
         void CheckPositionXYM(FdoIDirectPosition pos, double x, double y, double m)
         {
             CheckPositionXY(pos, x, y);
-            Assert.AreEqual(m, pos.M, "M value mismatch");
+            Assert.Equal(m, pos.M);
         }
 
         void CheckPositionXYZ(FdoIDirectPosition pos, double x, double y, double z)
         {
             CheckPositionXY(pos, x, y);
-            Assert.AreEqual(z, pos.Z, "Z value mismatch");
+            Assert.Equal(z, pos.Z);
         }
 
         void CheckPositionXYZM(FdoIDirectPosition pos, double x, double y, double z, double m)
         {
             CheckPositionXYZ(pos, x, y, z);
-            Assert.AreEqual(m, pos.M, "M value mismatch");
+            Assert.Equal(m, pos.M);
         }
 
         void CheckEnvelope(FdoIEnvelope envl, double[] ordsXY)
         {
-            Assert.AreEqual(ordsXY[0], envl.MinX, "MinX mismatch");
-            Assert.AreEqual(ordsXY[1], envl.MinY, "MinY mismatch");
-            Assert.AreEqual(ordsXY[2], envl.MaxX, "MaxX mismatch");
-            Assert.AreEqual(ordsXY[3], envl.MaxY, "MaxY mismatch");
+            Assert.Equal(ordsXY[0], envl.MinX);
+            Assert.Equal(ordsXY[1], envl.MinY);
+            Assert.Equal(ordsXY[2], envl.MaxX);
+            Assert.Equal(ordsXY[3], envl.MaxY);
         }
 
         void CheckEnvelope(FdoIEnvelope envl, FdoIDirectPosition pos1, FdoIDirectPosition pos2)
         {
-            Assert.AreEqual(pos1.X, envl.MinX, "MinX mismatch");
-            Assert.AreEqual(pos1.Y, envl.MinY, "MinY mismatch");
+            Assert.Equal(pos1.X, envl.MinX);
+            Assert.Equal(pos1.Y, envl.MinY);
             Assert.True((pos1.Dimensionality & (int)FdoDimensionality.FdoDimensionality_Z) == 0 || envl.MinZ == pos1.Z, "MinZ mismatch");
-            Assert.AreEqual(pos2.X, envl.MaxX, "MaxX mismatch");
-            Assert.AreEqual(pos2.Y, envl.MaxY, "MaxY mismatch");
+            Assert.Equal(pos2.X, envl.MaxX);
+            Assert.Equal(pos2.Y, envl.MaxY);
             Assert.True((pos2.Dimensionality & (int)FdoDimensionality.FdoDimensionality_Z) == 0 || envl.MaxZ == pos2.Z, "MaxZ mismatch");
         }
 
         void CheckEnvelopeXY(FdoIEnvelope envl, double minx, double miny, double maxx, double maxy)
         {
-            Assert.AreEqual(minx, envl.MinX, "MinX mismatch");
-            Assert.AreEqual(miny, envl.MinY, "MinY mismatch");
-            Assert.AreEqual(maxx, envl.MaxX, "MaxX mismatch");
-            Assert.AreEqual(maxy, envl.MaxY, "MaxY mismatch");
+            Assert.Equal(minx, envl.MinX);
+            Assert.Equal(miny, envl.MinY);
+            Assert.Equal(maxx, envl.MaxX);
+            Assert.Equal(maxy, envl.MaxY);
         }
 
         void CheckEnvelopeXYZ(FdoIEnvelope envl, double minx, double miny, double minz, double maxx, double maxy, double maxz)
         {
             CheckEnvelopeXY(envl, minx, miny, maxx, maxy);
-            Assert.AreEqual(minz, envl.MinZ, "MinZ mismatch");
-            Assert.AreEqual(maxz, envl.MaxZ, "MaxZ mismatch");
+            Assert.Equal(minz, envl.MinZ);
+            Assert.Equal(maxz, envl.MaxZ);
         }
 
         void CheckEqualEnvelopes(FdoIEnvelope envl1, FdoIEnvelope envl2)
         {
-            Assert.AreEqual(envl1.MinX, envl2.MinX, "Envelope MinX mismatch");
-            Assert.AreEqual(envl1.MinY, envl2.MinY, "Envelope MinY mismatch");
-            Assert.AreEqual(envl1.MinZ, envl2.MinZ, "Envelope MinZ mismatch");
-            Assert.AreEqual(envl1.MaxX, envl2.MaxX, "Envelope MaxX mismatch");
-            Assert.AreEqual(envl1.MaxY, envl2.MaxY, "Envelope MaxY mismatch");
-            Assert.AreEqual(envl1.MaxZ, envl2.MaxZ, "Envelope MaxZ mismatch");
+            Assert.Equal(envl1.MinX, envl2.MinX);
+            Assert.Equal(envl1.MinY, envl2.MinY);
+            Assert.Equal(envl1.MinZ, envl2.MinZ);
+            Assert.Equal(envl1.MaxX, envl2.MaxX);
+            Assert.Equal(envl1.MaxY, envl2.MaxY);
+            Assert.Equal(envl1.MaxZ, envl2.MaxZ);
         }
 
-        [Test]
+        [Fact]
         public void TestDirectPosition()
         {
             FdoFgfGeometryFactory factory = FdoFgfGeometryFactory.GetInstance();
@@ -100,7 +99,7 @@ namespace UnitTest
 	        CheckPositionXYZM(pointXYZM, 1.23, 4.26, 3.67, 3.14);
         }
 
-        [Test]
+        [Fact]
         public void TestEnvelope()
         {
             FdoFgfGeometryFactory gf = FdoFgfGeometryFactory.GetInstance();
@@ -130,7 +129,7 @@ namespace UnitTest
              */
         }
 
-        [Test]
+        [Fact]
         public void TestLinearRing()
         {
             FdoDirectPositionCollection positions = FdoDirectPositionCollection.Create();
@@ -148,18 +147,18 @@ namespace UnitTest
 
             FdoILinearRing ring = fact.CreateLinearRing(positions);
             FdoDirectPositionCollection positions2 = ring.GetPositions();
-            Assert.AreEqual(positions.GetCount(), positions2.GetCount(), "Position count mismatch");
+            Assert.Equal(positions.GetCount(), positions2.GetCount());
             for (int i = 0; i < positions.GetCount(); i++)
             {
                 FdoIDirectPosition posExpect = positions.GetItem(i);
                 FdoIDirectPosition posActual = positions2.GetItem(i);
 
-                Assert.AreEqual(posExpect.Dimensionality, posActual.Dimensionality, "Dimensionality mismatch");
+                Assert.Equal(posExpect.Dimensionality, posActual.Dimensionality);
                 CheckPositionXY(posExpect, posActual.X, posActual.Y);
             }
         }
 
-        [Test]
+        [Fact]
         public void TestLineStringSegment()
         {
             FdoDirectPositionCollection positions = FdoDirectPositionCollection.Create();
@@ -177,18 +176,18 @@ namespace UnitTest
 
             FdoILineStringSegment lineStringSegment = fact.CreateLineStringSegment(positions);
             FdoDirectPositionCollection positions2 = lineStringSegment.GetPositions();
-            Assert.AreEqual(positions.GetCount(), positions2.GetCount(), "Position count mismatch");
+            Assert.Equal(positions.GetCount(), positions2.GetCount());
             for (int i = 0; i < positions.GetCount(); i++)
             {
                 FdoIDirectPosition posExpect = positions.GetItem(i);
                 FdoIDirectPosition posActual = positions2.GetItem(i);
 
-                Assert.AreEqual(posExpect.Dimensionality, posActual.Dimensionality, "Dimensionality mismatch");
+                Assert.Equal(posExpect.Dimensionality, posActual.Dimensionality);
                 CheckPositionXY(posExpect, posActual.X, posActual.Y);
             }
         }
 
-        [Test]
+        [Fact]
         public void TestCircularArcSegment()
         {
             FdoFgfGeometryFactory fact = FdoFgfGeometryFactory.GetInstance();
@@ -207,7 +206,7 @@ namespace UnitTest
             CheckPositionXYZ(end, end2.X, end2.Y, end2.Z);
         }
 
-        [Test]
+        [Fact]
         public void TestFGFTAndRoundtrip()
         {
             FdoFgfGeometryFactory gf = FdoFgfGeometryFactory.GetInstance();
@@ -224,17 +223,17 @@ namespace UnitTest
             FdoIGeometry mcs =  gf.CreateGeometry("MULTICURVESTRING ((100 100 (CIRCULARARCSEGMENT (100 101, 101 102), LINESTRINGSEGMENT (103 100, 103 102))), (200 200 (CIRCULARARCSEGMENT (200 201, 201 202), LINESTRINGSEGMENT (203 200, 203 202))), (300 300 (CIRCULARARCSEGMENT (300 301, 301 302), LINESTRINGSEGMENT (303 300, 303 302))))");
             FdoIGeometry mcpg = gf.CreateGeometry("MULTICURVEPOLYGON (((200 200 (CIRCULARARCSEGMENT (200 201, 201 202), LINESTRINGSEGMENT (200 200))), (300 300 (CIRCULARARCSEGMENT (300 301, 301 302), LINESTRINGSEGMENT (300 300))), (400 400 (CIRCULARARCSEGMENT (400 401, 401 402), LINESTRINGSEGMENT (400 400)))), ((201 201 (CIRCULARARCSEGMENT (201 202, 202 203), LINESTRINGSEGMENT (201 201))), (301 301 (CIRCULARARCSEGMENT (301 302, 302 303), LINESTRINGSEGMENT (301 301))), (401 401 (CIRCULARARCSEGMENT (401 402, 402 403), LINESTRINGSEGMENT (401 401)))), ((202 202 (CIRCULARARCSEGMENT (202 203, 203 204), LINESTRINGSEGMENT (202 202))), (302 302 (CIRCULARARCSEGMENT (302 303, 303 304), LINESTRINGSEGMENT (302 302))), (402 402 (CIRCULARARCSEGMENT (402 403, 403 404), LINESTRINGSEGMENT (402 402)))))");
 
-            Assert.IsInstanceOf<FdoIPoint>(pt);
-            Assert.IsInstanceOf<FdoILineString>(ls);
-            Assert.IsInstanceOf<FdoIPolygon>(pg);
-            Assert.IsInstanceOf<FdoIMultiPoint>(mpt);
-            Assert.IsInstanceOf<FdoIMultiLineString>(mls);
-            Assert.IsInstanceOf<FdoIMultiPolygon>(mpg);
-            Assert.IsInstanceOf<FdoIMultiGeometry>(mg);
-            Assert.IsInstanceOf<FdoICurveString>(cs);
-            Assert.IsInstanceOf<FdoICurvePolygon>(cpg);
-            Assert.IsInstanceOf<FdoIMultiCurveString>(mcs);
-            Assert.IsInstanceOf<FdoIMultiCurvePolygon>(mcpg);
+            Assert.IsAssignableFrom<FdoIPoint>(pt);
+            Assert.IsAssignableFrom<FdoILineString>(ls);
+            Assert.IsAssignableFrom<FdoIPolygon>(pg);
+            Assert.IsAssignableFrom<FdoIMultiPoint>(mpt);
+            Assert.IsAssignableFrom<FdoIMultiLineString>(mls);
+            Assert.IsAssignableFrom<FdoIMultiPolygon>(mpg);
+            Assert.IsAssignableFrom<FdoIMultiGeometry>(mg);
+            Assert.IsAssignableFrom<FdoICurveString>(cs);
+            Assert.IsAssignableFrom<FdoICurvePolygon>(cpg);
+            Assert.IsAssignableFrom<FdoIMultiCurveString>(mcs);
+            Assert.IsAssignableFrom<FdoIMultiCurvePolygon>(mcpg);
 
             FdoByteArrayHandle fgf_pt = gf.GetFgfBytes(pt);
             FdoByteArrayHandle fgf_ls = gf.GetFgfBytes(ls);
@@ -297,17 +296,17 @@ namespace UnitTest
             mcs = gf.CreateGeometryFromFgf(fgf_mcs);
             mcpg = gf.CreateGeometryFromFgf(fgf_mcpg);
 
-            Assert.IsInstanceOf<FdoIPoint>(pt);
-            Assert.IsInstanceOf<FdoILineString>(ls);
-            Assert.IsInstanceOf<FdoIPolygon>(pg);
-            Assert.IsInstanceOf<FdoIMultiPoint>(mpt);
-            Assert.IsInstanceOf<FdoIMultiLineString>(mls);
-            Assert.IsInstanceOf<FdoIMultiPolygon>(mpg);
-            Assert.IsInstanceOf<FdoIMultiGeometry>(mg);
-            Assert.IsInstanceOf<FdoICurveString>(cs);
-            Assert.IsInstanceOf<FdoICurvePolygon>(cpg);
-            Assert.IsInstanceOf<FdoIMultiCurveString>(mcs);
-            Assert.IsInstanceOf<FdoIMultiCurvePolygon>(mcpg);
+            Assert.IsAssignableFrom<FdoIPoint>(pt);
+            Assert.IsAssignableFrom<FdoILineString>(ls);
+            Assert.IsAssignableFrom<FdoIPolygon>(pg);
+            Assert.IsAssignableFrom<FdoIMultiPoint>(mpt);
+            Assert.IsAssignableFrom<FdoIMultiLineString>(mls);
+            Assert.IsAssignableFrom<FdoIMultiPolygon>(mpg);
+            Assert.IsAssignableFrom<FdoIMultiGeometry>(mg);
+            Assert.IsAssignableFrom<FdoICurveString>(cs);
+            Assert.IsAssignableFrom<FdoICurvePolygon>(cpg);
+            Assert.IsAssignableFrom<FdoIMultiCurveString>(mcs);
+            Assert.IsAssignableFrom<FdoIMultiCurvePolygon>(mcpg);
 
             pt = gf.CreateGeometryFromWkb(wkb_pt);
             ls = gf.CreateGeometryFromWkb(wkb_ls);
@@ -321,17 +320,17 @@ namespace UnitTest
             //mcs = gf.CreateGeometryFromWkb(wkb_mcs);
             //mcpg = gf.CreateGeometryFromWkb(wkb_mcpg);
 
-            Assert.IsInstanceOf<FdoIPoint>(pt);
-            Assert.IsInstanceOf<FdoILineString>(ls);
-            Assert.IsInstanceOf<FdoIPolygon>(pg);
-            //Assert.IsInstanceOf<FdoIMultiPoint>(mpt);
-            //Assert.IsInstanceOf<FdoIMultiLineString>(mls);
-            Assert.IsInstanceOf<FdoIMultiPolygon>(mpg);
-            //Assert.IsInstanceOf<FdoIMultiGeometry>(mg);
-            //Assert.IsInstanceOf<FdoICurveString>(cs);
-            //Assert.IsInstanceOf<FdoICurvePolygon>(cpg);
-            //Assert.IsInstanceOf<FdoIMultiCurveString>(mcs);
-            //Assert.IsInstanceOf<FdoIMultiCurvePolygon>(mcpg);
+            Assert.IsAssignableFrom<FdoIPoint>(pt);
+            Assert.IsAssignableFrom<FdoILineString>(ls);
+            Assert.IsAssignableFrom<FdoIPolygon>(pg);
+            //Assert.IsAssignableFrom<FdoIMultiPoint>(mpt);
+            //Assert.IsAssignableFrom<FdoIMultiLineString>(mls);
+            Assert.IsAssignableFrom<FdoIMultiPolygon>(mpg);
+            //Assert.IsAssignableFrom<FdoIMultiGeometry>(mg);
+            //Assert.IsAssignableFrom<FdoICurveString>(cs);
+            //Assert.IsAssignableFrom<FdoICurvePolygon>(cpg);
+            //Assert.IsAssignableFrom<FdoIMultiCurveString>(mcs);
+            //Assert.IsAssignableFrom<FdoIMultiCurvePolygon>(mcpg);
         }
     }
 }

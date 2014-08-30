@@ -10,7 +10,8 @@ namespace TestRunner64
     {
         static void Main(string[] args)
         {
-            NUnit.ConsoleRunner.Runner.Main(new string[] { "UnitTest64Dbg.dll" });
+            OSGeo.FDO.FdoIDisposable.EnableGlobalThreadLocking(true);
+            Xunit.ConsoleClient.Program.Main(new string[] { "UnitTest64Dbg.dll" });
         }
     }
 }

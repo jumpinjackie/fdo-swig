@@ -1,14 +1,13 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
     public class FilterTests
     {
         // parse an FDO Filter that we except to return NULL because of error
@@ -30,7 +29,7 @@ namespace UnitTest
             {
                 return;
             }
-            Assert.Null(pFilter, "FdoFilter::Parse() should have returned NULL!");
+            Assert.Null(pFilter); //, "FdoFilter::Parse() should have returned NULL!");
         }
 
         // parse an FDO Filter
@@ -46,17 +45,17 @@ namespace UnitTest
 
             if (pwzResult == null)
             {
-                Assert.AreEqual(pwzOut, pwzFilter, "Parse/ToString do not match!\n\t<{0}> should be <{1}>\n", pwzOut, pwzFilter);
+                Assert.Equal(pwzOut, pwzFilter); //, "Parse/ToString do not match!\n\t<{0}> should be <{1}>\n", pwzOut, pwzFilter);
             }
             else
             {
-                Assert.AreEqual(pwzOut, pwzResult, "Parse/ToString do not match!\n\t<{0}> should be <{1}>\n", pwzOut, pwzResult);
+                Assert.Equal(pwzOut, pwzResult); //, "Parse/ToString do not match!\n\t<{0}> should be <{1}>\n", pwzOut, pwzResult);
             }
 
-            Assert.IsInstanceOf<T>(pFilter, pwzFilter);
+            Assert.IsAssignableFrom<T>(pFilter);
         }
 
-        [Test]
+        [Fact]
         public void TestParse()
         {
             ParseFilter<FdoComparisonCondition>("colourIndex > -a", "colourIndex > -(a)");

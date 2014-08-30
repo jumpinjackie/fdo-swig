@@ -1,23 +1,21 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
-    public class DeleteTests
+    public class DeleteTests : IDisposable
     {
         const string SDF = "DeleteTest/SDF/DeleteTest.sdf";
         const string SHP = "DeleteTest/SHP";
         const string SQLITE = "DeleteTest/SQLite/DeleteTest.sqlite";
 
-        [TestFixtureSetUp]
-        public void Setup()
+        public DeleteTests()
         {
             Directory.CreateDirectory("DeleteTest");
             Directory.CreateDirectory("DeleteTest/SDF");
@@ -28,8 +26,7 @@ namespace UnitTest
             TestDataStore.CopySHP(SHP);
         }
 
-        [TestFixtureTearDown]
-        public void Teardown()
+        public void Dispose()
         {
             try
             {
@@ -61,7 +58,7 @@ namespace UnitTest
             deleteCmd.SetFilter("NAME = 'Canada'");
 
             int updated = deleteCmd.Execute();
-            Assert.AreEqual(66, updated, "Expect 66 features deleted");
+            Assert.Equal(66, updated);
 
             FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
             Assert.NotNull(selectCmd);
@@ -73,13 +70,13 @@ namespace UnitTest
             fr.Close();
         }
 
-        [Test]
+        [Fact]
         public void TestSDFDelete()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -91,13 +88,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPDelete()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -109,13 +106,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteDelete()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {

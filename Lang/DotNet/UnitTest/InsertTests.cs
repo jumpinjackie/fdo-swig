@@ -1,23 +1,21 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
-    public class InsertTests
+    public class InsertTests : IDisposable
     {
         const string SDF = "InsertTest/SDF/InsertTest.sdf";
         const string SHP = "InsertTest/SHP";
         const string SQLITE = "InsertTest/SQLite/InsertTest.sqlite";
 
-        [TestFixtureSetUp]
-        public void Setup()
+        public InsertTests()
         {
             Directory.CreateDirectory("InsertTest");
             Directory.CreateDirectory("InsertTest/SDF");
@@ -28,8 +26,7 @@ namespace UnitTest
             TestDataStore.CopySHP(SHP);
         }
 
-        [TestFixtureTearDown]
-        public void Teardown()
+        public void Dispose()
         {
             try
             {
@@ -92,16 +89,16 @@ namespace UnitTest
                 geomVal.SetGeometryBytes(fgf);
 
                 int inserted = GetInsertedFeatures(insertCmd);
-                Assert.AreEqual(1, inserted, "Expected 1 feature inserted");
+                Assert.Equal(1, inserted);
 
                 int count = GetFeatureCountForName(conn, "My Own Country");
-                Assert.AreEqual(1, count, "Expected 1 feature");
+                Assert.Equal(1, count);
 
                 mapkeyVal.String = "MOC234";
-                Assert.AreEqual(1, GetInsertedFeatures(insertCmd), "Expected 1 feature inserted");
-                Assert.AreEqual(2, GetFeatureCountForName(conn, "My Own Country"));
-                Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC123"));
-                Assert.AreEqual(1, GetFeatureCountForMapKey(conn, "MOC234"));
+                Assert.Equal(1, GetInsertedFeatures(insertCmd)); //, "Expected 1 feature inserted");
+                Assert.Equal(2, GetFeatureCountForName(conn, "My Own Country"));
+                Assert.Equal(1, GetFeatureCountForMapKey(conn, "MOC123"));
+                Assert.Equal(1, GetFeatureCountForMapKey(conn, "MOC234"));
             }
         }
 
@@ -167,13 +164,13 @@ namespace UnitTest
             return count;
         }
 
-        [Test]
+        [Fact]
         public void TestSDFInsert()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -185,13 +182,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPInsert()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -203,13 +200,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteInsert()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {

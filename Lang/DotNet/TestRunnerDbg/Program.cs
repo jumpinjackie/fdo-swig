@@ -10,7 +10,8 @@ namespace TestRunner
     {
         static void Main(string[] args)
         {
-            NUnit.ConsoleRunner.Runner.Main(new string[] { "UnitTestDbg.dll" });
+            OSGeo.FDO.FdoIDisposable.EnableGlobalThreadLocking(true);
+            Xunit.ConsoleClient.Program.Main(new string[] { "UnitTestDbg.dll" });
         }
     }
 }

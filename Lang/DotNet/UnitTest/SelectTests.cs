@@ -1,14 +1,13 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
     public class SelectTests
     {
         private static void TestSelectCommand(FdoISelect selectCmd)
@@ -43,11 +42,12 @@ namespace UnitTest
                         FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
                         Assert.NotNull(geom);
                         string wkt = geom.Text;
-                        Assert.IsNotNullOrEmpty(wkt);
+                        Assert.NotNull(wkt);
+                        Assert.NotEmpty(wkt);
                     }
                     count++;
                 }
-                Assert.AreEqual(419, count, "Expected 419 features");
+                Assert.Equal(419, count);
             }
             finally
             {
@@ -88,11 +88,12 @@ namespace UnitTest
                         FdoIGeometry geom = geomFact.CreateGeometryFromFgf(fgf);
                         Assert.NotNull(geom);
                         string wkt = geom.Text;
-                        Assert.IsNotNullOrEmpty(wkt);
+                        Assert.NotNull(wkt);
+                        Assert.NotEmpty(wkt);
                     }
                     count++;
                 }
-                Assert.AreEqual(66, count, "Expected 66 features");
+                Assert.Equal(66, count);
             }
             finally
             {
@@ -100,13 +101,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSDFSelect()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -120,13 +121,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSDFSelectFiltered()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -140,13 +141,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPSelect()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -160,13 +161,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPSelectFiltered()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -180,13 +181,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteSelect()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -200,13 +201,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteSelectFiltered()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {

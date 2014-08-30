@@ -9,7 +9,7 @@
 
 //Do not AddRef() as any pointer returned will either already be AddRef()'d at the C++ level or
 //(if freshly allocated) will start off with a refcount of 1
-%feature("ref") FdoIDisposable ""
+%feature("ref") FdoIDisposable "FdoLogRefCount($this);"
 //However, we still do need to release
 %feature("unref") FdoIDisposable "FdoCleanup($this);"
 
@@ -73,10 +73,14 @@ typedef long long     FdoInt64;
 
 %include "DotNetPolymorphism.i"
 
+%ignore _fdo_purecall_handler;
 %{
+#define HAS_RTTI
 #include <vector>
 #include "Fdo.h"
-
+#ifdef HAS_RTTI
+#include <typeinfo.h>
+#endif
 #include "MemCheck.h"
 #include "ByteArrayHandle.h"
 
@@ -104,19 +108,41 @@ static std::string W2A_SLOW(const wchar_t* input)
     return std::string(mbs);
 }
 
+#ifdef _DEBUG
+#define FdoLogRefCount(obj) \
+{ \
+    char sAddress[80]; \
+    if (NULL != obj) { \
+        sprintf(sAddress, "%x", obj); \
+        printf("Refcount of %s: %d\n", sAddress, obj->GetRefCount()); \
+    } \
+}
+#else
+#define FdoLogRefCount(obj)
+#endif
+
 static void FdoCleanup(FdoIDisposable* obj)
 {
-    /*
+#ifdef _DEBUG
+    char sAddress[80];
     if (NULL != obj)
     {
+        sprintf(sAddress, "%x", obj);
+        printf("Releasing %s", sAddress);
+#ifdef HAS_RTTI
+        printf(" (%s): ", typeid(*obj).name());
+#else
+        printf(": ");
+#endif
         FdoInt32 refCount = obj->Release();
         if (refCount <= 0)
             printf("Deleted\n");
         else
-            printf("Un-refd(%d)\n", refCount);
+            printf("Un-refd (new refcount: %d)\n", refCount);
     }
-    */
+#else
     FDO_SAFE_RELEASE(obj);
+#endif
 }
 
 %}

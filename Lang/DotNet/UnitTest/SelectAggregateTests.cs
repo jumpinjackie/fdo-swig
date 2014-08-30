@@ -1,14 +1,13 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
     public class SelectAggregateTests
     {
         private void DoCount(FdoIConnection conn)
@@ -29,13 +28,13 @@ namespace UnitTest
                 total += rdr.GetInt64("TOTAL_COUNT");
             }
             rdr.Close();
-            Assert.AreEqual(419L, total, "Expected 419 features");
+            Assert.Equal(419L, total);
 
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.AreEqual(0, propNames.GetCount());
+            Assert.Equal(0, propNames.GetCount());
             propNames.AddComputedIdentifier("TOTAL_COUNT", "COUNT(NAME)");
-            Assert.AreEqual(1, propNames.GetCount());
+            Assert.Equal(1, propNames.GetCount());
 
             rdr = selectCmd.Execute();
             total = 0;
@@ -44,7 +43,7 @@ namespace UnitTest
                 total += rdr.GetInt64("TOTAL_COUNT");
             }
             rdr.Close();
-            Assert.AreEqual(419L, total, "Expected 419 features");
+            Assert.Equal(419L, total);
         }
 
         private void DoFilteredCount(FdoIConnection conn)
@@ -66,13 +65,13 @@ namespace UnitTest
                 total += rdr.GetInt64("TOTAL_COUNT");
             }
             rdr.Close();
-            Assert.AreEqual(66L, total, "Expected 66 features");
+            Assert.Equal(66L, total);
 
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.AreEqual(0, propNames.GetCount());
+            Assert.Equal(0, propNames.GetCount());
             propNames.AddComputedIdentifier("TOTAL_COUNT", "COUNT(NAME)");
-            Assert.AreEqual(1, propNames.GetCount());
+            Assert.Equal(1, propNames.GetCount());
 
             rdr = selectCmd.Execute();
             total = 0;
@@ -81,7 +80,7 @@ namespace UnitTest
                 total += rdr.GetInt64("TOTAL_COUNT");
             }
             rdr.Close();
-            Assert.AreEqual(66L, total, "Expected 66 features");
+            Assert.Equal(66L, total);
         }
 
         private void DoDistinct(FdoIConnection conn)
@@ -105,7 +104,7 @@ namespace UnitTest
                 count++;
             }
             rdr.Close();
-            Assert.AreEqual(values.Count, count, string.Format("Expected {0} distinct results", values.Count));
+            Assert.Equal(values.Count, count);
         }
 
         private void DoFilteredDistinct(FdoIConnection conn)
@@ -130,7 +129,7 @@ namespace UnitTest
                 count++;
             }
             rdr.Close();
-            Assert.AreEqual(values.Count, count, string.Format("Expected {0} distinct results", values.Count));
+            Assert.Equal(values.Count, count);
         }
 
         private void DoSpatialExtents(FdoIConnection conn)
@@ -139,7 +138,7 @@ namespace UnitTest
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
             Assert.NotNull(schemas);
-            Assert.AreEqual(1, schemas.GetCount());
+            Assert.Equal(1, schemas.GetCount());
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
             string geomName = null;
@@ -148,7 +147,7 @@ namespace UnitTest
                 FdoClassDefinition cls = classes.GetItem(i);
                 if (cls.Name == "World_Countries")
                 {
-                    Assert.IsInstanceOf<FdoFeatureClass>(cls);
+                    Assert.IsAssignableFrom<FdoFeatureClass>(cls);
                     FdoGeometricPropertyDefinition geomProp = ((FdoFeatureClass)cls).GetGeometryProperty();
                     Assert.NotNull(geomProp);
                     geomName = geomProp.Name;
@@ -171,7 +170,7 @@ namespace UnitTest
             while (rdr.ReadNext())
             {
                 Assert.False(rdr.IsNull("EXTENTS"));
-                Assert.AreEqual(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
+                Assert.Equal(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
 
                 FdoByteArrayHandle bytes = rdr.GetGeometryBytes("EXTENTS");
                 Assert.NotNull(bytes);
@@ -183,20 +182,20 @@ namespace UnitTest
                 iterations++;
             }
             rdr.Close();
-            Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
+            Assert.Equal(1, iterations);
             
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.AreEqual(0, propNames.GetCount());
+            Assert.Equal(0, propNames.GetCount());
             propNames.AddComputedIdentifier("EXTENTS", "SpatialExtents(" + geomName + ")");
-            Assert.AreEqual(1, propNames.GetCount());
+            Assert.Equal(1, propNames.GetCount());
 
             rdr = selectCmd.Execute();
             iterations = 0;
             while (rdr.ReadNext())
             {
                 Assert.False(rdr.IsNull("EXTENTS"));
-                Assert.AreEqual(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
+                Assert.Equal(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
 
                 FdoByteArrayHandle bytes = rdr.GetGeometryBytes("EXTENTS");
                 Assert.NotNull(bytes);
@@ -208,7 +207,7 @@ namespace UnitTest
                 iterations++;
             }
             rdr.Close();
-            Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
+            Assert.Equal(1, iterations);
         }
 
         private void DoFilteredSpatialExtents(FdoIConnection conn)
@@ -217,7 +216,7 @@ namespace UnitTest
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
             Assert.NotNull(schemas);
-            Assert.AreEqual(1, schemas.GetCount());
+            Assert.Equal(1, schemas.GetCount());
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
             string geomName = null;
@@ -226,7 +225,7 @@ namespace UnitTest
                 FdoClassDefinition cls = classes.GetItem(i);
                 if (cls.Name == "World_Countries")
                 {
-                    Assert.IsInstanceOf<FdoFeatureClass>(cls);
+                    Assert.IsAssignableFrom<FdoFeatureClass>(cls);
                     FdoGeometricPropertyDefinition geomProp = ((FdoFeatureClass)cls).GetGeometryProperty();
                     Assert.NotNull(geomProp);
                     geomName = geomProp.Name;
@@ -250,7 +249,7 @@ namespace UnitTest
             while (rdr.ReadNext())
             {
                 Assert.False(rdr.IsNull("EXTENTS"));
-                Assert.AreEqual(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
+                Assert.Equal(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
 
                 FdoByteArrayHandle bytes = rdr.GetGeometryBytes("EXTENTS");
                 Assert.NotNull(bytes);
@@ -262,20 +261,20 @@ namespace UnitTest
                 iterations++;
             }
             rdr.Close();
-            Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
+            Assert.Equal(1, iterations);
 
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.AreEqual(0, propNames.GetCount());
+            Assert.Equal(0, propNames.GetCount());
             propNames.AddComputedIdentifier("EXTENTS", "SpatialExtents(" + geomName + ")");
-            Assert.AreEqual(1, propNames.GetCount());
+            Assert.Equal(1, propNames.GetCount());
 
             rdr = selectCmd.Execute();
             iterations = 0;
             while (rdr.ReadNext())
             {
                 Assert.False(rdr.IsNull("EXTENTS"));
-                Assert.AreEqual(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
+                Assert.Equal(FdoPropertyType.FdoPropertyType_GeometricProperty, rdr.GetPropertyType("EXTENTS"));
 
                 FdoByteArrayHandle bytes = rdr.GetGeometryBytes("EXTENTS");
                 Assert.NotNull(bytes);
@@ -287,16 +286,16 @@ namespace UnitTest
                 iterations++;
             }
             rdr.Close();
-            Assert.AreEqual(1, iterations, "Expected 1 iteration of the data reader");
+            Assert.Equal(1, iterations);
         }
 
-        [Test]
+        [Fact]
         public void TestSDFCount()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoCount(conn);
@@ -308,13 +307,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSDFDistinct()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoDistinct(conn);
@@ -326,13 +325,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSDFSpatialExtents()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoSpatialExtents(conn);
@@ -344,13 +343,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPCount()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoCount(conn);
@@ -362,13 +361,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPDistinct()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoDistinct(conn);
@@ -380,13 +379,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPSpatialExtents()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoSpatialExtents(conn);
@@ -398,13 +397,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteCount()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoCount(conn);
@@ -416,13 +415,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteDistinct()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoDistinct(conn);
@@ -434,13 +433,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteSpatialExtents()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoSpatialExtents(conn);

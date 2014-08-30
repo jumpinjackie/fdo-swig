@@ -1,23 +1,21 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
-    public class UpdateTests
+    public class UpdateTests : IDisposable
     {
         const string SDF = "UpdateTest/SDF/UpdateTest.sdf";
         const string SHP = "UpdateTest/SHP";
         const string SQLITE = "UpdateTest/SQLite/UpdateTest.sqlite";
 
-        [TestFixtureSetUp]
-        public void Setup()
+        public UpdateTests()
         {
             Directory.CreateDirectory("UpdateTest");
             Directory.CreateDirectory("UpdateTest/SDF");
@@ -28,8 +26,7 @@ namespace UnitTest
             TestDataStore.CopySHP(SHP);
         }
 
-        [TestFixtureTearDown]
-        public void Teardown()
+        public void Dispose()
         {
             try
             {
@@ -83,7 +80,7 @@ namespace UnitTest
             mapkeyVal.String = "MOC123";
 
             int updated = updateCmd.Execute();
-            Assert.AreEqual(66, updated, "Expect 66 features updated");
+            Assert.Equal(66, updated);
 
             FdoISelect selectCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Select) as FdoISelect;
             Assert.NotNull(selectCmd);
@@ -95,19 +92,19 @@ namespace UnitTest
             {
                 Assert.False(fr.IsNull("KEY"));
                 Assert.False(fr.IsNull("MAPKEY"));
-                Assert.AreEqual(fr.GetString("KEY"), "MOC");
-                Assert.AreEqual(fr.GetString("MAPKEY"), "MOC123");
+                Assert.Equal(fr.GetString("KEY"), "MOC");
+                Assert.Equal(fr.GetString("MAPKEY"), "MOC123");
             }
             fr.Close();
         }
 
-        [Test]
+        [Fact]
         public void TestSDFUpdate()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -119,13 +116,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPUpdate()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {
@@ -137,13 +134,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteUpdate()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
 
             try
             {

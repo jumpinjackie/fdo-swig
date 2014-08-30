@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,17 +8,14 @@ using System.Threading.Tasks;
 
 namespace UnitTest
 {
-    [SetUpFixture]
-    public class TestBootstrap
+    public class TestBootstrap : IDisposable
     {
-        [SetUp]
-        public void Setup()
+        public TestBootstrap()
         {
             FdoMemCheck.EnableMemoryLeakChecking();
         }
 
-        [TearDown]
-        public void Teardown()
+        public void Dispose()
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -29,7 +25,7 @@ namespace UnitTest
         }
     }
 
-    public class TestDataStore
+    public class TestDataStore : Xunit.IUseFixture<TestBootstrap>
     {
         public const string SDF     = "../../../../../../TestData/SDF/World_Countries.sdf";
         public const string SHP     = "../../../../../../TestData/SHP/World_Countries.shp";
@@ -55,6 +51,13 @@ namespace UnitTest
         public static void CopySQLite(string targetPath)
         {
             File.Copy(SQLITE, targetPath, true);
+        }
+
+        public TestBootstrap TestData { get; private set; }
+
+        public void SetFixture(TestBootstrap data)
+        {
+            this.TestData = data;
         }
     }
 }

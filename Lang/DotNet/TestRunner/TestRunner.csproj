@@ -34,9 +34,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit-console-runner">
-      <HintPath>..\packages\NUnit.Runners.2.6.3\tools\lib\nunit-console-runner.dll</HintPath>
-    </Reference>
     <Reference Include="OSGeo.FDO">
       <HintPath>..\Bin\Win32\Release\OSGeo.FDO.dll</HintPath>
     </Reference>
@@ -47,6 +44,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit.console.clr4.x86">
+      <HintPath>..\packages\xunit.runners.1.9.2\tools\xunit.console.clr4.x86.exe</HintPath>
+    </Reference>
+    <Reference Include="xunit.runner.utility">
+      <HintPath>..\packages\xunit.runners.1.9.2\tools\xunit.runner.utility.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />

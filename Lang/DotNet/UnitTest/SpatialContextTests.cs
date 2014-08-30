@@ -1,14 +1,13 @@
-﻿using NUnit.Framework;
-using OSGeo.FDO;
+﻿using OSGeo.FDO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace UnitTest
 {
-    [TestFixture]
     public class SpatialContextTests
     {
         private void DoGetSpatialContexts(FdoIConnection conn)
@@ -19,19 +18,20 @@ namespace UnitTest
             int count = 0;
             while (scReader.ReadNext())
             {
-                Assert.IsNotNullOrEmpty(scReader.Name);
+                Assert.NotNull(scReader.Name);
+                Assert.NotEmpty(scReader.Name);
                 count++;
             }
-            Assert.AreEqual(1, count, "Expect one spatial context in data store");
+            Assert.Equal(1, count);
         }
 
-        [Test]
+        [Fact]
         public void TestSDFSpatialContext()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
             conn.SetConnectionString("File=" + TestDataStore.SDF);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoGetSpatialContexts(conn);
@@ -42,13 +42,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSHPSpatialContext()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
             conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoGetSpatialContexts(conn);
@@ -59,13 +59,13 @@ namespace UnitTest
             }
         }
 
-        [Test]
+        [Fact]
         public void TestSQLiteSpatialContext()
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
             conn.SetConnectionString("File=" + TestDataStore.SQLITE);
-            Assert.AreEqual(FdoConnectionState.FdoConnectionState_Open, conn.Open());
+            Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
                 DoGetSpatialContexts(conn);
