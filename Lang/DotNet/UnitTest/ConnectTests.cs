@@ -15,11 +15,11 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
-            conn.SetConnectionString("File=" + TestDataStore.SDF);
+            conn.ConnectionString = "File=" + TestDataStore.SDF;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
-            conn.SetConnectionString("File=../IDontExist.sdf");
+            conn.ConnectionString = "File=../IDontExist.sdf";
             Assert.Throws<ManagedFdoException>(() =>
             {
                 FdoConnectionState state = conn.Open();
@@ -31,15 +31,15 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
-            conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
+            conn.ConnectionString = "DefaultFileLocation=" + TestDataStore.SHP;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
-            conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP_DIR);
+            conn.ConnectionString = "DefaultFileLocation=" + TestDataStore.SHP_DIR;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
-            conn.SetConnectionString("File=../IDontExist.shp");
+            conn.ConnectionString = "File=../IDontExist.shp";
             Assert.Throws<ManagedFdoException>(() =>
             {
                 FdoConnectionState state = conn.Open();
@@ -51,11 +51,11 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
-            conn.SetConnectionString("File=" + TestDataStore.SQLITE);
+            conn.ConnectionString = "File=" + TestDataStore.SQLITE;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             conn.Close();
 
-            conn.SetConnectionString("File=../IDontExist.sqlite");
+            conn.ConnectionString = "File=../IDontExist.sqlite";
             Assert.Throws<ManagedFdoException>(() =>
             {
                 FdoConnectionState state = conn.Open();

@@ -30,7 +30,7 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SDF");
-            conn.SetConnectionString("File=" + TestDataStore.SDF);
+            conn.ConnectionString = "File=" + TestDataStore.SDF;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
@@ -47,7 +47,7 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SHP");
-            conn.SetConnectionString("DefaultFileLocation=" + TestDataStore.SHP);
+            conn.ConnectionString = "DefaultFileLocation=" + TestDataStore.SHP;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {
@@ -64,7 +64,7 @@ namespace UnitTest
         {
             IConnectionManager connMgr = FdoFeatureAccessManager.GetConnectionManager();
             FdoIConnection conn = connMgr.CreateConnection("OSGeo.SQLite");
-            conn.SetConnectionString("File=" + TestDataStore.SQLITE);
+            conn.ConnectionString = "File=" + TestDataStore.SQLITE;
             Assert.Equal(FdoConnectionState.FdoConnectionState_Open, conn.Open());
             try
             {

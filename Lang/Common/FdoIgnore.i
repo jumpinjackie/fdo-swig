@@ -115,8 +115,7 @@
 %ignore FdoSubSelectExpression::ToStringInternal;
 %ignore FdoGeometryStreamFactory::CreateGeometryStreamReader;
 
-%ignore FdoFunction::Create;
-%ignore FdoFunctionDefinition::Create;
+%ignore FdoFunction::Create(FdoString*, FdoExpression**, FdoInt32);
 %ignore FdoArgumentDefinitionCollection::Create(FdoArgumentDefinition**, FdoInt32);
 %ignore FdoSignatureDefinitionCollection::Create(FdoSignatureDefinition**, FdoInt32);
 %ignore FdoFunctionDefinitionCollection::Create(FdoFunctionDefinition**, FdoInt32);

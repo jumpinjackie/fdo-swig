@@ -5,7 +5,6 @@
 // NOTES:
 //  Only non-pointer basic types and enums are wrapped as attributes
 //  Pointer types are not wrapped as we are not certain if they will/won't affect %newobject behavior
-//  FdoString* types are not wrapped
 //  Most boolean methods not wrapped because they don't follow the Get/Set naming convention that others follow
 
 %include <attribute.i>
@@ -13,6 +12,9 @@
 %attribute(FdoByteArrayHandle, FdoInt32, Length, GetLength);
 
 %attribute(FdoIDisposable, FdoInt32, RefCount, GetRefCount);
+
+%attribute(FdoIConnection, FdoInt32, ConnectionTimeout, GetConnectionTimeout, SetConnectionTimeout);
+%attribute(FdoIConnection, FdoString*, ConnectionString, GetConnectionString, SetConnectionString);
 
 %attribute(FdoArgumentDefinition, FdoDataType, DataType, GetDataType);
 %attribute(FdoArgumentDefinition, FdoDataType, PropertyType, GetPropertyType);

@@ -6,6 +6,8 @@
 //
 
 // NOTE: Wildcards are wildcards as we are certain there are no such methods that return non-pointer values
+// NOTE2: Following methods do not return reference counted pointers and are omitted from this list
+//    - IProviderRegistry::GetProviders()
 %newobject *::Create;
 %newobject *::CreateConnection;
 %newobject *::GetConnectionManager;
@@ -101,7 +103,6 @@
 %newobject *::GetSchemaMapping;
 %newobject FdoProperty::GetName;
 %newobject *::GetConstraintList;
-%newobject *::GetProviders;
 %newobject *::GetDefaultDataModel;
 %newobject *::GetAttributes;
 %newobject FdoSpatialCondition::GetGeometry;
