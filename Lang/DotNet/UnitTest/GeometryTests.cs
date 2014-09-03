@@ -147,8 +147,8 @@ namespace UnitTest
 
             FdoILinearRing ring = fact.CreateLinearRing(positions);
             FdoDirectPositionCollection positions2 = ring.GetPositions();
-            Assert.Equal(positions.GetCount(), positions2.GetCount());
-            for (int i = 0; i < positions.GetCount(); i++)
+            Assert.Equal(positions.Count, positions2.Count);
+            for (int i = 0; i < positions.Count; i++)
             {
                 FdoIDirectPosition posExpect = positions.GetItem(i);
                 FdoIDirectPosition posActual = positions2.GetItem(i);
@@ -176,8 +176,8 @@ namespace UnitTest
 
             FdoILineStringSegment lineStringSegment = fact.CreateLineStringSegment(positions);
             FdoDirectPositionCollection positions2 = lineStringSegment.GetPositions();
-            Assert.Equal(positions.GetCount(), positions2.GetCount());
-            for (int i = 0; i < positions.GetCount(); i++)
+            Assert.Equal(positions.Count, positions2.Count);
+            for (int i = 0; i < positions.Count; i++)
             {
                 FdoIDirectPosition posExpect = positions.GetItem(i);
                 FdoIDirectPosition posActual = positions2.GetItem(i);
