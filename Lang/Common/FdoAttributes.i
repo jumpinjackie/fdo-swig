@@ -371,6 +371,19 @@
 %attribute(FdoSignatureDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoProviderCollection, FdoInt32, Count, GetCount);
 
+%attribute(FdoClassTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoConditionTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoDataTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoDistanceOperationsCollection, FdoInt32, Count, GetCount);
+%attribute(FdoExpressionTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoGeometryComponentTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoGeometryTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoInt32Collection, FdoInt32, Count, GetCount);
+%attribute(FdoDoubleCollection, FdoInt32, Count, GetCount);
+%attribute(FdoLockTypeCollection, FdoInt32, Count, GetCount);
+%attribute(FdoSpatialOperationsCollection, FdoInt32, Count, GetCount);
+%attribute(FdoSpatialContextExtentTypeCollection, FdoInt32, Count, GetCount);
+
 %attribute(FdoReadOnlyArgumentDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoReadOnlyDataPropertyDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoReadOnlyPropertyDefinitionCollection, FdoInt32, Count, GetCount);
