@@ -57,6 +57,17 @@ $extend FdoPropertyValueCollection
                 }
             }
         }
+        if (NULL == clsDef.p)
+        {
+            std::wstring msg = L"Class not found ";
+            if (NULL != schemaName)
+            {
+                msg += schemaName;
+                msg += L":";
+            }
+            msg += className;
+            throw FdoSchemaException::Create(msg.c_str());
+        }
         return clsDef.Detach();
     }
 };

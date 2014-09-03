@@ -17,10 +17,10 @@ namespace UnitTest
             FdoFeatureClass featCls = (FdoFeatureClass)clsDef;
 
             FdoPropertyDefinitionCollection clsProps = clsDef.GetProperties();
-            Assert.Equal(5, clsProps.GetCount());
+            Assert.Equal(5, clsProps.Count);
 
             FdoDataPropertyDefinitionCollection clsIdProps = clsDef.GetIdentityProperties();
-            Assert.Equal(1, clsIdProps.GetCount());
+            Assert.Equal(1, clsIdProps.Count);
 
             FdoGeometricPropertyDefinition geomProp = featCls.GetGeometryProperty();
             Assert.NotNull(geomProp);
@@ -50,11 +50,11 @@ namespace UnitTest
             FdoIDescribeSchema desc = conn.CreateCommand((int)FdoCommandType.FdoCommandType_DescribeSchema) as FdoIDescribeSchema;
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
-            Assert.Equal(1, schemas.GetCount());
+            Assert.Equal(1, schemas.Count);
             
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
-            Assert.Equal(1, classes.GetCount());
+            Assert.Equal(1, classes.Count);
 
             FdoClassDefinition clsDef = classes.GetItem(0);
             VerifyClass(clsDef);
@@ -66,8 +66,8 @@ namespace UnitTest
             clsDef = schemas.GetClassDefinition(null, "World_Countries");
             Assert.NotNull(clsDef);
             VerifyClass(clsDef);
-            Assert.Null(schemas.GetClassDefinition(null, "WorldCountries"));
-            Assert.Null(schemas.GetClassDefinition("BogusSchema", "World_Countries"));
+            Assert.Throws<ManagedFdoException>(() => schemas.GetClassDefinition(null, "WorldCountries"));
+            Assert.Throws<ManagedFdoException>(() => schemas.GetClassDefinition("BogusSchema", "World_Countries"));
         }
 
         [Fact]
@@ -81,11 +81,11 @@ namespace UnitTest
             FdoIDescribeSchema desc = conn.CreateCommand((int)FdoCommandType.FdoCommandType_DescribeSchema) as FdoIDescribeSchema;
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
-            Assert.Equal(1, schemas.GetCount());
+            Assert.Equal(1, schemas.Count);
 
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
-            Assert.Equal(1, classes.GetCount());
+            Assert.Equal(1, classes.Count);
 
             FdoClassDefinition clsDef = classes.GetItem(0);
             VerifyClass(clsDef);
@@ -97,8 +97,8 @@ namespace UnitTest
             clsDef = schemas.GetClassDefinition(null, "World_Countries");
             Assert.NotNull(clsDef);
             VerifyClass(clsDef);
-            Assert.Null(schemas.GetClassDefinition(null, "WorldCountries"));
-            Assert.Null(schemas.GetClassDefinition("BogusSchema", "World_Countries"));
+            Assert.Throws<ManagedFdoException>(() => schemas.GetClassDefinition(null, "WorldCountries"));
+            Assert.Throws<ManagedFdoException>(() => schemas.GetClassDefinition("BogusSchema", "World_Countries"));
         }
 
         [Fact]
@@ -112,11 +112,11 @@ namespace UnitTest
             FdoIDescribeSchema desc = conn.CreateCommand((int)FdoCommandType.FdoCommandType_DescribeSchema) as FdoIDescribeSchema;
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
-            Assert.Equal(1, schemas.GetCount());
+            Assert.Equal(1, schemas.Count);
 
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
-            Assert.Equal(1, classes.GetCount());
+            Assert.Equal(1, classes.Count);
 
             FdoClassDefinition clsDef = classes.GetItem(0);
             VerifyClass(clsDef);
@@ -128,8 +128,8 @@ namespace UnitTest
             clsDef = schemas.GetClassDefinition(null, "World_Countries");
             Assert.NotNull(clsDef);
             VerifyClass(clsDef);
-            Assert.Null(schemas.GetClassDefinition(null, "WorldCountries"));
-            Assert.Null(schemas.GetClassDefinition("BogusSchema", "World_Countries"));
+            Assert.Throws<ManagedFdoException>(() => schemas.GetClassDefinition(null, "WorldCountries"));
+            Assert.Throws<ManagedFdoException>(() => schemas.GetClassDefinition("BogusSchema", "World_Countries"));
         }
     }
 }
