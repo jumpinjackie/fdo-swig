@@ -1,5 +1,8 @@
 %{
-#define HAS_RTTI
+//Define this value to activate refcounting debugging code
+//#define DEBUG_FDO_REFCOUNTING
+//Define this value to print class types in FdoIDisposable pointers via RTTI
+//#define HAS_RTTI
 #include <cstdint>
 #include <vector>
 #include "Fdo.h"
@@ -33,14 +36,21 @@ static std::string W2A_SLOW(const wchar_t* input)
     return std::string(mbs);
 }
 
-#ifdef _DEBUG
-#define FdoLogRefCount(obj) \
-{ \
-    char sAddress[80]; \
-    if (NULL != obj) { \
-        sprintf(sAddress, "%x", obj); \
-        printf("Refcount of %s: %d\n", sAddress, obj->GetRefCount()); \
-    } \
+#ifdef DEBUG_FDO_REFCOUNTING
+static void FdoLogRefCount(FdoIDisposable* obj)
+{
+    char sAddress[80];
+    if (NULL != obj)
+    {
+        sprintf(sAddress, "%x", obj);
+        printf("Refcount of %s", sAddress);
+#ifdef HAS_RTTI
+        printf(" (%s): ", typeid(*obj).name());
+#else
+        printf(": ");
+#endif
+        printf("%d\n", obj->GetRefCount());
+    }
 }
 #else
 #define FdoLogRefCount(obj)
@@ -48,7 +58,7 @@ static std::string W2A_SLOW(const wchar_t* input)
 
 static void FdoCleanup(FdoIDisposable* obj)
 {
-#ifdef _DEBUG
+#ifdef DEBUG_FDO_REFCOUNTING
     char sAddress[80];
     if (NULL != obj)
     {

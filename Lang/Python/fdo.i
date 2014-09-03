@@ -1,4 +1,4 @@
-%module PyFDO
+%module FDO
 
 %include "wchar.i"
 %include <python.swg>
@@ -9,7 +9,7 @@
 
 //Do not AddRef() as any pointer returned will either already be AddRef()'d at the C++ level or
 //(if freshly allocated) will start off with a refcount of 1
-%feature("ref") FdoIDisposable ""
+%feature("ref") FdoIDisposable "FdoLogRefCount($this);"
 //However, we still do need to release
 %feature("unref") FdoIDisposable "FdoCleanup($this);"
 
@@ -111,6 +111,7 @@ PyObject *pFdoSpatialContextMismatchException;
 %include "../Common/MemCheck.h"
 %include "../Common/FdoIgnore.i"
 %include "../Common/FdoMarshal_Ignore.i"
+%include "../Common/FdoAttributes.i"
 %include "../Common/FdoIncludes.i"
 %include "../Common/FdoCollections.i"
 %include "../Common/FdoMarshal.i"
