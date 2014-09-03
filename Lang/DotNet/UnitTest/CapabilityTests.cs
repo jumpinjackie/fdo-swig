@@ -360,7 +360,7 @@ namespace UnitTest
                 Log("Expression Capabilities");
                 Log("\tFunctions:");
                 var funcs = caps.GetFunctions();
-                for (int i = 0; i < funcs.GetCount(); i++)
+                for (int i = 0; i < funcs.Count; i++)
                 {
                     var func = funcs.GetItem(i);
                     Log("\t\t{0}", func.Name);
@@ -383,7 +383,7 @@ namespace UnitTest
                         if (valueList != null)
                         {
                             Log("\t\t\t\tArgument Values:");
-                            Log("\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
+                            Log("\t\t\t\t\tConstraintType: {0}", valueList.ConstraintType);
                             Log("\t\t\t\t\tConstraint List:");
                             var list = valueList.GetConstraintList();
                             for (var k = 0; k < list.GetCount(); k++)
@@ -414,7 +414,7 @@ namespace UnitTest
                             if (valueList != null)
                             {
                                 Log("\t\t\t\t\tArgument Values:");
-                                Log("\t\t\t\t\t\tConstraintType: {0}", valueList.GetConstraintType());
+                                Log("\t\t\t\t\t\tConstraintType: {0}", valueList.ConstraintType);
                                 Log("\t\t\t\t\t\tConstraint List:");
                                 var list = valueList.GetConstraintList();
                                 for (var l = 0; l < list.GetCount(); l++)

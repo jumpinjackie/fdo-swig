@@ -348,6 +348,8 @@
 
 %attribute(FdoXmlWriter, FdoBoolean, DefaultRoot, GetDefaultRoot, SetDefaultRoot);
 
+%attribute(FdoPropertyValueConstraint, FdoPropertyValueConstraintType, ConstraintType, GetConstraintType);
+
 %attribute(FdoArgumentDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoBatchParameterValueCollection, FdoInt32, Count, GetCount);
 %attribute(FdoClassCollection, FdoInt32, Count, GetCount);
@@ -359,7 +361,7 @@
 %attribute(FdoExpressionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoFeatureClassCollection, FdoInt32, Count, GetCount);
 %attribute(FdoFeatureSchemaCollection, FdoInt32, Count, GetCount);
-%attribute(FdoFunctionDefintionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoFunctionDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoIdentifierCollection, FdoInt32, Count, GetCount);
 %attribute(FdoJoinCriteriaCollection, FdoInt32, Count, GetCount);
 %attribute(FdoLinearRingCollection, FdoInt32, Count, GetCount);
