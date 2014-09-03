@@ -369,6 +369,7 @@
 %attribute(FdoPropertyDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoRingCollection, FdoInt32, Count, GetCount);
 %attribute(FdoSignatureDefinitionCollection, FdoInt32, Count, GetCount);
+%attribute(FdoProviderCollection, FdoInt32, Count, GetCount);
 
 %attribute(FdoReadOnlyArgumentDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoReadOnlyDataPropertyDefinitionCollection, FdoInt32, Count, GetCount);
