@@ -32,9 +32,9 @@ namespace UnitTest
 
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.Equal(0, propNames.GetCount());
+            Assert.Equal(0, propNames.Count);
             propNames.AddComputedIdentifier("TOTAL_COUNT", "COUNT(NAME)");
-            Assert.Equal(1, propNames.GetCount());
+            Assert.Equal(1, propNames.Count);
 
             rdr = selectCmd.Execute();
             total = 0;
@@ -69,9 +69,9 @@ namespace UnitTest
 
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.Equal(0, propNames.GetCount());
+            Assert.Equal(0, propNames.Count);
             propNames.AddComputedIdentifier("TOTAL_COUNT", "COUNT(NAME)");
-            Assert.Equal(1, propNames.GetCount());
+            Assert.Equal(1, propNames.Count);
 
             rdr = selectCmd.Execute();
             total = 0;
@@ -138,11 +138,11 @@ namespace UnitTest
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
             Assert.NotNull(schemas);
-            Assert.Equal(1, schemas.GetCount());
+            Assert.Equal(1, schemas.Count);
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
             string geomName = null;
-            for (int i = 0; i < classes.GetCount(); i++)
+            for (int i = 0; i < classes.Count; i++)
             {
                 FdoClassDefinition cls = classes.GetItem(i);
                 if (cls.Name == "World_Countries")
@@ -186,9 +186,9 @@ namespace UnitTest
             
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.Equal(0, propNames.GetCount());
+            Assert.Equal(0, propNames.Count);
             propNames.AddComputedIdentifier("EXTENTS", "SpatialExtents(" + geomName + ")");
-            Assert.Equal(1, propNames.GetCount());
+            Assert.Equal(1, propNames.Count);
 
             rdr = selectCmd.Execute();
             iterations = 0;
@@ -216,11 +216,11 @@ namespace UnitTest
             Assert.NotNull(desc);
             FdoFeatureSchemaCollection schemas = desc.Execute();
             Assert.NotNull(schemas);
-            Assert.Equal(1, schemas.GetCount());
+            Assert.Equal(1, schemas.Count);
             FdoFeatureSchema schema = schemas.GetItem(0);
             FdoClassCollection classes = schema.GetClasses();
             string geomName = null;
-            for (int i = 0; i < classes.GetCount(); i++)
+            for (int i = 0; i < classes.Count; i++)
             {
                 FdoClassDefinition cls = classes.GetItem(i);
                 if (cls.Name == "World_Countries")
@@ -265,9 +265,9 @@ namespace UnitTest
 
             //Re-test with sugar methods
             propNames.Clear();
-            Assert.Equal(0, propNames.GetCount());
+            Assert.Equal(0, propNames.Count);
             propNames.AddComputedIdentifier("EXTENTS", "SpatialExtents(" + geomName + ")");
-            Assert.Equal(1, propNames.GetCount());
+            Assert.Equal(1, propNames.Count);
 
             rdr = selectCmd.Execute();
             iterations = 0;
