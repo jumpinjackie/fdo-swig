@@ -17,6 +17,7 @@
 
 # Import Python libs
 import sys
+sys.path.append("../../Bin/x86/Release")
 sys.path.append("../../Bin/x64/Release")
 import traceback
 import unittest
