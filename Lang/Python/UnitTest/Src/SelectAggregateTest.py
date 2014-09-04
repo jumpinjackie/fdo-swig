@@ -130,7 +130,7 @@ class SelectAggregateTest(unittest.TestCase):
             self.assertIsNotNone(geom)
             wkt = geom.Text
             self.assertIsNotNone(wkt)
-            print "SpatialExtents() - " + wkt
+            print "\nSpatialExtents() - " + wkt
             iterations += 1
         rdr.Close()
         self.assertEqual(1, iterations)
@@ -150,7 +150,7 @@ class SelectAggregateTest(unittest.TestCase):
             self.assertIsNotNone(geom)
             wkt = geom.Text
             self.assertIsNotNone(wkt)
-            print "SpatialExtents() - " + wkt
+            print "\nSpatialExtents() - " + wkt
             iterations += 1
         rdr.Close()
         self.assertEqual(1, iterations)
@@ -191,7 +191,7 @@ class SelectAggregateTest(unittest.TestCase):
             self.assertIsNotNone(geom)
             wkt = geom.Text
             self.assertIsNotNone(wkt)
-            print "SpatialExtents() - " + wkt
+            print "\nSpatialExtents() - " + wkt
             iterations += 1
         rdr.Close()
         self.assertEqual(1, iterations)
@@ -211,7 +211,7 @@ class SelectAggregateTest(unittest.TestCase):
             self.assertIsNotNone(geom)
             wkt = geom.Text
             self.assertIsNotNone(wkt)
-            print "SpatialExtents() - " + wkt
+            print "\nSpatialExtents() - " + wkt
             iterations += 1
         rdr.Close()
         self.assertEqual(1, iterations)

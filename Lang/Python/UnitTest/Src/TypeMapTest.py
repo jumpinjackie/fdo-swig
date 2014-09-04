@@ -98,6 +98,60 @@ class TypeMapTest(unittest.TestCase):
 		self.assert_(FdoClassType_NetworkLinkClass == 5)
 		self.assert_(FdoGeometryType_MultiCurveString == 12)
 
+	def testCollectionMagic(self):
+		"""
+		Test the magic methods injected into each FdoCollection-derived proxy class. For this test case,
+		we'll use a schema collection
+		"""
+		schemas = FdoFeatureSchemaCollection.Create(None)
+		schema1 = FdoFeatureSchema.Create("Test1", "")
+		schema2 = FdoFeatureSchema.Create("Test2", "")
+		schemas.Add(schema1)
+		schemas.Add(schema2)
+		self.assertEqual(2, len(schemas))
+		self.assertEqual(schemas.Count, len(schemas))
+		self.assertTrue(schema1 in schemas)
+		self.assertTrue(schema2 in schemas)
+		schemas.Clear()
+		#now try __setitem__ with __contains__ checks
+		schemas[0] = schema1
+		schemas[1] = schema2
+		self.assertEqual(2, len(schemas))
+		self.assertEqual(schemas.Count, len(schemas))
+		self.assertTrue(schema1 in schemas)
+		self.assertTrue(schema2 in schemas)
+		schemas.Clear()
+		#ensure invalid bounds are handled
+		try:
+			schemas[5] = schema1
+			raise AssertionError("Expected exception on invalid bounds")
+		except:
+			pass
+		schemas[0] = schema1
+		self.assertEqual(1, len(schemas))
+		self.assertEqual(schemas.Count, len(schemas))
+		self.assertTrue(schema1 in schemas)
+		self.assertFalse(schema2 in schemas)
+		try:
+			schemas[5] = schema2
+			raise AssertionError("Expected exception on invalid bounds")
+		except:
+			pass
+		schemas[1] = schema2
+		self.assertEqual(2, len(schemas))
+		self.assertEqual(schemas.Count, len(schemas))
+		self.assertTrue(schema1 in schemas)
+		self.assertTrue(schema2 in schemas)
+		#now try __delitem__
+		del schemas[1]
+		self.assertTrue(schema1 in schemas)
+		self.assertFalse(schema2 in schemas)
+		self.assertEqual(1, len(schemas))
+		del schemas[0]
+		self.assertFalse(schema1 in schemas)
+		self.assertFalse(schema2 in schemas)
+		self.assertEqual(0, len(schemas))
+
 	def _validateIntList(self, capabilityList):
 		"""
 		Validate the output from the FDO capabilities API.  There is a 

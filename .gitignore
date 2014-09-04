@@ -43,3 +43,4 @@
 /Lang/DotNet/FdoDotNet_AppVeyor.sdf
 /Lang/DotNet/packages/xunit.runners.1.9.2
 /Lang/DotNet/packages/xunit.1.9.2
+/Lang/Python/UnitTest/Src/*.pyc

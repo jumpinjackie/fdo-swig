@@ -107,6 +107,8 @@ PyObject *pFdoSpatialContextMismatchException;
     // End custom initialization code from Main.i
 %}
 
+%include "PythonCollections.i"
+
 %include "FdoExceptions.i"
 %include "../Common/MemCheck.h"
 %include "../Common/FdoIgnore.i"
