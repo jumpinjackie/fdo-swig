@@ -3,7 +3,7 @@
 //#define DEBUG_FDO_REFCOUNTING
 //Define this value to print class types in FdoIDisposable pointers via RTTI
 //#define HAS_RTTI
-#include <cstdint>
+#include <stdint.h>
 #include <vector>
 #include "Fdo.h"
 #ifdef HAS_RTTI
