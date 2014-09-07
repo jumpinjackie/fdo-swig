@@ -1,6 +1,7 @@
 %{
 //Define this value to activate refcounting debugging code
-//#define DEBUG_FDO_REFCOUNTING
+//#define DEBUG_FDO_REFCOUNTING_ADDREF
+//#define DEBUG_FDO_REFCOUNTING_RELEASE
 //Define this value to print class types in FdoIDisposable pointers via RTTI
 //#define HAS_RTTI
 #include <stdint.h>
@@ -36,7 +37,7 @@ static std::string W2A_SLOW(const wchar_t* input)
     return std::string(mbs);
 }
 
-#ifdef DEBUG_FDO_REFCOUNTING
+#ifdef DEBUG_FDO_REFCOUNTING_ADDREF
 static void FdoLogRefCount(FdoIDisposable* obj)
 {
     char sAddress[80];
@@ -58,7 +59,7 @@ static void FdoLogRefCount(FdoIDisposable* obj)
 
 static void FdoCleanup(FdoIDisposable* obj)
 {
-#ifdef DEBUG_FDO_REFCOUNTING
+#ifdef DEBUG_FDO_REFCOUNTING_RELEASE
     char sAddress[80];
     if (NULL != obj)
     {
