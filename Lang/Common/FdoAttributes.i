@@ -386,6 +386,8 @@
 %attribute(FdoSpatialOperationsCollection, FdoInt32, Count, GetCount);
 %attribute(FdoSpatialContextExtentTypeCollection, FdoInt32, Count, GetCount);
 
+%attribute(FdoPropertyValueCollection, FdoInt32, Count, GetCount);
+
 %attribute(FdoReadOnlyArgumentDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoReadOnlyDataPropertyDefinitionCollection, FdoInt32, Count, GetCount);
 %attribute(FdoReadOnlyPropertyDefinitionCollection, FdoInt32, Count, GetCount);

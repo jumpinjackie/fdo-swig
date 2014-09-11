@@ -170,48 +170,65 @@
             {
                 FdoDataValue* tmpData = static_cast<FdoDataValue*>($1);
                 FdoDataType dt = tmpData->GetDataType();
+                FdoBoolean bMatch = false;
                 switch (dt)
                 {
                     case FdoDataType_BLOB:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoBLOBValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Boolean:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoBooleanValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Byte:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoByteValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_CLOB:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoCLOBValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_DateTime:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDateTimeValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Decimal:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDecimalValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Double:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDoubleValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int16:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt16Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int32:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt32Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int64:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt64Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Single:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoSingleValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_String:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoStringValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     default:
                         PyErr_SetString(PyExc_RuntimeError, "data value type is either invalid or not supported/implemented by this wrapper API");
                         goto fail;
                         break;
+                }
+                if (bMatch)
+                {
+                    break;
                 }
             }
         case FdoExpressionItemType_GeometryValue:
@@ -239,48 +256,65 @@
             {
                 FdoDataValue* tmpData = static_cast<FdoDataValue*>($1);
                 FdoDataType dt = tmpData->GetDataType();
+                FdoBoolean bMatch = false;
                 switch (dt)
                 {
                     case FdoDataType_BLOB:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoBLOBValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Boolean:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoBooleanValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Byte:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoByteValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_CLOB:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoCLOBValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_DateTime:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDateTimeValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Decimal:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDecimalValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Double:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDoubleValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int16:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt16Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int32:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt32Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int64:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt64Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Single:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoSingleValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_String:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoStringValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     default:
                         PyErr_SetString(PyExc_RuntimeError, "data value type is either invalid or not supported/implemented by this wrapper API");
                         goto fail;
                         break;
+                }
+                if (bMatch)
+                {
+                    break;
                 }
             }
         case FdoExpressionItemType_GeometryValue:
@@ -302,48 +336,65 @@
             {
                 FdoDataValue* tmpData = static_cast<FdoDataValue*>($1);
                 FdoDataType dt = tmpData->GetDataType();
+                FdoBoolean bMatch = false;
                 switch (dt)
                 {
                     case FdoDataType_BLOB:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoBLOBValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Boolean:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoBooleanValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Byte:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoByteValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_CLOB:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoCLOBValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_DateTime:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDateTimeValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Decimal:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDecimalValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Double:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoDoubleValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int16:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt16Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int32:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt32Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Int64:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoInt64Value, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_Single:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoSingleValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     case FdoDataType_String:
                         $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), SWIGTYPE_p_FdoStringValue, SWIG_POINTER_OWN | 0);
+                        bMatch = true;
                         break;
                     default:
                         PyErr_SetString(PyExc_RuntimeError, "data value type is either invalid or not supported/implemented by this wrapper API");
                         goto fail;
                         break;
+                }
+                if (bMatch)
+                {
+                    break;
                 }
             }
         case FdoLiteralValueType_Geometry:

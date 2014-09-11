@@ -152,6 +152,158 @@ class TypeMapTest(unittest.TestCase):
 		self.assertFalse(schema2 in schemas)
 		self.assertEqual(0, len(schemas))
 
+	def testValueExpression(self):
+		"""
+		Test the out typemap for FdoValueExpression
+		"""
+		boolVal = FdoBooleanValue.Create(True)
+		pBool = FdoPropertyValue.Create("BOOL", boolVal)
+		boolVal2 = pBool.GetValue()
+		self.assertEqual("FdoBooleanValue", boolVal2.__class__.__name__)
+		self.assertEqual(boolVal.Boolean, boolVal2.Boolean)
+
+		bVal = FdoByteValue.Create(1)
+		pByte = FdoPropertyValue.Create("BYTE", bVal)
+		bVal2 = pByte.GetValue()
+		self.assertEqual("FdoByteValue", bVal2.__class__.__name__)
+		self.assertEqual(bVal.Byte, bVal2.Byte)
+
+		#FIXME: SWIG reports FdoDateTime is memory leaking because there's no dtor and SWIG is
+		#instructed not to create any
+		dt = FdoDateTime()
+		dtVal = FdoDateTimeValue.Create(dt)
+		pDateTime = FdoPropertyValue.Create("DATETIME", dtVal)
+		dtVal2 = pDateTime.GetValue()
+		self.assertEqual("FdoDateTimeValue", dtVal.__class__.__name__)
+		dt1 = dtVal.GetDateTime()
+		dt2 = dtVal2.GetDateTime();
+		self.assertEqual(dt1.year, dt2.year)
+		self.assertEqual(dt1.month, dt2.month)
+		self.assertEqual(dt1.day, dt2.day)
+		self.assertEqual(dt1.hour, dt2.hour)
+		self.assertEqual(dt1.minute, dt2.minute)
+		self.assertEqual(dt1.seconds, dt2.seconds)
+		
+		dblVal = FdoDoubleValue.Create(1.0)
+		pDouble = FdoPropertyValue.Create("DOUBLE", dblVal)
+		dblVal2 = pDouble.GetValue()
+		self.assertEqual("FdoDoubleValue", dblVal2.__class__.__name__)
+		self.assertEqual(dblVal.Double, dblVal2.Double)
+
+		i16Val = FdoInt16Value.Create(1)
+		pInt16 = FdoPropertyValue.Create("INT16", i16Val)
+		i16Val2 = pInt16.GetValue()
+		self.assertEqual("FdoInt16Value", i16Val2.__class__.__name__)
+		self.assertEqual(i16Val.Int16, i16Val2.Int16)
+
+		i32Val = FdoInt32Value.Create(1)
+		pInt32 = FdoPropertyValue.Create("INT32", i32Val)
+		i32Val2 = pInt32.GetValue()
+		self.assertEqual("FdoInt32Value", i32Val2.__class__.__name__)
+		self.assertEqual(i32Val.Int32, i32Val2.Int32)
+
+		i64Val = FdoInt64Value.Create(1)
+		pInt64 = FdoPropertyValue.Create("INT64", i64Val)
+		i64Val2 = pInt64.GetValue()
+		self.assertEqual("FdoInt64Value", i64Val2.__class__.__name__)
+		self.assertEqual(i64Val.Int64, i64Val2.Int64)
+
+		singVal = FdoSingleValue.Create(1.0)
+		pSingle = FdoPropertyValue.Create("SINGLE", singVal)
+		singVal2 = pSingle.GetValue()
+		self.assertEqual("FdoSingleValue", singVal2.__class__.__name__)
+		self.assertEqual(singVal.Single, singVal2.Single)
+
+		strVal = FdoStringValue.Create("Hello World")
+		pString = FdoPropertyValue.Create("STRING", strVal)
+		strVal2 = pString.GetValue()
+		self.assertEqual("FdoStringValue", strVal2.__class__.__name__)
+		self.assertEqual(strVal.String, strVal2.String)
+
+		gf = FdoFgfGeometryFactory.GetInstance()
+		geom = gf.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))")
+		fgf = gf.GetFgfBytes(geom)
+		geomVal = FdoGeometryValue.Create(fgf)
+		pGeom = FdoPropertyValue.Create("GEOMETRY", geomVal)
+		geomVal2 = pGeom.GetValue()
+		self.assertEqual("FdoGeometryValue", geomVal2.__class__.__name__)
+
+	def testLiteralValue(self):
+		"""
+		Test the out typemap for FdoLiteralValue
+		"""
+		boolVal = FdoBooleanValue.Create(True)
+		pBool = FdoParameterValue.Create("BOOL", boolVal)
+		boolVal2 = pBool.GetValue()
+		self.assertEqual("FdoBooleanValue", boolVal2.__class__.__name__)
+		self.assertEqual(boolVal.Boolean, boolVal2.Boolean)
+
+		bVal = FdoByteValue.Create(1)
+		pByte = FdoParameterValue.Create("BYTE", bVal)
+		bVal2 = pByte.GetValue()
+		self.assertEqual("FdoByteValue", bVal2.__class__.__name__)
+		self.assertEqual(bVal.Byte, bVal2.Byte)
+
+		#FIXME: SWIG reports FdoDateTime is memory leaking because there's no dtor and SWIG is
+		#instructed not to create any
+		dt = FdoDateTime()
+		dtVal = FdoDateTimeValue.Create(dt)
+		pDateTime = FdoParameterValue.Create("DATETIME", dtVal)
+		dtVal2 = pDateTime.GetValue()
+		self.assertEqual("FdoDateTimeValue", dtVal.__class__.__name__)
+		dt1 = dtVal.GetDateTime()
+		dt2 = dtVal2.GetDateTime();
+		self.assertEqual(dt1.year, dt2.year)
+		self.assertEqual(dt1.month, dt2.month)
+		self.assertEqual(dt1.day, dt2.day)
+		self.assertEqual(dt1.hour, dt2.hour)
+		self.assertEqual(dt1.minute, dt2.minute)
+		self.assertEqual(dt1.seconds, dt2.seconds)
+		
+		dblVal = FdoDoubleValue.Create(1.0)
+		pDouble = FdoParameterValue.Create("DOUBLE", dblVal)
+		dblVal2 = pDouble.GetValue()
+		self.assertEqual("FdoDoubleValue", dblVal2.__class__.__name__)
+		self.assertEqual(dblVal.Double, dblVal2.Double)
+
+		i16Val = FdoInt16Value.Create(1)
+		pInt16 = FdoParameterValue.Create("INT16", i16Val)
+		i16Val2 = pInt16.GetValue()
+		self.assertEqual("FdoInt16Value", i16Val2.__class__.__name__)
+		self.assertEqual(i16Val.Int16, i16Val2.Int16)
+
+		i32Val = FdoInt32Value.Create(1)
+		pInt32 = FdoParameterValue.Create("INT32", i32Val)
+		i32Val2 = pInt32.GetValue()
+		self.assertEqual("FdoInt32Value", i32Val2.__class__.__name__)
+		self.assertEqual(i32Val.Int32, i32Val2.Int32)
+
+		i64Val = FdoInt64Value.Create(1)
+		pInt64 = FdoParameterValue.Create("INT64", i64Val)
+		i64Val2 = pInt64.GetValue()
+		self.assertEqual("FdoInt64Value", i64Val2.__class__.__name__)
+		self.assertEqual(i64Val.Int64, i64Val2.Int64)
+
+		singVal = FdoSingleValue.Create(1.0)
+		pSingle = FdoParameterValue.Create("SINGLE", singVal)
+		singVal2 = pSingle.GetValue()
+		self.assertEqual("FdoSingleValue", singVal2.__class__.__name__)
+		self.assertEqual(singVal.Single, singVal2.Single)
+
+		strVal = FdoStringValue.Create("Hello World")
+		pString = FdoParameterValue.Create("STRING", strVal)
+		strVal2 = pString.GetValue()
+		self.assertEqual("FdoStringValue", strVal2.__class__.__name__)
+		self.assertEqual(strVal.String, strVal2.String)
+
+		gf = FdoFgfGeometryFactory.GetInstance()
+		geom = gf.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))")
+		fgf = gf.GetFgfBytes(geom)
+		geomVal = FdoGeometryValue.Create(fgf)
+		pGeom = FdoParameterValue.Create("GEOMETRY", geomVal)
+		geomVal2 = pGeom.GetValue()
+		self.assertEqual("FdoGeometryValue", geomVal2.__class__.__name__)
+
 	def _validateIntList(self, capabilityList):
 		"""
 		Validate the output from the FDO capabilities API.  There is a 

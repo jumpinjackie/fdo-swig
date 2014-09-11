@@ -60,7 +60,7 @@ namespace UnitTest
 
                 FdoFgfGeometryFactory geomFactory = FdoFgfGeometryFactory.GetInstance();
                 FdoPropertyValueCollection propVals = insertCmd.GetPropertyValues();
-
+                
                 FdoStringValue nameVal = FdoStringValue.Create();
                 Assert.True(nameVal.IsNull());
                 FdoStringValue keyVal = FdoStringValue.Create();
@@ -79,7 +79,7 @@ namespace UnitTest
                 propVals.Add(pKey);
                 propVals.Add(pMapKey);
                 propVals.Add(pGeom);
-
+                
                 //Set the actual values
                 nameVal.String = "My Own Country";
                 keyVal.String = "MOC";
@@ -87,7 +87,7 @@ namespace UnitTest
                 FdoIGeometry geom = geomFactory.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
                 FdoByteArrayHandle fgf = geomFactory.GetFgfBytes(geom);
                 geomVal.SetGeometryBytes(fgf);
-
+                
                 int inserted = GetInsertedFeatures(insertCmd);
                 Assert.Equal(1, inserted);
 
@@ -99,6 +99,98 @@ namespace UnitTest
                 Assert.Equal(2, GetFeatureCountForName(conn, "My Own Country"));
                 Assert.Equal(1, GetFeatureCountForMapKey(conn, "MOC123"));
                 Assert.Equal(1, GetFeatureCountForMapKey(conn, "MOC234"));
+            }
+            //Test sugar methods
+            using (FdoIInsert insertCmd = conn.CreateCommand((int)FdoCommandType.FdoCommandType_Insert) as FdoIInsert)
+            {
+                Assert.NotNull(insertCmd);
+
+                insertCmd.SetFeatureClassName("World_Countries");
+
+                FdoFgfGeometryFactory geomFactory = FdoFgfGeometryFactory.GetInstance();
+                FdoPropertyValueCollection propVals = insertCmd.GetPropertyValues();
+
+                propVals.SetStringValue("KEY", "MOC");
+                propVals.SetStringValue("MAPKEY", "MOC123");
+                propVals.SetStringValue("NAME", "My Own Country");
+
+                FdoIGeometry geom = geomFactory.CreateGeometry("POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))");
+                FdoByteArrayHandle fgf = geomFactory.GetFgfBytes(geom);
+
+                propVals.SetGeometryValue("Geometry", fgf);
+
+                Assert.Equal(4, propVals.Count);
+                FdoPropertyValue pKey = propVals.FindItem("KEY");
+                FdoPropertyValue pMapkey = propVals.FindItem("MAPKEY");
+                FdoPropertyValue pName = propVals.FindItem("NAME");
+                FdoPropertyValue pGeom = propVals.FindItem("Geometry");
+
+                Assert.NotNull(pKey);
+                Assert.NotNull(pMapkey);
+                Assert.NotNull(pName);
+                Assert.NotNull(pGeom);
+
+                FdoStringValue key = pKey.GetValue() as FdoStringValue;
+                FdoStringValue mapkey = pMapkey.GetValue() as FdoStringValue;
+                FdoStringValue name = pName.GetValue() as FdoStringValue;
+                FdoGeometryValue geomVal = pGeom.GetValue() as FdoGeometryValue;
+
+                Assert.NotNull(key);
+                Assert.NotNull(mapkey);
+                Assert.NotNull(name);
+                Assert.NotNull(geomVal);
+
+                Assert.False(key.IsNull());
+                Assert.False(mapkey.IsNull());
+                Assert.False(name.IsNull());
+                Assert.False(geomVal.IsNull());
+
+                //Null values one by one
+                propVals.SetValueNull("NAME");
+                Assert.False(key.IsNull());
+                Assert.False(mapkey.IsNull());
+                Assert.True(name.IsNull());
+                Assert.False(geomVal.IsNull());
+
+                propVals.SetValueNull("KEY");
+                Assert.True(key.IsNull());
+                Assert.False(mapkey.IsNull());
+                Assert.True(name.IsNull());
+                Assert.False(geomVal.IsNull());
+
+                propVals.SetValueNull("MAPKEY");
+                Assert.True(key.IsNull());
+                Assert.True(mapkey.IsNull());
+                Assert.True(name.IsNull());
+                Assert.False(geomVal.IsNull());
+
+                propVals.SetValueNull("Geometry");
+                Assert.True(key.IsNull());
+                Assert.True(mapkey.IsNull());
+                Assert.True(name.IsNull());
+                Assert.True(geomVal.IsNull());
+
+                //Re-set values
+                propVals.SetStringValue("KEY", "MOC");
+                propVals.SetStringValue("MAPKEY", "MOC123");
+                propVals.SetStringValue("NAME", "My Own Country");
+                propVals.SetGeometryValue("Geometry", fgf);
+
+                //Re-fetch data values to query null status
+                key = pKey.GetValue() as FdoStringValue;
+                mapkey = pMapkey.GetValue() as FdoStringValue;
+                name = pName.GetValue() as FdoStringValue;
+                geomVal = pGeom.GetValue() as FdoGeometryValue;
+
+                Assert.NotNull(key);
+                Assert.NotNull(mapkey);
+                Assert.NotNull(name);
+                Assert.NotNull(geomVal);
+
+                Assert.False(key.IsNull());
+                Assert.False(mapkey.IsNull());
+                Assert.False(name.IsNull());
+                Assert.False(geomVal.IsNull());
             }
         }
 

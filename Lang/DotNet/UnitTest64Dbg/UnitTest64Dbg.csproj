@@ -85,6 +85,9 @@
     <Compile Include="..\UnitTest\TestDataStore.cs">
       <Link>TestDataStore.cs</Link>
     </Compile>
+    <Compile Include="..\UnitTest\TypemapTests.cs">
+      <Link>TypemapTests.cs</Link>
+    </Compile>
     <Compile Include="..\UnitTest\UpdateTests.cs">
       <Link>UpdateTests.cs</Link>
     </Compile>

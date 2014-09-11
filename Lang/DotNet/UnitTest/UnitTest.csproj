@@ -62,6 +62,7 @@
     <Compile Include="SelectTests.cs" />
     <Compile Include="SpatialContextTests.cs" />
     <Compile Include="TestDataStore.cs" />
+    <Compile Include="TypemapTests.cs" />
     <Compile Include="UpdateTests.cs" />
   </ItemGroup>
   <ItemGroup>
