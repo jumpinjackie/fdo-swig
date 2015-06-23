@@ -183,5 +183,36 @@ namespace UnitTest
             ParseFilter<FdoInCondition>("FeatId IN ( SELECT (CLS, (CLS.PROP*30 + \"CLS\".P0+ CLS.\"P2\") AS P1, \"CLS\".\"P1\"=45))",
                 "FeatId IN (SELECT(CLS,( CLS.PROP*30+CLS.P0+CLS.P2 ) AS P1,CLS.P1 = 45))");
         }
+
+        [Fact]
+        public void TestSqlInjectionProtection()
+        {
+            string suspectQuery = "RNAME = '{0}'";
+
+            var tests = new[]
+            {
+                new { sql = "a'; DROP TABLE Parcels; SELECT * FROM Parcels WHERE '1' = '1", testTokens = new string[] { "DROP", ";" } },
+                new { sql = "b'; DELETE FROM Parcels; SELECT * FROM Parcels WHERE '1' = '1", testTokens = new string[] { "DELETE", ";" } },
+                new { sql = "c'; UPDATE Parcels SET RNAME = ''; SELECT * FROM Parcels WHERE '1' = '1", testTokens = new string[] { "UPDATE", "SET", ";" } }
+            };
+
+            int testNo = 1;
+            foreach (var t in tests)
+            {
+                try
+                {
+                    string origFilter = string.Format(suspectQuery, t.sql);
+                    FdoFilter filter = FdoFilter.Parse(origFilter);
+                    string filterStr = filter.ToString();
+                    Console.WriteLine("Test {0}: Drop table attempt\n   Original: {1}\n   Parsed: {2}", testNo, origFilter, filterStr);
+                    Assert.False(t.testTokens.Any(tok => filterStr.ToUpper().Contains(tok.ToUpper())));
+                }
+                catch (ManagedFdoException ex)
+                {
+                    Console.WriteLine("Test {0}: Drop table attempt - {1}", testNo, ex.Message);
+                }
+                testNo++;
+            }
+        }
     }
 }
